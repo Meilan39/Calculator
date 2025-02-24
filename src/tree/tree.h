@@ -1,0 +1,53 @@
+#ifndef TREE
+#define TREE
+
+#include <stdio.h>
+#include "../token/token.h"
+
+FILE* s_abstract_syntax_tree;
+
+typedef struct NODE{
+   struct NODE** next;
+   int length;
+   int type;
+   const Token* token; // allocated and freed by token
+} Node;
+
+const char* n_get(int type);
+
+Node* n_free(Node* head);
+Node* n_reset(Node* head);
+Node* n_construct(int type, const Token* token);
+int n_push(Node* this, Node* node);
+void n_print(Node* this, const char* path);
+void n_helper(Node* this, int depth, int endge, int state[]);
+/* simplify */
+void n_simplify(Node* this);
+void n_compress_symbol(Node* this);
+void n_compress_chain(Node* this);
+
+enum n_Types {
+   nt_command = 1,
+   nt_elementary,
+   nt_root,
+   nt_expression,
+   nt_variable_expression,
+   nt_nonvariable_expression,
+   nt_nonvariable_expression_suffix,
+   nt_polynomial,
+   nt_polynomial_suffix,
+   nt_real_number,
+   nt_scientific,
+   nt_special_symbols,
+   nt_natural,
+   nt_integer,
+   nt_rational,
+   nt_nonzero,
+   nt_zero,
+   nt_digit,
+   nt_sign,
+   nt_variable,
+   nt_symbol
+};
+
+#endif

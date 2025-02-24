@@ -1,0 +1,60 @@
+<command> ::= <elementary>
+            | <root>
+
+<elementary> ::= <nonvariable_expression>
+
+<root> ::= root <polynomail> = <polynomail>
+         | root <polynomial>
+
+<expression> ::= {nonvariable_expression}
+               | {variable_expression}
+
+<variable_expression> ::= <polynomial>
+
+<nonvariable_expression> ::= <additive_expression>
+
+<polynomial> ::= {<polynomail_suffix>}*
+<polynomial_suffix> ::= {<real_number>}? <variable> ^ <natural>
+                      | {<real_number>}? <variable>
+                      | <real_number>
+                      | + <polynomial>
+                      | - <polynomial>
+
+<additive_expression> ::= <multiplicative_expression> {<additive-expression_suffix>}*
+<additive_expression_suffix> ::=  + <multiplicative_expression>
+                               |  - <multiplicative_expression>
+
+<multiplicative_expression> ::= <exponential_expression> {<multiplicative_expression_suffix>}*
+<multiplicative_expression_suffix> ::=  * <exponential_expression>
+                                     |  / <exponential_expression>
+
+<exponential_expression> ::= <parenthetical_expression> {<exponential_expression_suffix>}*
+<exponential_expression_suffix> ::= ^ <parenthetical_expression>
+
+<parenthetical_expression> ::= <real_number>
+                             | ( <additive_expression> )
+                             | { <additive_expression> }
+
+<real_number> ::= <scientific>
+                | <rational>
+                | <special_symbols>
+
+<scientific> ::= <rational> E <integer>
+
+<special_symbols> ::= \e | \pi
+
+<natural> ::= <nonzero> {<digit>}*
+<integer> ::= {<sign>}? <natural>
+            | <zero>
+<rational> ::= <integer> . {<digit>}*
+             | <integer>
+
+<digit> ::= <zero> | <nonzero>
+
+<sign> ::= + | -
+
+<nonzero> ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+<zero> ::= 0
+
+<variable> ::= a | b | c | d | e | f | g | h | i | j | k | l | m 
+             | n | o | p | q | r | s | t | u | v | w | x | y | z

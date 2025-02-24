@@ -1,0 +1,23 @@
+command {1}
+├── elementary {1}
+│   ├── nonvariable expression {1}
+│   │   ├── real number {1}
+│   │   │   ├── scientific {1}
+│   │   │   │   ├── rational {1}
+│   │   │   │   │   ├── integer {1}
+│   │   │   │   │   │   ├── sign {1}
+│   │   │   │   │   │   ├── natural {1}
+│   │   │   │   │   │   │   ├── digit {+}
+│   │   │   │   │   ├── integer {1}
+│   │   │   │   │   │   ├── sign {1}
+│   │   │   │   │   │   ├── natural {1}
+│   │   │   │   │   │   │   ├── digit {+}
+│   │   │   ├── rational {1}
+│   │   │   │   ├── integer {1}
+│   │   │   │   │   ├── sign {1}
+│   │   │   │   │   ├── natural {1}
+│   │   │   │   │   │   ├── digit {+}
+│   │   │   │   ├── integer {1}
+│   │   │   │   │   ├── sign {1}
+│   │   │   │   │   ├── natural {1}
+│   │   │   │   │   │   ├── digit {+}

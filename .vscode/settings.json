@@ -1,0 +1,5 @@
+{
+    "files.associations": {
+        "*.supports-builtin-modules": "cpp"
+    }
+}
