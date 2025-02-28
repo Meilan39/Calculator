@@ -1,23 +1,26 @@
-command {1}
-├── elementary {1}
-│   ├── nonvariable expression {1}
-│   │   ├── real number {1}
-│   │   │   ├── scientific {1}
-│   │   │   │   ├── rational {1}
-│   │   │   │   │   ├── integer {1}
-│   │   │   │   │   │   ├── sign {1}
-│   │   │   │   │   │   ├── natural {1}
-│   │   │   │   │   │   │   ├── digit {+}
-│   │   │   │   │   ├── integer {1}
-│   │   │   │   │   │   ├── sign {1}
-│   │   │   │   │   │   ├── natural {1}
-│   │   │   │   │   │   │   ├── digit {+}
-│   │   │   ├── rational {1}
-│   │   │   │   ├── integer {1}
-│   │   │   │   │   ├── sign {1}
-│   │   │   │   │   ├── natural {1}
-│   │   │   │   │   │   ├── digit {+}
-│   │   │   │   ├── integer {1}
-│   │   │   │   │   ├── sign {1}
-│   │   │   │   │   ├── natural {1}
-│   │   │   │   │   │   ├── digit {+}
+command {0}
+├── elementary {0}
+│   ├── nonvariable expression {0}
+│   │   ├── additive expression {0}
+│   │   │   ├── multiplicative expression {0}
+│   │   │   │   ├── exponential expression {0}
+│   │   │   │   │   ├── parenthetical expression {0}
+│   │   │   │   │   │   ├── real number {0}
+│   │   │   │   │   │   │   ├── scientific {0}
+│   │   │   │   │   │   │   │   ├── rational {0}
+│   │   │   │   │   │   │   │   │   ├── integer {0}
+│   │   │   │   │   │   │   │   │   │   ├── sign {0}
+│   │   │   │   │   │   │   │   │   │   ├── natural {0}
+│   │   │   │   │   │   │   │   │   ├── integer {0}
+│   │   │   │   │   │   │   │   │   │   ├── sign {0}
+│   │   │   │   │   │   │   │   │   │   ├── natural {0}
+│   │   │   │   │   │   │   ├── rational {0}
+│   │   │   │   │   │   │   │   ├── integer {0}
+│   │   │   │   │   │   │   │   │   ├── sign {0}
+│   │   │   │   │   │   │   │   │   ├── natural {0}
+│   │   │   │   │   │   │   │   ├── integer {0}
+│   │   │   │   │   │   │   │   │   ├── sign {0}
+│   │   │   │   │   │   │   │   │   ├── natural {0}
+│   │   │   │   │   ├── exponential expression suffix {=}
+│   │   │   │   ├── multiplicative expression suffix {=}
+│   │   │   ├── additive expression suffix {=}

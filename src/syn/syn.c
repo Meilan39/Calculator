@@ -3,7 +3,7 @@
 int s_syn(Node** head, Token* token) {
     /* open depth map */
     s_syntax_depth_map = fopen("./src/meta/depthmap.txt", "w");
-    if(!s_syntax_depth_map) { printf("depthmap failed to open\n"); return -1; }
+    if(!s_syntax_depth_map) { printf("unable to open depthmap\n"); return -1; }
     /* parse */
     s_F_end_of_token = 0;
     *head = s_command(&token, 0);
@@ -87,57 +87,35 @@ t : return node;
 }
 Node* s_nonvariable_expression(Token** token, int depth) {
     PRINTMAP(depth, "nonvariable expression", (*token)->s)
-    Node* node = n_construct(nt_variable_expression, NULL);
+    Node* node = n_construct(nt_nonvariable_expression, NULL);
     Token* ptoken = *token;
-    while(n_push(node, s_nonvariable_expression_suffix(token, depth+1)));
+    if(!n_push(node, s_additive_expression(token, depth+1))) goto f;
     goto t;
 f : *token = ptoken;
     return n_free(node);
 t : return node;    
 }
-Node* s_nonvariable_expression_suffix(Token** token, int depth) {
-    PRINTMAP(depth, "nonvariable expression suffix", (*token)->s)
-    Node* node = n_construct(nt_nonvariable_expression, NULL);
+Node* s_polynomial(Token** token, int depth) {
+    PRINTMAP(depth, "polynomial", (*token)->s)
+    Node* node = n_construct(nt_polynomial, NULL);
     Token* ptoken = *token;
-    if(!n_push(node, s_real_number(token, depth+1))) goto c2;
+    if(!n_push(node, s_compare(token, lt_plus))) goto c2;
+    if(!n_push(node, s_polynomial_term(token, depth+1))) goto c2;
     goto t;
 c2: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_plus))) goto c3;
-    if(!n_push(node, s_nonvariable_expression(token, depth+1))) goto c3;
+    if(!n_push(node, s_compare(token, lt_minus))) goto c3;
+    if(!n_push(node, s_polynomial_term(token, depth+1))) goto c3;
     goto t;
 c3: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_minus))) goto c4;
-    if(!n_push(node, s_nonvariable_expression(token, depth+1))) goto c4;
-    goto t;
-c4: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_dot))) goto c5;
-    if(!n_push(node, s_nonvariable_expression(token, depth+1))) goto c5;
-    goto t;
-c5: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_slash))) goto c6;
-    if(!n_push(node, s_nonvariable_expression(token, depth+1))) goto c6;
-    goto t;
-c6: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_caret))) goto c7;
-    if(!n_push(node, s_nonvariable_expression(token, depth+1))) goto c7;
-    goto t;
-c7: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_h_parenthesis))) goto c8;
-    if(!n_push(node, s_nonvariable_expression(token, depth+1))) goto c8;
-    if(!n_push(node, s_compare(token, lt_t_parenthesis))) goto c8;
-    goto t;
-c8: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_h_bracket))) goto f;
-    if(!n_push(node, s_nonvariable_expression(token, depth+1))) goto f;
-    if(!n_push(node, s_compare(token, lt_t_bracket))) goto f;
+    if(!n_push(node, s_polynomial_term(token, depth+1))) goto f;
     goto t;
 f : *token = ptoken;
     return n_free(node);
 t : return node;
 }
-Node* s_polynomial(Token** token, int depth) {
-    PRINTMAP(depth, "polynomial", (*token)->s)
-    Node* node = n_construct(nt_polynomial, NULL);
+Node* s_polynomial_term(Token** token, int depth) {
+    PRINTMAP(depth, "polynomial term", (*token)->s)
+    Node* node = n_construct(nt_polynomial_term, NULL);
     Token* ptoken = *token;
     n_push(node, s_real_number(token, depth+1));
     if(!n_push(node, s_compare(token, lt_variable))) goto c2;
@@ -149,15 +127,102 @@ c2: *token = ptoken; n_reset(node);
     if(!n_push(node, s_compare(token, lt_variable))) goto c3;
     goto t;
 c3: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_real_number(token, depth+1))) goto c4;
+    if(!n_push(node, s_real_number(token, depth+1))) goto f;
     goto t;
-c4: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_plus))) goto c5;
-    if(!n_push(node, s_polynomial(token, depth+1))) goto c5;
+f : *token = ptoken;
+    return n_free(node);
+t : return node;
+}
+Node* s_additive_expression(Token** token, int depth) {
+    PRINTMAP(depth, "additive expression", (*token)->s)
+    Node* node = n_construct(nt_additive_expression, NULL);
+    Token* ptoken = *token;
+    if(!n_push(node, s_multiplicative_expression(token, depth+1))) goto f;
+    while(n_push(node, s_additive_expression_suffix(token, depth+1)));
     goto t;
-c5: *token = ptoken; n_reset(node);
+f : *token = ptoken;
+    return n_free(node);
+t : return node;
+}
+Node* s_additive_expression_suffix(Token** token, int depth) {
+    PRINTMAP(depth, "additive expression suffix", (*token)->s)
+    Node* node = n_construct(nt_additive_expression_suffix, NULL);
+    Token* ptoken = *token;
+    if(!n_push(node, s_compare(token, lt_plus))) goto c2;
+    if(!n_push(node, s_multiplicative_expression(token, depth+1))) goto c2;
+    printf("additive plus done");
+    goto t;
+c2: *token = ptoken; n_reset(node);
     if(!n_push(node, s_compare(token, lt_minus))) goto f;
-    if(!n_push(node, s_polynomial(token, depth+1))) goto f;
+    if(!n_push(node, s_multiplicative_expression(token, depth+1))) goto f;
+    goto t;
+f : *token = ptoken;
+    return n_free(node);
+t : return node;
+}
+Node* s_multiplicative_expression(Token** token, int depth) {
+    PRINTMAP(depth, "multiplicative expression", (*token)->s)
+    Node* node = n_construct(nt_multiplicative_expression, NULL);
+    Token* ptoken = *token;
+    if(!n_push(node, s_exponential_expression(token, depth+1))) goto f;
+    while(n_push(node, s_multiplicative_expression_suffix(token, depth+1)));
+    goto t;
+f : *token = ptoken;
+    return n_free(node);
+t : return node;
+}
+Node* s_multiplicative_expression_suffix(Token** token, int depth) {
+    PRINTMAP(depth, "multiplicative expression suffix", (*token)->s)
+    Node* node = n_construct(nt_multiplicative_expression_suffix, NULL);
+    Token* ptoken = *token;
+    if(!n_push(node, s_compare(token, lt_dot))) goto c2;
+    if(!n_push(node, s_exponential_expression(token, depth+1))) goto c2;
+    goto t;
+c2: *token = ptoken; n_reset(node);
+    if(!n_push(node, s_compare(token, lt_slash))) goto f;
+    if(!n_push(node, s_exponential_expression(token, depth+1))) goto f;
+    goto t;
+f : *token = ptoken;
+    return n_free(node);
+t : return node;
+}
+Node* s_exponential_expression(Token** token, int depth) {
+    PRINTMAP(depth, "exponential expression", (*token)->s)
+    Node* node = n_construct(nt_exponential_expression, NULL);
+    Token* ptoken = *token;
+    if(!n_push(node, s_parenthetical_expression(token, depth+1))) goto f;
+    while(n_push(node, s_exponential_expression_suffix(token, depth+1)));
+    goto t;
+f : *token = ptoken;
+    return n_free(node);
+t : return node;
+}
+Node* s_exponential_expression_suffix(Token** token, int depth) {
+    PRINTMAP(depth, "exponential expression suffix", (*token)->s)
+    Node* node = n_construct(nt_exponential_expression_suffix, NULL);
+    Token* ptoken = *token;
+    if(!n_push(node, s_compare(token, lt_caret))) goto f;
+    if(!n_push(node, s_parenthetical_expression(token, depth+1))) goto f;
+    goto t;
+f : *token = ptoken;
+    return n_free(node);
+t : return node;
+}
+Node* s_parenthetical_expression(Token** token, int depth) {
+    PRINTMAP(depth, "parenthetical expression", (*token)->s)
+    Node* node = n_construct(nt_parenthetical_expression, NULL);
+    Token* ptoken = *token;
+    if(!n_push(node, s_real_number(token, depth+1))) goto c2;
+    goto t;
+c2: *token = ptoken; n_reset(node);
+    if(!n_push(node, s_compare(token, lt_h_parenthesis))) goto c3;
+    if(!n_push(node, s_additive_expression(token, depth+1))) goto c3;
+    if(!n_push(node, s_compare(token, lt_t_parenthesis))) goto c3;
+    goto t;
+c3: *token = ptoken; n_reset(node);
+    if(!n_push(node, s_compare(token, lt_h_bracket))) goto f;
+    if(!n_push(node, s_additive_expression(token, depth+1))) goto f;
+    if(!n_push(node, s_compare(token, lt_t_bracket))) goto f;
     goto t;
 f : *token = ptoken;
     return n_free(node);

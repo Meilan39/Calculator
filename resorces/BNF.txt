@@ -13,12 +13,13 @@
 
 <nonvariable_expression> ::= <additive_expression>
 
-<polynomial> ::= {<polynomail_suffix>}*
-<polynomial_suffix> ::= {<real_number>}? <variable> ^ <natural>
-                      | {<real_number>}? <variable>
-                      | <real_number>
-                      | + <polynomial>
-                      | - <polynomial>
+<polynomial> ::= <polynomial_term> + <polynomial>
+               | <polynomial_term> - <polynomial>
+               | <polynomial_term>
+<polynomial_term> ::= {<real_number>}? <variable> ^ <natural>
+                    | {<real_number>}? <variable>
+                    | <real_number>
+
 
 <additive_expression> ::= <multiplicative_expression> {<additive-expression_suffix>}*
 <additive_expression_suffix> ::=  + <multiplicative_expression>

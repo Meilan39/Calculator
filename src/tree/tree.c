@@ -43,7 +43,7 @@ int n_push(Node* this, Node* node) {
 
 void n_print(Node* this, const char* path) {
     s_abstract_syntax_tree = fopen(path, "w");
-    if(!s_abstract_syntax_tree) {printf("%s\n", path); return;}
+    if(!s_abstract_syntax_tree) {printf("unable to open %s\n", path); return;}
     int state[100] = {0};
     n_helper(this, 0, 0, state);
     fclose(s_abstract_syntax_tree);
@@ -71,11 +71,11 @@ void n_simplify(Node* this) {
     /* print parse tree */
     n_print(this, "./src/meta/pt.txt");
     /* compress */
-    n_compress_symbol(this);
-    n_compress_chain(this);
-    for(int i = 0; i < this->length; i++){
-        n_simplify(this->next[i]);
-    }
+    // n_compress_symbol(this);
+    // n_compress_chain(this);
+    // for(int i = 0; i < this->length; i++){
+    //     n_simplify(this->next[i]);
+    // }
     /* print abstract syntax tree */
     n_print(this, "./src/meta/ast.txt");    
 }
@@ -138,9 +138,15 @@ const char* n_get(int type) {
         case nt_expression: return "expression";
         case nt_variable_expression: return "variable expression";
         case nt_nonvariable_expression: return "nonvariable expression";
-        case nt_nonvariable_expression_suffix: return "nonvariable expression suffix";
         case nt_polynomial: return "polynomial";
-        case nt_polynomial_suffix: return "polynomial suffix";
+        case nt_polynomial_term: return "polynomial suffix";
+        case nt_additive_expression: return "additive expression";
+        case nt_additive_expression_suffix: return "additive expression suffix";
+        case nt_multiplicative_expression: return "multiplicative expression";
+        case nt_multiplicative_expression_suffix: return "multiplicative expression suffix";
+        case nt_exponential_expression: return "exponential expression";
+        case nt_exponential_expression_suffix: return "exponential expression suffix";
+        case nt_parenthetical_expression: return "parenthetical expression";
         case nt_real_number: return "real number";
         case nt_scientific: return "scientific";
         case nt_special_symbols: return "special symbols";

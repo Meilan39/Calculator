@@ -1,2 +1,11 @@
-natural
-└── symbol {1}
+command
+└── elementary
+    └── nonvariable expression
+        └── additive expression
+            └── multiplicative expression
+                └── exponential expression
+                    └── parenthetical expression
+                        └── real number
+                            └── rational
+                                └── integer
+                                    └── symbol {0}
