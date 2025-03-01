@@ -7,7 +7,6 @@
 #include "../tree/tree.h"
 
 FILE* s_syntax_depth_map;
-int s_F_end_of_token; // token terminal flag for s_compare
 
 #define DEPTHMAP 1
 #ifdef DEPTHMAP
@@ -17,7 +16,8 @@ int s_F_end_of_token; // token terminal flag for s_compare
                 fprintf(s_syntax_depth_map, "│   ");        \
             fprintf(s_syntax_depth_map, "├── ");            \
         }                                                   \
-        fprintf(s_syntax_depth_map, "%s {%s}\n", name, token);
+        fprintf(s_syntax_depth_map, "%s {%s}\n", name,      \
+                            (*token) ? (*token)->s : "");
 #else
     #define PRINTMAP(fmt, ...)
 #endif
@@ -46,7 +46,6 @@ Node* s_special_symbols(Token** token, int depth);
 Node* s_natural(Token** token, int depth);
 Node* s_integer(Token** token, int depth);
 Node* s_rational(Token** token, int depth);
-Node* s_digit(Token** token, int depth);
 Node* s_sign(Token** token, int depth);
 
 #endif

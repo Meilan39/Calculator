@@ -28,10 +28,11 @@ int t_push(Token* head, char* s, int type) {
 }
 
 int t_next(Token** current) {
-    if((*current)->next) {
-        *current = (*current)->next;
-        return 0;
-    } return -1;
+    *current = (*current)->next;
+    // if((*current)->next) {
+    //     *current = (*current)->next;
+    //     return 0;
+    // } return -1;
 }
 
 void t_print(Token* head) {

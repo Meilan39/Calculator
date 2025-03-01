@@ -23,8 +23,12 @@ void n_print(Node* this, const char* path);
 void n_helper(Node* this, int depth, int endge, int state[]);
 /* simplify */
 void n_simplify(Node* this);
+void n_compress(Node* this);
 void n_compress_symbol(Node* this);
+void n_compress_suffix(Node* this);
 void n_compress_chain(Node* this);
+/* helpers */
+int n_chain_exception(int type);
 
 enum n_Types {
    nt_command = 1,
@@ -48,9 +52,6 @@ enum n_Types {
    nt_natural,
    nt_integer,
    nt_rational,
-   nt_nonzero,
-   nt_zero,
-   nt_digit,
    nt_sign,
    nt_variable,
    nt_symbol

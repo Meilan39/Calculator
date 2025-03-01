@@ -2,10 +2,57 @@ command
 └── elementary
     └── nonvariable expression
         └── additive expression
-            └── multiplicative expression
-                └── exponential expression
-                    └── parenthetical expression
-                        └── real number
-                            └── rational
-                                └── integer
-                                    └── symbol {0}
+            ├── multiplicative expression
+            │   └── exponential expression
+            │       └── parenthetical expression
+            │           └── real number
+            │               └── rational
+            │                   └── symbol {1}
+            ├── additive expression suffix
+            │   ├── symbol {+}
+            │   └── multiplicative expression
+            │       ├── exponential expression
+            │       │   └── parenthetical expression
+            │       │       └── real number
+            │       │           └── rational
+            │       │               └── symbol {4}
+            │       └── multiplicative expression suffix
+            │           ├── symbol {*}
+            │           └── exponential expression
+            │               └── parenthetical expression
+            │                   ├── symbol {(}
+            │                   ├── additive expression
+            │                   │   └── multiplicative expression
+            │                   │       └── exponential expression
+            │                   │           ├── parenthetical expression
+            │                   │           │   └── real number
+            │                   │           │       └── rational
+            │                   │           │           └── symbol {6}
+            │                   │           └── exponential expression suffix
+            │                   │               ├── symbol {^}
+            │                   │               └── parenthetical expression
+            │                   │                   └── real number
+            │                   │                       └── rational
+            │                   │                           └── symbol {2.12312}
+            │                   └── symbol {)}
+            └── additive expression suffix
+                ├── symbol {+}
+                └── multiplicative expression
+                    ├── exponential expression
+                    │   └── parenthetical expression
+                    │       └── real number
+                    │           └── scientific
+                    │               ├── rational
+                    │               │   ├── sign
+                    │               │   │   └── symbol {-}
+                    │               │   └── symbol {12}
+                    │               ├── symbol {E}
+                    │               └── integer
+                    │                   └── symbol {3}
+                    └── multiplicative expression suffix
+                        ├── symbol {/}
+                        └── exponential expression
+                            └── parenthetical expression
+                                └── real number
+                                    └── rational
+                                        └── symbol {5}

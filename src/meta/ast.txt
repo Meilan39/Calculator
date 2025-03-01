@@ -1,11 +1,38 @@
 command
-└── elementary
-    └── nonvariable expression
-        └── additive expression
-            └── multiplicative expression
-                └── exponential expression
-                    └── parenthetical expression
-                        └── real number
-                            └── rational
-                                └── integer
-                                    └── symbol {0}
+└── additive expression
+    ├── multiplicative expression
+    │   └── exponential expression
+    │       └── parenthetical expression
+    │           └── rational {1}
+    ├── symbol {+}
+    ├── multiplicative expression
+    │   ├── exponential expression
+    │   │   └── parenthetical expression
+    │   │       └── rational {4}
+    │   ├── symbol {*}
+    │   └── exponential expression
+    │       └── parenthetical expression
+    │           ├── symbol {(}
+    │           ├── additive expression
+    │           │   └── multiplicative expression
+    │           │       └── exponential expression
+    │           │           ├── parenthetical expression
+    │           │           │   └── rational {6}
+    │           │           ├── symbol {^}
+    │           │           └── parenthetical expression
+    │           │               └── rational {2.12312}
+    │           └── symbol {)}
+    ├── symbol {+}
+    └── multiplicative expression
+        ├── exponential expression
+        │   └── parenthetical expression
+        │       └── scientific
+        │           ├── rational
+        │           │   ├── sign {-}
+        │           │   └── symbol {12}
+        │           ├── symbol {E}
+        │           └── integer {3}
+        ├── symbol {/}
+        └── exponential expression
+            └── parenthetical expression
+                └── rational {5}

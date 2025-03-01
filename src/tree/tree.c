@@ -1,5 +1,22 @@
 #include "tree.h"
 
+void n_simplify(Node* this) {
+    /* print parse tree */
+    n_print(this, "./src/meta/pt.txt");
+    /* compress */
+    n_compress(this);
+    /* print abstract syntax tree */
+    n_print(this, "./src/meta/ast.txt");    
+}
+
+void n_compress(Node* this) {
+    n_compress_symbol(this);
+    n_compress_suffix(this);
+    n_compress_chain(this);
+    for(int i = 0; i < this->length; i++)
+        n_compress(this->next[i]);  
+}
+
 Node* n_free(Node* head) {
     if(!head) return NULL;
     if(head->length) {
@@ -67,19 +84,6 @@ void n_helper(Node* this, int depth, int edge, int state[]) {
     }
 }
 
-void n_simplify(Node* this) {
-    /* print parse tree */
-    n_print(this, "./src/meta/pt.txt");
-    /* compress */
-    // n_compress_symbol(this);
-    // n_compress_chain(this);
-    // for(int i = 0; i < this->length; i++){
-    //     n_simplify(this->next[i]);
-    // }
-    /* print abstract syntax tree */
-    n_print(this, "./src/meta/ast.txt");    
-}
-
 void n_compress_symbol(Node* this) {
     if(this->length!=1) return;
     Node* next = this->next[0];
@@ -95,6 +99,10 @@ void n_compress_chain(Node* this) {
     for(int i = 0; i < this->length; i++) {
         while(1) {
             Node* next = this->next[i];
+            if(n_chain_exception(next->type)) {
+                n_compress_chain(next);
+                break;
+            }
             if(next->length!=1) break;
             if(next->next[0]->type==nt_symbol) break;
             this->next[i] = next->next[0];
@@ -104,31 +112,33 @@ void n_compress_chain(Node* this) {
     }
 }
 
-// void m_compress_suffix(Node* this) {
-//     if(this->length==0) return;
-//     switch(this->type) {
-//         case nt_command: break;
-//         default: return; // no suffix to compress
-//     }
-//     for(int i = 0; i < this->length; i++) {
-//         Node* next = this->next[i];
-//         if(this->type + 1 != next->type) continue;
-//         this->length += next->length - 1;
-//         Node** temp = malloc(this->length * sizeof(Node*));
-//         int j = 0, k = 0, l = 0;
-//         for(; j < this->length; j++) {
-//             if(j < i || j >= i + next->length) {
-//                 temp[j] = this->next[k++];
-//                 continue;
-//             } else temp[j] = next->next[l++];
-//             if(j==i) k++;
-//         }
-//         free(this->next);
-//         this->next = temp;
-//         free(next->next);
-//         free(next);
-//     }
-// }
+void n_compress_suffix(Node* this) {
+    if(this->length==0) return;
+    switch(this->type) {
+        case nt_additive_expression: break;
+        case nt_multiplicative_expression: break;
+        case nt_exponential_expression: break;
+        default: return; // no suffix to compress
+    }
+    for(int i = 0; i < this->length; i++) {
+        Node* next = this->next[i];
+        if(this->type + 1 != next->type) continue;
+        this->length += next->length - 1;
+        Node** temp = malloc(this->length * sizeof(Node*));
+        int j = 0, k = 0, l = 0;
+        for(; j < this->length; j++) {
+            if(j < i || j >= i + next->length) {
+                temp[j] = this->next[k++];
+                continue;
+            } else temp[j] = next->next[l++];
+            if(j==i) k++;
+        }
+        free(this->next);
+        this->next = temp;
+        free(next->next);
+        free(next);
+    }
+}
 
 const char* n_get(int type) {
     switch (type) {
@@ -153,13 +163,20 @@ const char* n_get(int type) {
         case nt_natural: return "natural";
         case nt_integer: return "integer";
         case nt_rational: return "rational";
-        case nt_nonzero: return "nonzero";
-        case nt_zero: return "zero";
-        case nt_digit: return "digit";
         case nt_sign: return "sign";
         case nt_variable: return "variable";
         case nt_symbol: return "symbol";
         default: return "";
     }
+}
+
+int n_chain_exception(int type) {
+    switch(type) {
+        case nt_additive_expression: break;
+        case nt_multiplicative_expression: break;
+        case nt_exponential_expression: break;
+        case nt_parenthetical_expression: break;
+        default: return 0;
+    } return 1;
 }
 
