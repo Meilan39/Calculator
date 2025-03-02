@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "../token/token.h"
+#include "../lex/lex.h"
 
 FILE* s_abstract_syntax_tree;
 
@@ -28,10 +29,12 @@ void n_compress_symbol(Node* this);
 void n_compress_suffix(Node* this);
 void n_compress_chain(Node* this);
 /* helpers */
+int n_symbol_exception(int type);
+int n_suffix_exception(int type);
 int n_chain_exception(int type);
 
 enum n_Types {
-   nt_command = 1,
+   nt_command = 100,
    nt_elementary,
    nt_root,
    nt_expression,

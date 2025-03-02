@@ -86,8 +86,9 @@ void n_helper(Node* this, int depth, int edge, int state[]) {
 
 void n_compress_symbol(Node* this) {
     if(this->length!=1) return;
+    if(n_symbol_exception(this->type)) return;
     Node* next = this->next[0];
-    if(next->type!=nt_symbol) return;
+    if(next->length) return;
     this->token = next->token;
     this->length = 0;
     this->next = NULL;
@@ -96,30 +97,22 @@ void n_compress_symbol(Node* this) {
 
 void n_compress_chain(Node* this) {
     if(this->length==0) return;
-    for(int i = 0; i < this->length; i++) {
+    //for(int i = 0; i < this->length; i++) {
         while(1) {
-            Node* next = this->next[i];
-            if(n_chain_exception(next->type)) {
-                n_compress_chain(next);
-                break;
-            }
+            Node* next = this->next[0]; // i
+            if(n_chain_exception(next->type)) break;
             if(next->length!=1) break;
-            if(next->next[0]->type==nt_symbol) break;
-            this->next[i] = next->next[0];
+            if(next->next[0]->length==0) break;
+            this->next[0] = next->next[0]; // i
             free(next->next);
             free(next);
         }
-    }
+    //}
 }
 
 void n_compress_suffix(Node* this) {
     if(this->length==0) return;
-    switch(this->type) {
-        case nt_additive_expression: break;
-        case nt_multiplicative_expression: break;
-        case nt_exponential_expression: break;
-        default: return; // no suffix to compress
-    }
+    if( ! n_suffix_exception(this->type)) return;
     for(int i = 0; i < this->length; i++) {
         Node* next = this->next[i];
         if(this->type + 1 != next->type) continue;
@@ -164,10 +157,37 @@ const char* n_get(int type) {
         case nt_integer: return "integer";
         case nt_rational: return "rational";
         case nt_sign: return "sign";
-        case nt_variable: return "variable";
         case nt_symbol: return "symbol";
+        /*  */
+        case ct_number: return "number";
+        case ct_decimal: return "decimal";
+        case ct_zero: return "zero";
+        /* lex */
+        case lt_plus: return "plus";
+        case lt_minus: return "minus";
+        case lt_dot: return "dot"; 
+        case lt_slash: return "slash";
+        case lt_caret: return "caret";
+        case lt_equal: return "equal";
+        case lt_scientific: return "scientific";
+        case lt_h_parenthesis: return "head parenthesis";
+        case lt_t_parenthesis: return "tail parenthesis";
+        case lt_h_bracket: return "head bracket";
+        case lt_t_bracket: return "tail bracket";
+        case lt_variable: return "variable";
+        case lt_root: return "root";
+        /* default */
         default: return "";
     }
+}
+
+int n_symbol_exception(int type) {
+    switch(type) {
+        case nt_rational: break;
+        case nt_integer: break;
+        case nt_natural: break;
+        default: return 0;
+    } return 1;   
 }
 
 int n_chain_exception(int type) {
@@ -180,3 +200,11 @@ int n_chain_exception(int type) {
     } return 1;
 }
 
+int n_suffix_exception(int type) {
+    switch(type) {
+        case nt_additive_expression: break;
+        case nt_multiplicative_expression: break;
+        case nt_exponential_expression: break;
+        default: return 0;
+    } return 1;
+}

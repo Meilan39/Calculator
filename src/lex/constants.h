@@ -23,7 +23,7 @@ char c_nonzero[9][3];
 char c_zero[1][3];
 
 enum c_Types {
-    ct_number = 100,
+    ct_number = 90,
     ct_decimal,
     ct_zero
 };

@@ -7,36 +7,36 @@ command
             │       └── parenthetical expression
             │           └── real number
             │               └── rational
-            │                   └── symbol {1}
+            │                   └── number {1}
             ├── additive expression suffix
-            │   ├── symbol {+}
+            │   ├── plus {+}
             │   └── multiplicative expression
             │       ├── exponential expression
             │       │   └── parenthetical expression
             │       │       └── real number
             │       │           └── rational
-            │       │               └── symbol {4}
+            │       │               └── number {4}
             │       └── multiplicative expression suffix
-            │           ├── symbol {*}
+            │           ├── dot {*}
             │           └── exponential expression
             │               └── parenthetical expression
-            │                   ├── symbol {(}
+            │                   ├── head parenthesis {(}
             │                   ├── additive expression
             │                   │   └── multiplicative expression
             │                   │       └── exponential expression
             │                   │           ├── parenthetical expression
             │                   │           │   └── real number
             │                   │           │       └── rational
-            │                   │           │           └── symbol {6}
+            │                   │           │           └── number {6}
             │                   │           └── exponential expression suffix
-            │                   │               ├── symbol {^}
+            │                   │               ├── caret {^}
             │                   │               └── parenthetical expression
             │                   │                   └── real number
             │                   │                       └── rational
-            │                   │                           └── symbol {2.12312}
-            │                   └── symbol {)}
+            │                   │                           └── decimal {2.12312}
+            │                   └── tail parenthesis {)}
             └── additive expression suffix
-                ├── symbol {+}
+                ├── plus {+}
                 └── multiplicative expression
                     ├── exponential expression
                     │   └── parenthetical expression
@@ -44,15 +44,15 @@ command
                     │           └── scientific
                     │               ├── rational
                     │               │   ├── sign
-                    │               │   │   └── symbol {-}
-                    │               │   └── symbol {12}
-                    │               ├── symbol {E}
+                    │               │   │   └── minus {-}
+                    │               │   └── number {12}
+                    │               ├── scientific {E}
                     │               └── integer
-                    │                   └── symbol {3}
+                    │                   └── number {3}
                     └── multiplicative expression suffix
-                        ├── symbol {/}
+                        ├── slash {/}
                         └── exponential expression
                             └── parenthetical expression
                                 └── real number
                                     └── rational
-                                        └── symbol {5}
+                                        └── number {5}

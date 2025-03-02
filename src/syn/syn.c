@@ -17,7 +17,7 @@ int s_syn(Node** head, Token* token) {
 Node* s_compare(Token** token, int type) {
     if( (*token)==NULL ) return NULL;
     if( (*token)->type == type ) {
-        Node* node = n_construct(nt_symbol, *token);
+        Node* node = n_construct(type, *token);
         t_next(token);
         return node;
     } return NULL;

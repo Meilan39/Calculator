@@ -10,7 +10,7 @@ int l_lex(Token* this, char* s) {
         // general init
         ps = s;
         type = 0;
-       // numerical constants
+        // numerical constants
         if(c_constant(&s, &type)) {goto P;}        
         // checks
         if(l_compare(&s, l_special_symbols, 2)) {type = lt_special_symbols; goto P;}
