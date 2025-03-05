@@ -23,7 +23,8 @@ char l_t_parenthesis[1][20];
 char l_h_bracket[1][20];
 char l_t_bracket[1][20];
 char l_variable[26][20];
-char l_special_symbols[2][20];
+char l_special_e[1][20];
+char l_special_pi[1][20];
 char l_root[1][20];
 
 enum l_Types {
@@ -41,7 +42,8 @@ enum l_Types {
     lt_t_bracket,
     lt_variable,
     /* specific symbols */
-    lt_special_symbols,
+    lt_special_e,
+    lt_special_pi,
     lt_root
 };
 

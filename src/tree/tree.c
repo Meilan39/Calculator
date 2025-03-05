@@ -10,7 +10,7 @@ void n_simplify(Node* this) {
 }
 
 void n_compress(Node* this) {
-    n_compress_symbol(this);
+    //n_compress_symbol(this);
     n_compress_suffix(this);
     n_compress_chain(this);
     for(int i = 0; i < this->length; i++)
@@ -21,8 +21,8 @@ Node* n_free(Node* head) {
     if(!head) return NULL;
     if(head->length) {
         for(int i = 0; i < head->length; i++)
-            n_free(head->next[i]);
-        free(head->next);
+            if(head->next[i]) n_free(head->next[i]);
+        if(head->next) free(head->next);
     }
     free(head);
     return NULL;
@@ -33,7 +33,7 @@ Node* n_reset(Node* head) {
     if(head->length) {
         for(int i = 0; i < head->length; i++)
             n_free(head->next[i]);
-        free(head->next);
+        if(head->next) free(head->next);
     }
     head->next = NULL;
     head->length = 0;
@@ -84,30 +84,27 @@ void n_helper(Node* this, int depth, int edge, int state[]) {
     }
 }
 
-void n_compress_symbol(Node* this) {
-    if(this->length!=1) return;
-    if(n_symbol_exception(this->type)) return;
-    Node* next = this->next[0];
-    if(next->length) return;
-    this->token = next->token;
-    this->length = 0;
-    this->next = NULL;
-    free(next);
-}
+// void n_compress_symbol(Node* this) {
+//     if(this->length!=1) return;
+//     if(n_symbol_exception(this->type)) return;
+//     Node* next = this->next[0];
+//     if(next->length) return;
+//     this->token = next->token;
+//     this->length = 0;
+//     this->next = NULL;
+//     free(next);
+// }
 
 void n_compress_chain(Node* this) {
     if(this->length==0) return;
-    //for(int i = 0; i < this->length; i++) {
-        while(1) {
-            Node* next = this->next[0]; // i
-            if(n_chain_exception(next->type)) break;
-            if(next->length!=1) break;
-            if(next->next[0]->length==0) break;
-            this->next[0] = next->next[0]; // i
-            free(next->next);
-            free(next);
-        }
-    //}
+    while(1) {
+        Node* next = this->next[0]; // i
+        if(n_chain_exception(next->type)) break;
+        if(next->length!=1) break;
+        this->next[0] = next->next[0]; // i
+        free(next->next);
+        free(next);
+    }
 }
 
 void n_compress_suffix(Node* this) {
@@ -136,7 +133,7 @@ void n_compress_suffix(Node* this) {
 const char* n_get(int type) {
     switch (type) {
         case nt_command: return "command";
-        case nt_elementary: return "elementary";
+        case nt_nonvariable: return "non variable";
         case nt_root: return "root";
         case nt_expression: return "expression";
         case nt_variable_expression: return "variable expression";
@@ -150,14 +147,13 @@ const char* n_get(int type) {
         case nt_exponential_expression: return "exponential expression";
         case nt_exponential_expression_suffix: return "exponential expression suffix";
         case nt_parenthetical_expression: return "parenthetical expression";
+        case nt_special_symbols: return "special symbols";
         case nt_real_number: return "real number";
         case nt_scientific: return "scientific";
-        case nt_special_symbols: return "special symbols";
         case nt_natural: return "natural";
         case nt_integer: return "integer";
         case nt_rational: return "rational";
         case nt_sign: return "sign";
-        case nt_symbol: return "symbol";
         /*  */
         case ct_number: return "number";
         case ct_decimal: return "decimal";
@@ -174,6 +170,8 @@ const char* n_get(int type) {
         case lt_t_parenthesis: return "tail parenthesis";
         case lt_h_bracket: return "head bracket";
         case lt_t_bracket: return "tail bracket";
+        case lt_special_e: return "special symbol e";
+        case lt_special_pi: return "special symbol pi";
         case lt_variable: return "variable";
         case lt_root: return "root";
         /* default */
@@ -181,14 +179,15 @@ const char* n_get(int type) {
     }
 }
 
-int n_symbol_exception(int type) {
-    switch(type) {
-        case nt_rational: break;
-        case nt_integer: break;
-        case nt_natural: break;
-        default: return 0;
-    } return 1;   
-}
+// int n_symbol_exception(int type) {
+//     switch(type) {
+//         case nt_rational: break;
+//         case nt_integer: break;
+//         case nt_natural: break;
+//         case nt_sign: break;
+//         default: return 0;
+//     } return 1;   
+// }
 
 int n_chain_exception(int type) {
     switch(type) {
@@ -196,6 +195,10 @@ int n_chain_exception(int type) {
         case nt_multiplicative_expression: break;
         case nt_exponential_expression: break;
         case nt_parenthetical_expression: break;
+        case nt_rational: break;
+        case nt_nonvariable: break;
+        case nt_root: break;
+        case nt_special_symbols: break;
         default: return 0;
     } return 1;
 }

@@ -13,7 +13,8 @@ int l_lex(Token* this, char* s) {
         // numerical constants
         if(c_constant(&s, &type)) {goto P;}        
         // checks
-        if(l_compare(&s, l_special_symbols, 2)) {type = lt_special_symbols; goto P;}
+        if(l_compare(&s, l_special_e, 1)) {type = lt_special_e; goto P;}
+        if(l_compare(&s, l_special_pi, 1)) {type = lt_special_pi; goto P;}
         if(l_compare(&s, l_root, 1)) {type = lt_root; goto P;}        
         if(l_compare(&s, l_plus, 1)) {type = lt_plus; goto P;}
         if(l_compare(&s, l_minus, 1)) {type = lt_minus; goto P;}
@@ -59,5 +60,6 @@ char l_t_bracket[1][20] = {"}"};
 char l_variable[26][20] = {"a","b","c","d","e","f","g","h","i","j","k","l","m",
                            "n","o","p","q","r","s","t","u","v","w","x","y","z"};
 
-char l_special_symbols[2][20] = {"\\e", "\\pi"};
+char l_special_e[1][20] = {"\\e"};
+char l_special_pi[1][20] = {"\\pi"};
 char l_root[1][20] = {"root"};

@@ -1,58 +1,59 @@
 command
-└── elementary
+└── non variable
     └── nonvariable expression
         └── additive expression
             ├── multiplicative expression
             │   └── exponential expression
             │       └── parenthetical expression
             │           └── real number
-            │               └── rational
-            │                   └── number {1}
-            ├── additive expression suffix
-            │   ├── plus {+}
-            │   └── multiplicative expression
-            │       ├── exponential expression
-            │       │   └── parenthetical expression
-            │       │       └── real number
-            │       │           └── rational
-            │       │               └── number {4}
-            │       └── multiplicative expression suffix
-            │           ├── dot {*}
-            │           └── exponential expression
-            │               └── parenthetical expression
-            │                   ├── head parenthesis {(}
-            │                   ├── additive expression
-            │                   │   └── multiplicative expression
-            │                   │       └── exponential expression
-            │                   │           ├── parenthetical expression
-            │                   │           │   └── real number
-            │                   │           │       └── rational
-            │                   │           │           └── number {6}
-            │                   │           └── exponential expression suffix
-            │                   │               ├── caret {^}
-            │                   │               └── parenthetical expression
-            │                   │                   └── real number
-            │                   │                       └── rational
-            │                   │                           └── decimal {2.12312}
-            │                   └── tail parenthesis {)}
+            │               └── special symbols
+            │                   └── special symbol e {\e}
             └── additive expression suffix
                 ├── plus {+}
                 └── multiplicative expression
                     ├── exponential expression
                     │   └── parenthetical expression
                     │       └── real number
-                    │           └── scientific
-                    │               ├── rational
-                    │               │   ├── sign
-                    │               │   │   └── minus {-}
-                    │               │   └── number {12}
-                    │               ├── scientific {E}
-                    │               └── integer
-                    │                   └── number {3}
+                    │           └── special symbols
+                    │               └── special symbol pi {\pi}
+                    ├── multiplicative expression suffix
+                    │   ├── dot {*}
+                    │   └── exponential expression
+                    │       ├── parenthetical expression
+                    │       │   ├── head parenthesis {(}
+                    │       │   ├── additive expression
+                    │       │   │   └── multiplicative expression
+                    │       │   │       ├── exponential expression
+                    │       │   │       │   └── parenthetical expression
+                    │       │   │       │       └── real number
+                    │       │   │       │           └── rational
+                    │       │   │       │               └── number {5}
+                    │       │   │       └── multiplicative expression suffix
+                    │       │   │           ├── slash {/}
+                    │       │   │           └── exponential expression
+                    │       │   │               └── parenthetical expression
+                    │       │   │                   └── real number
+                    │       │   │                       └── rational
+                    │       │   │                           └── number {2}
+                    │       │   └── tail parenthesis {)}
+                    │       └── exponential expression suffix
+                    │           ├── caret {^}
+                    │           └── parenthetical expression
+                    │               ├── head bracket {{}
+                    │               ├── additive expression
+                    │               │   └── multiplicative expression
+                    │               │       └── exponential expression
+                    │               │           └── parenthetical expression
+                    │               │               └── real number
+                    │               │                   └── rational
+                    │               │                       ├── sign
+                    │               │                       │   └── minus {-}
+                    │               │                       └── number {1}
+                    │               └── tail bracket {}}
                     └── multiplicative expression suffix
-                        ├── slash {/}
+                        ├── dot {*}
                         └── exponential expression
                             └── parenthetical expression
                                 └── real number
                                     └── rational
-                                        └── number {5}
+                                        └── number {6}

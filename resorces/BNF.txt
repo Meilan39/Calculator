@@ -42,7 +42,8 @@
 
 <scientific> ::= <rational> E <integer>
 
-<special_symbols> ::= \e | \pi
+<special_symbols> ::= {<sign>}? \e 
+                    | {<sign>}? \pi
 
 <natural> ::= <number>
 <integer> ::= {<sign>}? <number>

@@ -35,7 +35,7 @@ int n_chain_exception(int type);
 
 enum n_Types {
    nt_command = 100,
-   nt_elementary,
+   nt_nonvariable,
    nt_root,
    nt_expression,
    nt_variable_expression,
@@ -51,13 +51,12 @@ enum n_Types {
    nt_parenthetical_expression,
    nt_real_number,
    nt_scientific,
-   nt_special_symbols,
    nt_natural,
    nt_integer,
    nt_rational,
    nt_sign,
    nt_variable,
-   nt_symbol
+   nt_special_symbols
 };
 
 #endif

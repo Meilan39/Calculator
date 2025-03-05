@@ -26,7 +26,7 @@ int s_syn(Node** head, Token* token);
 Node* s_compare(Token** token, int type);
 
 Node* s_command(Token** token, int depth);
-Node* s_elementary(Token** token, int depth);
+Node* s_nonvariable(Token** token, int depth);
 Node* s_root(Token** token, int depth);
 Node* s_expression(Token** token, int depth);
 Node* s_variable_expression(Token** token, int depth);

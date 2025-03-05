@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "*.supports-builtin-modules": "cpp"
+        "*.supports-builtin-modules": "cpp",
+        "__locale": "c",
+        "string": "c",
+        "string_view": "c"
     }
 }

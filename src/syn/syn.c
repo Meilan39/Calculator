@@ -27,7 +27,7 @@ Node* s_command(Token** token, int depth) {
     PRINTMAP(depth, "command", token)
     Node* node = n_construct(nt_command, NULL);
     Token* ptoken = *token;
-    if(!n_push(node, s_elementary(token, depth+1))) goto c2;
+    if(!n_push(node, s_nonvariable(token, depth+1))) goto c2;
     goto t;
 c2: *token = ptoken; n_reset(node);
     if(!n_push(node, s_root(token, depth+1))) goto f;
@@ -36,9 +36,9 @@ f : *token = ptoken;
     return n_free(node);
 t : return node; 
 }
-Node* s_elementary(Token** token, int depth) {
-    PRINTMAP(depth, "elementary", token)
-    Node* node = n_construct(nt_elementary, NULL);
+Node* s_nonvariable(Token** token, int depth) {
+    PRINTMAP(depth, "non variable", token)
+    Node* node = n_construct(nt_nonvariable, NULL);
     Token* ptoken = *token;
     if(!n_push(node, s_nonvariable_expression(token, depth+1))) goto f;
     goto t;
@@ -260,7 +260,12 @@ Node* s_special_symbols(Token** token, int depth) {
     PRINTMAP(depth, "special symbols", token)
     Node* node = n_construct(nt_special_symbols, NULL);
     Token* ptoken = *token;
-    if(!n_push(node, s_compare(token, lt_special_symbols))) goto f;
+    n_push(node, s_sign(token, depth+1));
+    if(!n_push(node, s_compare(token, lt_special_e))) goto c2;
+    goto t;
+c2: *token = ptoken; n_reset(node);
+    n_push(node, s_sign(token, depth+1));
+    if(!n_push(node, s_compare(token, lt_special_pi))) goto f;
     goto t;
 f : *token = ptoken;
     return n_free(node);
