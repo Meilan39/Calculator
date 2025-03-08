@@ -31,6 +31,7 @@ int main(void) {
         if(strcmp("help", buffer)==0) {fprint("./src/files/help.txt"); goto E;}
         // lexical analysis
         if(l_lex(tokens, buffer)) {printf("...lexical error\n"); goto E;}
+        t_print(tokens);
         // syntax analysis
         if(s_syn(&head, tokens->next)) {printf("...syntax error\n"); goto E;}
         // syntaz tree

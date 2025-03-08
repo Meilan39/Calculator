@@ -11,23 +11,8 @@ int l_lex(Token* this, char* s) {
         ps = s;
         type = 0;
         // numerical constants
-        if(c_constant(&s, &type)) {goto P;}        
-        // checks
-        if(l_compare(&s, l_special_e, 1)) {type = lt_special_e; goto P;}
-        if(l_compare(&s, l_special_pi, 1)) {type = lt_special_pi; goto P;}
-        if(l_compare(&s, l_root, 1)) {type = lt_root; goto P;}        
-        if(l_compare(&s, l_plus, 1)) {type = lt_plus; goto P;}
-        if(l_compare(&s, l_minus, 1)) {type = lt_minus; goto P;}
-        if(l_compare(&s, l_dot, 1)) {type = lt_dot; goto P;}
-        if(l_compare(&s, l_slash, 1)) {type = lt_slash; goto P;}
-        if(l_compare(&s, l_caret, 1)) {type = lt_caret; goto P;}
-        if(l_compare(&s, l_equal, 1)) {type = lt_equal; goto P;}
-        if(l_compare(&s, l_scientific, 1)) {type = lt_scientific; goto P;}
-        if(l_compare(&s, l_h_parenthesis, 1)) {type = lt_h_parenthesis; goto P;}
-        if(l_compare(&s, l_t_parenthesis, 1)) {type = lt_t_parenthesis; goto P;}
-        if(l_compare(&s, l_h_bracket, 1)) {type = lt_h_bracket; goto P;}
-        if(l_compare(&s, l_t_bracket, 1)) {type = lt_t_bracket; goto P;}
-        if(l_compare(&s, l_variable, 26)) {type = lt_variable; goto P;}
+        if(c_constant(&s, &type)) {goto P;}  
+        if( (type = l_hash(&s)) ) {goto P;}
         // lexical error
         return -1;
     P:  // pushback
@@ -37,29 +22,52 @@ int l_lex(Token* this, char* s) {
     } return 0;
 }
 
-int l_compare(char** s, char hash[][20], int keyCount) {
-    for(int i = 0; i < keyCount; i++) {
-        if(strncmp(*s, hash[i], strlen(hash[i]))==0) {
-            *s += strlen(hash[i]);
-            return 1;
+// int l_compare(char** s, char hash[][20], int keyCount) {
+//     for(int i = 0; i < keyCount; i++) {
+//         if(strncmp(*s, hash[i], strlen(hash[i]))==0) {
+//             *s += strlen(hash[i]);
+//             return 1;
+//         }
+//     } return 0;
+// }
+
+int l_hash(char** s) {
+    const char* value;
+    for(int i = 0; value = l_map[i].value; i++) {
+        if(strncmp(*s, value, strlen(value)) == 0) {
+            *s += strlen(value);
+            return l_map[i].key;
         }
     } return 0;
 }
 
-char l_plus[1][20] = {"+"};
-char l_minus[1][20] = {"-"};
-char l_dot[1][20] = {"*"};
-char l_slash[1][20] = {"/"};
-char l_caret[1][20] = {"^"};
-char l_equal[1][20] = {"="};
-char l_scientific[1][20] = {"E"};
-char l_h_parenthesis[1][20] = {"("};
-char l_t_parenthesis[1][20] = {")"};
-char l_h_bracket[1][20] = {"{"};
-char l_t_bracket[1][20] = {"}"};
-char l_variable[26][20] = {"a","b","c","d","e","f","g","h","i","j","k","l","m",
-                           "n","o","p","q","r","s","t","u","v","w","x","y","z"};
+char* l_unhash(int key) {
+    for(int i = 0; l_map[i].key; i++) {
+        if(key == l_map[i].key) {
+            return l_map[i].value;
+        }
+    } return NULL;
+}
 
-char l_special_e[1][20] = {"\\e"};
-char l_special_pi[1][20] = {"\\pi"};
-char l_root[1][20] = {"root"};
+const l_Map l_map[] = {
+    /* common symbols */
+    {"+", lt_plus},
+    {"-", lt_minus},
+    {"*", lt_dot},
+    {"/", lt_slash},
+    {"^", lt_caret},
+    {"=", lt_equal},
+    {"E", lt_scientific},
+    {"(", lt_h_parenthesis},
+    {")", lt_t_parenthesis},
+    {"{", lt_h_bracket},
+    {"}", lt_t_bracket},
+    /* specific symbols */
+    {"e", lt_e},
+    {"pi", lt_pi},
+    {"x", lt_x},
+    /* commands */
+    {"root", lt_root},
+    /* end */
+    {NULL, 0}
+};

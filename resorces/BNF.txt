@@ -16,8 +16,8 @@
 <polynomial> ::= <polynomial_term> + <polynomial>
                | <polynomial_term> - <polynomial>
                | <polynomial_term>
-<polynomial_term> ::= {<real_number>}? <variable> ^ <natural>
-                    | {<real_number>}? <variable>
+<polynomial_term> ::= {<real_number>}? x ^ <natural>
+                    | {<real_number>}? x
                     | <real_number>
 
 
@@ -42,8 +42,8 @@
 
 <scientific> ::= <rational> E <integer>
 
-<special_symbols> ::= {<sign>}? \e 
-                    | {<sign>}? \pi
+<special_symbols> ::= {<sign>}? e 
+                    | {<sign>}? pi
 
 <natural> ::= <number>
 <integer> ::= {<sign>}? <number>

@@ -170,9 +170,9 @@ const char* n_get(int type) {
         case lt_t_parenthesis: return "tail parenthesis";
         case lt_h_bracket: return "head bracket";
         case lt_t_bracket: return "tail bracket";
-        case lt_special_e: return "special symbol e";
-        case lt_special_pi: return "special symbol pi";
-        case lt_variable: return "variable";
+        case lt_e: return "e";
+        case lt_pi: return "pi";
+        case lt_x: return "x";
         case lt_root: return "root";
         /* default */
         default: return "";

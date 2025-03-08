@@ -4,43 +4,47 @@ command
         ├── multiplicative expression
         │   └── exponential expression
         │       └── parenthetical expression
-        │           └── special symbols
-        │               └── special symbol e {\e}
+        │           └── rational
+        │               └── number {4}
         ├── plus {+}
         └── multiplicative expression
             ├── exponential expression
             │   └── parenthetical expression
-            │       └── special symbols
-            │           └── special symbol pi {\pi}
-            ├── dot {*}
-            ├── exponential expression
-            │   ├── parenthetical expression
-            │   │   ├── head parenthesis {(}
-            │   │   ├── additive expression
-            │   │   │   └── multiplicative expression
-            │   │   │       ├── exponential expression
-            │   │   │       │   └── parenthetical expression
-            │   │   │       │       └── rational
-            │   │   │       │           └── number {5}
-            │   │   │       ├── slash {/}
-            │   │   │       └── exponential expression
-            │   │   │           └── parenthetical expression
-            │   │   │               └── rational
-            │   │   │                   └── number {2}
-            │   │   └── tail parenthesis {)}
-            │   ├── caret {^}
-            │   └── parenthetical expression
-            │       ├── head bracket {{}
+            │       ├── head parenthesis {(}
             │       ├── additive expression
             │       │   └── multiplicative expression
+            │       │       ├── exponential expression
+            │       │       │   └── parenthetical expression
+            │       │       │       └── special symbols
+            │       │       │           └── e {e}
+            │       │       ├── dot {*}
+            │       │       ├── exponential expression
+            │       │       │   ├── parenthetical expression
+            │       │       │   │   └── special symbols
+            │       │       │   │       └── pi {pi}
+            │       │       │   ├── caret {^}
+            │       │       │   └── parenthetical expression
+            │       │       │       └── rational
+            │       │       │           └── number {2}
+            │       │       ├── dot {*}
             │       │       └── exponential expression
             │       │           └── parenthetical expression
-            │       │               └── rational
-            │       │                   ├── minus {-}
-            │       │                   └── number {1}
-            │       └── tail bracket {}}
-            ├── dot {*}
+            │       │               ├── head parenthesis {(}
+            │       │               ├── additive expression
+            │       │               │   └── multiplicative expression
+            │       │               │       └── exponential expression
+            │       │               │           └── parenthetical expression
+            │       │               │               └── scientific
+            │       │               │                   ├── rational
+            │       │               │                   │   └── number {4}
+            │       │               │                   ├── scientific {E}
+            │       │               │                   └── integer
+            │       │               │                       ├── minus {-}
+            │       │               │                       └── number {2}
+            │       │               └── tail parenthesis {)}
+            │       └── tail parenthesis {)}
+            ├── slash {/}
             └── exponential expression
                 └── parenthetical expression
                     └── rational
-                        └── number {6}
+                        └── number {4}

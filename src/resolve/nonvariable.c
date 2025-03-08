@@ -81,8 +81,8 @@ int nonvariable_conversion(Node* head, long double* value) {
     /* convert */
     if(head->type == nt_special_symbols) {
         hasSign = head->length - 1;
-        if(head->next[hasSign]->type == lt_special_e) a = GLOBAL_E;
-        if(head->next[hasSign]->type == lt_special_pi) a = GLOBAL_PI;
+        if(head->next[hasSign]->type == lt_e) a = GLOBAL_E;
+        if(head->next[hasSign]->type == lt_pi) a = GLOBAL_PI;
         if(head->next[0]->type == lt_minus) a = -a;
     }
     if(head->type == nt_scientific) {
