@@ -46,7 +46,7 @@ Node* n_construct(int type, const Token* token) {
     this->next = NULL;
     this->length = 0;
     this->type = type;
-    this->token = token;
+    if(token) this->value = token->value;
     return this;
 }
 
@@ -72,8 +72,8 @@ void n_helper(Node* this, int depth, int edge, int state[]) {
             fprintf(s_abstract_syntax_tree, state[i] ? "│   " : "    ");
         fprintf(s_abstract_syntax_tree, "%s", (edge ? "└── " : "├── "));
     }
-    if(this->token) {
-        fprintf(s_abstract_syntax_tree, "%s {%s}\n", n_get(this->type), this->token->s);
+    if(c_types(this->type)) {
+        fprintf(s_abstract_syntax_tree, "%s {%Lf}\n", n_get(this->type), this->value);
     } else fprintf(s_abstract_syntax_tree, "%s\n", n_get(this->type));
     if(this->length > 0) {
         state[depth] = !edge;

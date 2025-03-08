@@ -11,7 +11,7 @@ typedef struct NODE{
    struct NODE** next;
    int length;
    int type;
-   const Token* token; // allocated and freed by token
+   long double value;
 } Node;
 
 const char* n_get(int type);

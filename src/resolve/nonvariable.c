@@ -76,7 +76,6 @@ E:  return -1;
 int nonvariable_conversion(Node* head, long double* value) {
     long double a;
     int hasSign;
-    char* end;
     errno = 0;
     /* convert */
     if(head->type == nt_special_symbols) {
@@ -90,18 +89,18 @@ int nonvariable_conversion(Node* head, long double* value) {
         Node* rational = head->next[0], *exponent = head->next[2];
         /* coefficient part */
         hasSign = rational->length - 1;
-        a = strtold(rational->next[hasSign]->token->s, &end);
+        a = rational->next[hasSign]->value;
         if(rational->next[0]->type == lt_minus) a = -a;
         /* exponent part */
         int temp;
         hasSign = exponent->length - 1;
-        temp = strtold(exponent->next[hasSign]->token->s, &end);
+        temp = exponent->next[hasSign]->value;
         if(exponent->next[0]->type == lt_minus) temp = -temp;        
         a *= powl(10, temp);
     }
     if(head->type == nt_rational) {
         hasSign = head->length - 1;
-        a = strtold(head->next[hasSign]->token->s, &end);
+        a = head->next[hasSign]->value;
         if(head->next[0]->type == lt_minus) a = -a;       
     }
     *value = a;

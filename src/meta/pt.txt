@@ -7,57 +7,12 @@ command
             │       └── parenthetical expression
             │           └── real number
             │               └── rational
-            │                   └── number {4}
+            │                   └── decimal {1.234212}
             └── additive expression suffix
-                ├── plus {+}
+                ├── minus
                 └── multiplicative expression
-                    ├── exponential expression
-                    │   └── parenthetical expression
-                    │       ├── head parenthesis {(}
-                    │       ├── additive expression
-                    │       │   └── multiplicative expression
-                    │       │       ├── exponential expression
-                    │       │       │   └── parenthetical expression
-                    │       │       │       └── real number
-                    │       │       │           └── special symbols
-                    │       │       │               └── e {e}
-                    │       │       ├── multiplicative expression suffix
-                    │       │       │   ├── dot {*}
-                    │       │       │   └── exponential expression
-                    │       │       │       ├── parenthetical expression
-                    │       │       │       │   └── real number
-                    │       │       │       │       └── special symbols
-                    │       │       │       │           └── pi {pi}
-                    │       │       │       └── exponential expression suffix
-                    │       │       │           ├── caret {^}
-                    │       │       │           └── parenthetical expression
-                    │       │       │               └── real number
-                    │       │       │                   └── rational
-                    │       │       │                       └── number {2}
-                    │       │       └── multiplicative expression suffix
-                    │       │           ├── dot {*}
-                    │       │           └── exponential expression
-                    │       │               └── parenthetical expression
-                    │       │                   ├── head parenthesis {(}
-                    │       │                   ├── additive expression
-                    │       │                   │   └── multiplicative expression
-                    │       │                   │       └── exponential expression
-                    │       │                   │           └── parenthetical expression
-                    │       │                   │               └── real number
-                    │       │                   │                   └── scientific
-                    │       │                   │                       ├── rational
-                    │       │                   │                       │   └── number {4}
-                    │       │                   │                       ├── scientific {E}
-                    │       │                   │                       └── integer
-                    │       │                   │                           ├── sign
-                    │       │                   │                           │   └── minus {-}
-                    │       │                   │                           └── number {2}
-                    │       │                   └── tail parenthesis {)}
-                    │       └── tail parenthesis {)}
-                    └── multiplicative expression suffix
-                        ├── slash {/}
-                        └── exponential expression
-                            └── parenthetical expression
-                                └── real number
-                                    └── rational
-                                        └── number {4}
+                    └── exponential expression
+                        └── parenthetical expression
+                            └── real number
+                                └── rational
+                                    └── decimal {5.234210}

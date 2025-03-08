@@ -16,10 +16,9 @@ struct l_Map {
 extern const l_Map l_map[];
 
 int l_lex(Token* this, char* s);
-//int l_compare(char** s, char hash[][20], int keyCount);
 
 int l_hash(char** s);
-char* l_unhash(int key);
+const char* l_unhash(int key);
 
 enum l_Types {
     /* common symbols */

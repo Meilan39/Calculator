@@ -10,14 +10,16 @@ FILE* s_syntax_depth_map;
 
 #define DEPTHMAP 1
 #ifdef DEPTHMAP
-    #define PRINTMAP(depth, name, token)                    \
-        if(depth>0) {                                       \
-            for (int i = 1; i < depth; i++)                 \
-                fprintf(s_syntax_depth_map, "│   ");        \
-            fprintf(s_syntax_depth_map, "├── ");            \
-        }                                                   \
-        fprintf(s_syntax_depth_map, "%s {%s}\n", name,      \
-                            (*token) ? (*token)->s : "");
+    #define PRINTMAP(depth, name, token)                                        \
+        if(depth>0) {                                                           \
+            for (int i = 1; i < depth; i++)                                     \
+                fprintf(s_syntax_depth_map, "│   ");                            \
+            fprintf(s_syntax_depth_map, "├── ");                                \
+        }                                                                       \
+        fprintf(s_syntax_depth_map, "%s\n", name);        
+        // if((*token) && c_types((*token)->type))                              
+        //     fprintf(s_syntax_depth_map, "%s {%Lf}\n", name, (*token)->value); 
+        // else                                                                  
 #else
     #define PRINTMAP(fmt, ...)
 #endif

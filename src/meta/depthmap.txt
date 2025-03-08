@@ -1,118 +1,28 @@
-command {4}
-├── non variable {4}
-│   ├── nonvariable expression {4}
-│   │   ├── additive expression {4}
-│   │   │   ├── multiplicative expression {4}
-│   │   │   │   ├── exponential expression {4}
-│   │   │   │   │   ├── parenthetical expression {4}
-│   │   │   │   │   │   ├── real number {4}
-│   │   │   │   │   │   │   ├── scientific {4}
-│   │   │   │   │   │   │   │   ├── rational {4}
-│   │   │   │   │   │   │   │   │   ├── sign {4}
-│   │   │   │   │   │   │   │   │   ├── sign {4}
-│   │   │   │   │   │   │   ├── rational {4}
-│   │   │   │   │   │   │   │   ├── sign {4}
-│   │   │   │   │   │   │   │   ├── sign {4}
-│   │   │   │   │   ├── exponential expression suffix {+}
-│   │   │   │   ├── multiplicative expression suffix {+}
-│   │   │   ├── additive expression suffix {+}
-│   │   │   │   ├── multiplicative expression {(}
-│   │   │   │   │   ├── exponential expression {(}
-│   │   │   │   │   │   ├── parenthetical expression {(}
-│   │   │   │   │   │   │   ├── real number {(}
-│   │   │   │   │   │   │   │   ├── scientific {(}
-│   │   │   │   │   │   │   │   │   ├── rational {(}
-│   │   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   │   ├── rational {(}
-│   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   │   ├── special symbols {(}
-│   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   ├── additive expression {e}
-│   │   │   │   │   │   │   │   ├── multiplicative expression {e}
-│   │   │   │   │   │   │   │   │   ├── exponential expression {e}
-│   │   │   │   │   │   │   │   │   │   ├── parenthetical expression {e}
-│   │   │   │   │   │   │   │   │   │   │   ├── real number {e}
-│   │   │   │   │   │   │   │   │   │   │   │   ├── scientific {e}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational {e}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {e}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {e}
-│   │   │   │   │   │   │   │   │   │   │   │   ├── rational {e}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {e}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {e}
-│   │   │   │   │   │   │   │   │   │   │   │   ├── special symbols {e}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {e}
-│   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix {*}
-│   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix {*}
-│   │   │   │   │   │   │   │   │   │   ├── exponential expression {pi}
-│   │   │   │   │   │   │   │   │   │   │   ├── parenthetical expression {pi}
-│   │   │   │   │   │   │   │   │   │   │   │   ├── real number {pi}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific {pi}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational {pi}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {pi}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {pi}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational {pi}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {pi}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {pi}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── special symbols {pi}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {pi}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {pi}
-│   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix {^}
-│   │   │   │   │   │   │   │   │   │   │   │   ├── parenthetical expression {2}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number {2}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific {2}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational {2}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {2}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {2}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational {2}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {2}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {2}
-│   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix {*}
-│   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix {*}
-│   │   │   │   │   │   │   │   │   │   ├── exponential expression {(}
-│   │   │   │   │   │   │   │   │   │   │   ├── parenthetical expression {(}
-│   │   │   │   │   │   │   │   │   │   │   │   ├── real number {(}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific {(}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational {(}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational {(}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── special symbols {(}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {(}
-│   │   │   │   │   │   │   │   │   │   │   │   ├── additive expression {4}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── multiplicative expression {4}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression {4}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── parenthetical expression {4}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number {4}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific {4}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational {4}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {4}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {4}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── integer {-}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign {-}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix {)}
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix {)}
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── additive expression suffix {)}
-│   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix {)}
-│   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix {)}
-│   │   │   │   │   │   │   │   ├── additive expression suffix {)}
-│   │   │   │   │   │   ├── exponential expression suffix {/}
-│   │   │   │   │   ├── multiplicative expression suffix {/}
-│   │   │   │   │   │   ├── exponential expression {4}
-│   │   │   │   │   │   │   ├── parenthetical expression {4}
-│   │   │   │   │   │   │   │   ├── real number {4}
-│   │   │   │   │   │   │   │   │   ├── scientific {4}
-│   │   │   │   │   │   │   │   │   │   ├── rational {4}
-│   │   │   │   │   │   │   │   │   │   │   ├── sign {4}
-│   │   │   │   │   │   │   │   │   │   │   ├── sign {4}
-│   │   │   │   │   │   │   │   │   ├── rational {4}
-│   │   │   │   │   │   │   │   │   │   ├── sign {4}
-│   │   │   │   │   │   │   │   │   │   ├── sign {4}
-│   │   │   │   │   │   │   ├── exponential expression suffix {}
-│   │   │   │   │   ├── multiplicative expression suffix {}
-│   │   │   ├── additive expression suffix {}
+command
+├── non variable
+│   ├── nonvariable expression
+│   │   ├── additive expression
+│   │   │   ├── multiplicative expression
+│   │   │   │   ├── exponential expression
+│   │   │   │   │   ├── parenthetical expression
+│   │   │   │   │   │   ├── real number
+│   │   │   │   │   │   │   ├── scientific
+│   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   ├── exponential expression suffix
+│   │   │   │   ├── multiplicative expression suffix
+│   │   │   ├── additive expression suffix
+│   │   │   │   ├── multiplicative expression
+│   │   │   │   │   ├── exponential expression
+│   │   │   │   │   │   ├── parenthetical expression
+│   │   │   │   │   │   │   ├── real number
+│   │   │   │   │   │   │   │   ├── scientific
+│   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── exponential expression suffix
+│   │   │   │   │   ├── multiplicative expression suffix
+│   │   │   ├── additive expression suffix

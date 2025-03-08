@@ -2,14 +2,14 @@
 #define CONSTANTS
 
 #include <string.h>
-
+#include <errno.h>
 #include "../token/token.h"
 
 typedef enum c_Types c_Types;
+char c_buffer[256];
 
-int c_F_compare; // flag for constant_compare
-
-int c_constant(char** s, int* constant_type);
+int c_constant(char** s, long double* value);
+int c_types(int type);
 
 int c_compare(char** s, char hash[][3], int keyCount);
 
