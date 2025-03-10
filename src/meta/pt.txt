@@ -1,18 +1,25 @@
 command
-└── non variable
-    └── nonvariable expression
-        └── additive expression
-            ├── multiplicative expression
-            │   └── exponential expression
-            │       └── parenthetical expression
-            │           └── real number
-            │               └── rational
-            │                   └── decimal {1.234212}
-            └── additive expression suffix
-                ├── minus
-                └── multiplicative expression
-                    └── exponential expression
-                        └── parenthetical expression
-                            └── real number
-                                └── rational
-                                    └── decimal {5.234210}
+└── root
+    ├── root
+    └── polynomial
+        ├── polynomial term
+        │   ├── real number
+        │   │   └── rational
+        │   │       └── number {1.000000}
+        │   └── x
+        ├── polynomial suffix
+        │   ├── plus
+        │   └── polynomial term
+        │       ├── real number
+        │       │   └── rational
+        │       │       └── number {2.000000}
+        │       ├── x
+        │       ├── caret
+        │       └── natural
+        │           └── number {2.000000}
+        └── polynomial suffix
+            ├── plus
+            └── polynomial term
+                └── real number
+                    └── rational
+                        └── number {13.000000}

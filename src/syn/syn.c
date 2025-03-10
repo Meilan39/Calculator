@@ -100,14 +100,22 @@ Node* s_polynomial(Token** token, int depth) {
     PRINTMAP(depth, "polynomial", token)
     Node* node = n_construct(nt_polynomial, NULL);
     Token* ptoken = *token;
+    if(!n_push(node, s_polynomial_term(token, depth+1))) goto f;
+    while(n_push(node, s_polynomial_suffix(token, depth+1)));
+    goto t;
+f : *token = ptoken;
+    return n_free(node);
+t : return node;
+}
+Node* s_polynomial_suffix(Token** token, int depth) {
+    PRINTMAP(depth, "polynomial suffix", token)
+    Node* node = n_construct(nt_polynomial_suffix, NULL);
+    Token* ptoken = *token;
     if(!n_push(node, s_compare(token, lt_plus))) goto c2;
     if(!n_push(node, s_polynomial_term(token, depth+1))) goto c2;
     goto t;
 c2: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_minus))) goto c3;
-    if(!n_push(node, s_polynomial_term(token, depth+1))) goto c3;
-    goto t;
-c3: *token = ptoken; n_reset(node);
+    if(!n_push(node, s_compare(token, lt_minus))) goto f;
     if(!n_push(node, s_polynomial_term(token, depth+1))) goto f;
     goto t;
 f : *token = ptoken;

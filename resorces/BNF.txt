@@ -4,7 +4,7 @@
 <elementary> ::= <nonvariable_expression>
 
 <root> ::= root <polynomail> = <polynomail>
-         | root <polynomial>
+        | root <polynomial>
 
 <expression> ::= {nonvariable_expression}
                | {variable_expression}
@@ -13,9 +13,9 @@
 
 <nonvariable_expression> ::= <additive_expression>
 
-<polynomial> ::= <polynomial_term> + <polynomial>
-               | <polynomial_term> - <polynomial>
-               | <polynomial_term>
+<polynomial> ::= <polynomial_term> {<polynomial_suffix}*
+<polynomial_suffix> ::= + <polynomial_term>
+                      | - <polynomial_term>
 <polynomial_term> ::= {<real_number>}? x ^ <natural>
                     | {<real_number>}? x
                     | <real_number>

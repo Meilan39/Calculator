@@ -9,20 +9,123 @@ command
 │   │   │   │   │   │   │   ├── scientific
 │   │   │   │   │   │   │   │   ├── rational
 │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   ├── sign
 │   │   │   │   │   │   │   ├── rational
 │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   ├── exponential expression suffix
-│   │   │   │   ├── multiplicative expression suffix
-│   │   │   ├── additive expression suffix
-│   │   │   │   ├── multiplicative expression
-│   │   │   │   │   ├── exponential expression
-│   │   │   │   │   │   ├── parenthetical expression
-│   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── exponential expression suffix
-│   │   │   │   │   ├── multiplicative expression suffix
-│   │   │   ├── additive expression suffix
+│   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── special symbols
+│   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   ├── sign
+├── root
+│   ├── polynomial
+│   │   ├── polynomial term
+│   │   │   ├── real number
+│   │   │   │   ├── scientific
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   │   │   ├── rational
+│   │   │   │   │   ├── sign
+│   │   │   │   │   ├── sign
+│   │   │   ├── real number
+│   │   │   │   ├── scientific
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   │   │   ├── rational
+│   │   │   │   │   ├── sign
+│   │   │   │   │   ├── sign
+│   │   ├── polynomial suffix
+│   │   │   ├── polynomial term
+│   │   │   │   ├── real number
+│   │   │   │   │   ├── scientific
+│   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   │   │   ├── natural
+│   │   ├── polynomial suffix
+│   │   │   ├── polynomial term
+│   │   │   │   ├── real number
+│   │   │   │   │   ├── scientific
+│   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   │   │   ├── real number
+│   │   │   │   │   ├── scientific
+│   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   │   │   ├── real number
+│   │   │   │   │   ├── scientific
+│   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   ├── polynomial suffix
+│   ├── polynomial
+│   │   ├── polynomial term
+│   │   │   ├── real number
+│   │   │   │   ├── scientific
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   │   │   ├── rational
+│   │   │   │   │   ├── sign
+│   │   │   │   │   ├── sign
+│   │   │   ├── real number
+│   │   │   │   ├── scientific
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   │   │   ├── rational
+│   │   │   │   │   ├── sign
+│   │   │   │   │   ├── sign
+│   │   ├── polynomial suffix
+│   │   │   ├── polynomial term
+│   │   │   │   ├── real number
+│   │   │   │   │   ├── scientific
+│   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   │   │   ├── natural
+│   │   ├── polynomial suffix
+│   │   │   ├── polynomial term
+│   │   │   │   ├── real number
+│   │   │   │   │   ├── scientific
+│   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   │   │   ├── real number
+│   │   │   │   │   ├── scientific
+│   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   │   │   ├── real number
+│   │   │   │   │   ├── scientific
+│   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
+│   │   ├── polynomial suffix

@@ -34,6 +34,7 @@ Node* s_expression(Token** token, int depth);
 Node* s_variable_expression(Token** token, int depth);
 Node* s_nonvariable_expression(Token** token, int depth);
 Node* s_polynomial(Token** token, int depth);
+Node* s_polynomial_suffix(Token** token, int depth);
 Node* s_polynomial_term(Token** token, int depth);
 Node* s_additive_expression(Token** token, int depth);
 Node* s_additive_expression_suffix(Token** token, int depth);

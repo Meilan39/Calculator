@@ -41,6 +41,7 @@ enum n_Types {
    nt_variable_expression,
    nt_nonvariable_expression,
    nt_polynomial,
+   nt_polynomial_suffix,
    nt_polynomial_term,
    nt_additive_expression,
    nt_additive_expression_suffix,

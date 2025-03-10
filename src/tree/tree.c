@@ -139,7 +139,8 @@ const char* n_get(int type) {
         case nt_variable_expression: return "variable expression";
         case nt_nonvariable_expression: return "nonvariable expression";
         case nt_polynomial: return "polynomial";
-        case nt_polynomial_term: return "polynomial suffix";
+        case nt_polynomial_suffix: return "polynomial suffix";
+        case nt_polynomial_term: return "polynomial term";
         case nt_additive_expression: return "additive expression";
         case nt_additive_expression_suffix: return "additive expression suffix";
         case nt_multiplicative_expression: return "multiplicative expression";
@@ -208,6 +209,7 @@ int n_suffix_exception(int type) {
         case nt_additive_expression: break;
         case nt_multiplicative_expression: break;
         case nt_exponential_expression: break;
+        case nt_polynomial: break;
         default: return 0;
     } return 1;
 }

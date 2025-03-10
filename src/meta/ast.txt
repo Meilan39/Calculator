@@ -1,14 +1,20 @@
 command
-└── non variable
-    └── additive expression
-        ├── multiplicative expression
-        │   └── exponential expression
-        │       └── parenthetical expression
-        │           └── rational
-        │               └── decimal {1.234212}
-        ├── minus
-        └── multiplicative expression
-            └── exponential expression
-                └── parenthetical expression
-                    └── rational
-                        └── decimal {5.234210}
+└── root
+    ├── root
+    └── polynomial
+        ├── polynomial term
+        │   ├── rational
+        │   │   └── number {1.000000}
+        │   └── x
+        ├── plus
+        ├── polynomial term
+        │   ├── rational
+        │   │   └── number {2.000000}
+        │   ├── x
+        │   ├── caret
+        │   └── natural
+        │       └── number {2.000000}
+        ├── plus
+        └── polynomial term
+            └── rational
+                └── number {13.000000}
