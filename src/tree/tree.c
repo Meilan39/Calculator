@@ -73,8 +73,8 @@ void n_helper(Node* this, int depth, int edge, int state[]) {
         fprintf(s_abstract_syntax_tree, "%s", (edge ? "└── " : "├── "));
     }
     if(c_types(this->type)) {
-        fprintf(s_abstract_syntax_tree, "%s {%Lf}\n", n_get(this->type), this->value);
-    } else fprintf(s_abstract_syntax_tree, "%s\n", n_get(this->type));
+        fprintf(s_abstract_syntax_tree, "%s {%Lf}\n", n_typtostr(this->type), this->value);
+    } else fprintf(s_abstract_syntax_tree, "%s\n", n_typtostr(this->type));
     if(this->length > 0) {
         state[depth] = !edge;
         for (int i = 0; i < this->length; i++) {
@@ -83,17 +83,6 @@ void n_helper(Node* this, int depth, int edge, int state[]) {
         state[depth] = 0;
     }
 }
-
-// void n_compress_symbol(Node* this) {
-//     if(this->length!=1) return;
-//     if(n_symbol_exception(this->type)) return;
-//     Node* next = this->next[0];
-//     if(next->length) return;
-//     this->token = next->token;
-//     this->length = 0;
-//     this->next = NULL;
-//     free(next);
-// }
 
 void n_compress_chain(Node* this) {
     if(this->length==0) return;
@@ -130,86 +119,79 @@ void n_compress_suffix(Node* this) {
     }
 }
 
-const char* n_get(int type) {
-    switch (type) {
-        case nt_command: return "command";
-        case nt_nonvariable: return "non variable";
-        case nt_root: return "root";
-        case nt_expression: return "expression";
-        case nt_variable_expression: return "variable expression";
-        case nt_nonvariable_expression: return "nonvariable expression";
-        case nt_polynomial: return "polynomial";
-        case nt_polynomial_suffix: return "polynomial suffix";
-        case nt_polynomial_term: return "polynomial term";
-        case nt_additive_expression: return "additive expression";
-        case nt_additive_expression_suffix: return "additive expression suffix";
-        case nt_multiplicative_expression: return "multiplicative expression";
-        case nt_multiplicative_expression_suffix: return "multiplicative expression suffix";
-        case nt_exponential_expression: return "exponential expression";
-        case nt_exponential_expression_suffix: return "exponential expression suffix";
-        case nt_parenthetical_expression: return "parenthetical expression";
-        case nt_special_symbols: return "special symbols";
-        case nt_real_number: return "real number";
-        case nt_scientific: return "scientific";
-        case nt_natural: return "natural";
-        case nt_integer: return "integer";
-        case nt_rational: return "rational";
-        case nt_sign: return "sign";
-        /*  */
-        case ct_number: return "number";
-        case ct_decimal: return "decimal";
-        case ct_zero: return "zero";
-        /* lex */
-        case lt_plus: return "plus";
-        case lt_minus: return "minus";
-        case lt_dot: return "dot"; 
-        case lt_slash: return "slash";
-        case lt_caret: return "caret";
-        case lt_equal: return "equal";
-        case lt_scientific: return "scientific";
-        case lt_h_parenthesis: return "head parenthesis";
-        case lt_t_parenthesis: return "tail parenthesis";
-        case lt_h_bracket: return "head bracket";
-        case lt_t_bracket: return "tail bracket";
-        case lt_e: return "e";
-        case lt_pi: return "pi";
-        case lt_x: return "x";
-        case lt_root: return "root";
-        /* default */
-        default: return "";
-    }
+const char* n_typtostr(int type) {
+    if(type < 1 || nt_terminator <= type) return n_typtostr_map[0];
+    return n_typtostr_map[type] ? n_typtostr_map[type] : n_typtostr_map[0];
 }
-
-// int n_symbol_exception(int type) {
-//     switch(type) {
-//         case nt_rational: break;
-//         case nt_integer: break;
-//         case nt_natural: break;
-//         case nt_sign: break;
-//         default: return 0;
-//     } return 1;   
-// }
-
-int n_chain_exception(int type) {
-    switch(type) {
-        case nt_additive_expression: break;
-        case nt_multiplicative_expression: break;
-        case nt_exponential_expression: break;
-        case nt_parenthetical_expression: break;
-        case nt_rational: break;
-        case nt_nonvariable: break;
-        case nt_root: break;
-        case nt_special_symbols: break;
-        default: return 0;
-    } return 1;
-}
-
 int n_suffix_exception(int type) {
-    switch(type) {
-        case nt_additive_expression: break;
-        case nt_multiplicative_expression: break;
-        case nt_exponential_expression: break;
-        case nt_polynomial: break;
-        default: return 0;
-    } return 1;
+    if(type < 1 || nt_terminator <= type) return 0;
+    return n_suffix_exception_map[type];
 }
+int n_chain_exception(int type) {
+    if(type < 1 || nt_terminator <= type) return 0;
+    return n_chain_exception_map[type];
+}
+
+const char* const n_typtostr_map[nt_terminator] = {
+    [0] = "",
+    /* constants */
+    [ct_number] = "number",
+    [ct_decimal] = "decimal",
+    [ct_zero] = "zero",
+    /* lex */
+    [lt_plus] = "plus",
+    [lt_minus] = "minus",
+    [lt_dot] = "dot", 
+    [lt_slash] = "slash",
+    [lt_caret] = "caret",
+    [lt_equal] = "equal",
+    [lt_scientific] = "scientific",
+    [lt_h_parenthesis] = "head parenthesis",
+    [lt_t_parenthesis] = "tail parenthesis",
+    [lt_h_bracket] = "head bracket",
+    [lt_t_bracket] = "tail bracket",
+    [lt_e] = "e",
+    [lt_pi] = "pi",
+    [lt_x] = "x",
+    [lt_root] = "root",
+    /* syn */
+    [nt_command] = "command",
+    [nt_nonvariable] = "non variable",
+    [nt_root] = "root",
+    [nt_nonvariable_expression] = "nonvariable expression",
+    [nt_polynomial] = "polynomial",
+    [nt_polynomial_suffix] = "polynomial suffix",
+    [nt_polynomial_term] = "polynomial term",
+    [nt_additive_expression] = "additive expression",
+    [nt_additive_expression_suffix] = "additive expression suffix",
+    [nt_multiplicative_expression] = "multiplicative expression",
+    [nt_multiplicative_expression_suffix] = "multiplicative expression suffix",
+    [nt_exponential_expression] = "exponential expression",
+    [nt_exponential_expression_suffix] = "exponential expression suffix",
+    [nt_parenthetical_expression] = "parenthetical expression",
+    [nt_special_symbols] = "special symbols",
+    [nt_real_number] = "real number",
+    [nt_scientific] = "scientific",
+    [nt_natural] = "natural",
+    [nt_integer] = "integer",
+    [nt_rational] = "rational",
+    [nt_sign] = "sign"
+};
+
+const char n_chain_exception_map[] = {
+    [nt_additive_expression] = 1,
+    [nt_multiplicative_expression] = 1,
+    [nt_exponential_expression] = 1,
+    [nt_parenthetical_expression] = 1,
+    [nt_rational] = 1,
+    [nt_nonvariable] = 1,
+    [nt_root] = 1,
+    [nt_special_symbols] = 1
+};
+
+const char n_suffix_exception_map[] = {
+    [nt_additive_expression] = 1,
+    [nt_multiplicative_expression] = 1,
+    [nt_exponential_expression] = 1,
+    [nt_polynomial] = 1,
+};

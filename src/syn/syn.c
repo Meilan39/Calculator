@@ -63,29 +63,6 @@ f : *token = ptoken;
     return n_free(node);
 t : return node; 
 }
-Node* s_expression(Token** token, int depth) {
-    PRINTMAP(depth, "expression", token)
-    Node* node = n_construct(nt_expression, NULL);
-    Token* ptoken = *token;
-    if(!n_push(node, s_nonvariable_expression(token, depth+1))) goto c2;
-    goto t;
-c2: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_variable_expression(token, depth+1))) goto f;
-    goto t;
-f : *token = ptoken;
-    return n_free(node);
-t : return node;
-}
-Node* s_variable_expression(Token** token, int depth) {
-    PRINTMAP(depth, "variable expression", token)
-    Node* node = n_construct(nt_variable_expression, NULL);
-    Token* ptoken = *token;
-    if(!n_push(node, s_polynomial(token, depth+1))) goto f;
-    goto t;
-f : *token = ptoken;
-    return n_free(node);
-t : return node;
-}
 Node* s_nonvariable_expression(Token** token, int depth) {
     PRINTMAP(depth, "nonvariable expression", token)
     Node* node = n_construct(nt_nonvariable_expression, NULL);

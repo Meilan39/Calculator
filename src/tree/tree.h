@@ -14,7 +14,6 @@ typedef struct NODE{
    long double value;
 } Node;
 
-const char* n_get(int type);
 
 Node* n_free(Node* head);
 Node* n_reset(Node* head);
@@ -28,17 +27,15 @@ void n_compress(Node* this);
 void n_compress_symbol(Node* this);
 void n_compress_suffix(Node* this);
 void n_compress_chain(Node* this);
-/* helpers */
-int n_symbol_exception(int type);
+/* exceptions */
+const char* n_typtostr(int type);
 int n_suffix_exception(int type);
 int n_chain_exception(int type);
 
 enum n_Types {
-   nt_command = 100,
+   nt_command = lt_terminator + 1,
    nt_nonvariable,
    nt_root,
-   nt_expression,
-   nt_variable_expression,
    nt_nonvariable_expression,
    nt_polynomial,
    nt_polynomial_suffix,
@@ -57,7 +54,13 @@ enum n_Types {
    nt_rational,
    nt_sign,
    nt_variable,
-   nt_special_symbols
+   nt_special_symbols,
+   nt_terminator
 };
+
+/* exception map */
+extern const char* const n_typtostr_map[nt_terminator];
+extern const char n_suffix_exception_map[nt_terminator];
+extern const char n_chain_exception_map[nt_terminator];
 
 #endif

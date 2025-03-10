@@ -1,25 +1,25 @@
 command
 └── root
     ├── root
-    └── polynomial
-        ├── polynomial term
-        │   ├── real number
-        │   │   └── rational
-        │   │       └── number {1.000000}
-        │   └── x
+    └── nonvariable expression
         ├── polynomial suffix
+        │   ├── parenthetical expression
+        │   │   └── integer
+        │   │       └── number {3.000000}
+        │   ├── x
+        │   ├── caret
+        │   └── scientific
+        │       └── number {2.000000}
+        ├── polynomial
         │   ├── plus
-        │   └── polynomial term
-        │       ├── real number
-        │       │   └── rational
+        │   └── polynomial suffix
+        │       ├── parenthetical expression
+        │       │   └── integer
         │       │       └── number {2.000000}
-        │       ├── x
-        │       ├── caret
-        │       └── natural
-        │           └── number {2.000000}
-        └── polynomial suffix
+        │       └── x
+        └── polynomial
             ├── plus
-            └── polynomial term
-                └── real number
-                    └── rational
-                        └── number {13.000000}
+            └── polynomial suffix
+                └── parenthetical expression
+                    └── integer
+                        └── number {1.000000}

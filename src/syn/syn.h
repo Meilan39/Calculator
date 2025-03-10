@@ -30,8 +30,6 @@ Node* s_compare(Token** token, int type);
 Node* s_command(Token** token, int depth);
 Node* s_nonvariable(Token** token, int depth);
 Node* s_root(Token** token, int depth);
-Node* s_expression(Token** token, int depth);
-Node* s_variable_expression(Token** token, int depth);
 Node* s_nonvariable_expression(Token** token, int depth);
 Node* s_polynomial(Token** token, int depth);
 Node* s_polynomial_suffix(Token** token, int depth);

@@ -27,14 +27,7 @@ command
 │   │   │   │   ├── rational
 │   │   │   │   │   ├── sign
 │   │   │   │   │   ├── sign
-│   │   │   ├── real number
-│   │   │   │   ├── scientific
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   │   │   ├── rational
-│   │   │   │   │   ├── sign
-│   │   │   │   │   ├── sign
+│   │   │   ├── natural
 │   │   ├── polynomial suffix
 │   │   │   ├── polynomial term
 │   │   │   │   ├── real number
@@ -45,7 +38,14 @@ command
 │   │   │   │   │   ├── rational
 │   │   │   │   │   │   ├── sign
 │   │   │   │   │   │   ├── sign
-│   │   │   │   ├── natural
+│   │   │   │   ├── real number
+│   │   │   │   │   ├── scientific
+│   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
 │   │   ├── polynomial suffix
 │   │   │   ├── polynomial term
 │   │   │   │   ├── real number
@@ -83,14 +83,7 @@ command
 │   │   │   │   ├── rational
 │   │   │   │   │   ├── sign
 │   │   │   │   │   ├── sign
-│   │   │   ├── real number
-│   │   │   │   ├── scientific
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   │   │   ├── rational
-│   │   │   │   │   ├── sign
-│   │   │   │   │   ├── sign
+│   │   │   ├── natural
 │   │   ├── polynomial suffix
 │   │   │   ├── polynomial term
 │   │   │   │   ├── real number
@@ -101,7 +94,14 @@ command
 │   │   │   │   │   ├── rational
 │   │   │   │   │   │   ├── sign
 │   │   │   │   │   │   ├── sign
-│   │   │   │   ├── natural
+│   │   │   │   ├── real number
+│   │   │   │   │   ├── scientific
+│   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   ├── rational
+│   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   ├── sign
 │   │   ├── polynomial suffix
 │   │   │   ├── polynomial term
 │   │   │   │   ├── real number

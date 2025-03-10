@@ -6,12 +6,7 @@
 <root> ::= root <polynomail> = <polynomail>
         | root <polynomial>
 
-<expression> ::= {nonvariable_expression}
-               | {variable_expression}
-
-<variable_expression> ::= <polynomial>
-
-<nonvariable_expression> ::= <additive_expression>
+/**************************** root *******************************/
 
 <polynomial> ::= <polynomial_term> {<polynomial_suffix}*
 <polynomial_suffix> ::= + <polynomial_term>
@@ -20,6 +15,9 @@
                     | {<real_number>}? x
                     | <real_number>
 
+/**************************** nonvariable expression *******************************/
+
+<nonvariable_expression> ::= <additive_expression>
 
 <additive_expression> ::= <multiplicative_expression> {<additive_expression_suffix>}*
 <additive_expression_suffix> ::=  + <multiplicative_expression>

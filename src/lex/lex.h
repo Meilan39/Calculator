@@ -22,7 +22,7 @@ const char* l_unhash(int key);
 
 enum l_Types {
     /* common symbols */
-    lt_plus = 1, 
+    lt_plus = ct_terminator + 1, 
     lt_minus, 
     lt_dot, 
     lt_slash,
@@ -38,7 +38,9 @@ enum l_Types {
     lt_pi,
     lt_x,    
     /* commands */
-    lt_root
+    lt_root,
+    /* terminator */
+    lt_terminator
 };
 
 #endif
