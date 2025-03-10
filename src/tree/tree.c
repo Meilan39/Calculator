@@ -37,7 +37,7 @@ Node* n_reset(Node* head) {
     }
     head->next = NULL;
     head->length = 0;
-    return head;
+    return head; 
 }
 
 Node* n_construct(int type, const Token* token) {
