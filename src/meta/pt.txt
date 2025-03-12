@@ -1,25 +1,46 @@
 command
-└── root
-    ├── root
-    └── polynomial
-        ├── polynomial term
-        │   ├── real number
-        │   │   └── rational
-        │   │       └── number {3.000000}
-        │   ├── x
-        │   ├── caret
-        │   └── natural
-        │       └── number {2.000000}
-        ├── polynomial suffix
-        │   ├── plus
-        │   └── polynomial term
-        │       ├── real number
-        │       │   └── rational
-        │       │       └── number {2.000000}
-        │       └── x
-        └── polynomial suffix
-            ├── plus
-            └── polynomial term
-                └── real number
-                    └── rational
-                        └── number {1.000000}
+└── non variable
+    └── expression
+        └── additive expression
+            └── multiplicative expression
+                └── exponential expression
+                    └── parenthetical expression
+                        └── functions
+                            └── natural logarithm
+                                ├── natural logarithm
+                                ├── head parenthesis
+                                ├── expression
+                                │   └── additive expression
+                                │       └── multiplicative expression
+                                │           └── exponential expression
+                                │               ├── parenthetical expression
+                                │               │   └── functions
+                                │               │       └── sin
+                                │               │           ├── sin
+                                │               │           ├── head parenthesis
+                                │               │           ├── expression
+                                │               │           │   └── additive expression
+                                │               │           │       └── multiplicative expression
+                                │               │           │           └── exponential expression
+                                │               │           │               └── parenthetical expression
+                                │               │           │                   └── real number
+                                │               │           │                       └── rational
+                                │               │           │                           └── number {1.000000}
+                                │               │           └── tail parenthesis
+                                │               └── exponential expression suffix
+                                │                   ├── caret
+                                │                   └── parenthetical expression
+                                │                       └── functions
+                                │                           └── hyperbolic cos
+                                │                               ├── hyperbolic cos
+                                │                               ├── head parenthesis
+                                │                               ├── expression
+                                │                               │   └── additive expression
+                                │                               │       └── multiplicative expression
+                                │                               │           └── exponential expression
+                                │                               │               └── parenthetical expression
+                                │                               │                   └── real number
+                                │                               │                       └── special symbols
+                                │                               │                           └── pi
+                                │                               └── tail parenthesis
+                                └── tail parenthesis

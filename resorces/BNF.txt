@@ -1,12 +1,11 @@
-<command> ::= <elementary>
-            | <root>
+<command> ::= <nonvariable>
+            | <zeros>
 
-<elementary> ::= <nonvariable_expression>
+<nonvariable> ::= <expression>
 
-<root> ::= root <polynomail> = <polynomail>
-        | root <polynomial>
+<zeros> ::= zeros <polynomial>
 
-/**************************** root *******************************/
+/**************************** zeros *******************************/
 
 <polynomial> ::= <polynomial_term> {<polynomial_suffix}*
 <polynomial_suffix> ::= + <polynomial_term>
@@ -15,9 +14,9 @@
                     | {<real_number>}? x
                     | <real_number>
 
-/**************************** nonvariable expression *******************************/
+/**************************** expression *******************************/
 
-<nonvariable_expression> ::= <additive_expression>
+<expression> ::= <additive_expression>
 
 <additive_expression> ::= <multiplicative_expression> {<additive_expression_suffix>}*
 <additive_expression_suffix> ::=  + <multiplicative_expression>
@@ -30,9 +29,49 @@
 <exponential_expression> ::= <parenthetical_expression> {<exponential_expression_suffix>}*
 <exponential_expression_suffix> ::= ^ <parenthetical_expression>
 
-<parenthetical_expression> ::= <real_number>
-                             | ( <additive_expression> )
-                             | { <additive_expression> }
+<parenthetical_expression> ::= <functions>
+                             | <compound_number>
+                             | <real_number>
+                             | <variable>
+                             | ( <expression> )
+                             | { <expression> }
+
+/******************************** functions **************************************/
+
+<functions> ::= <root> | <sqrt> | <log> | <sqrt> | <log> | <ln> | <sin> | <cos> | <tan> 
+              | <asin> | <acos> | <atan> | <sinh> | <cosh> | <tanh>
+
+<root> ::= root ( <natural> ) ( <expression> )
+
+<sqrt> ::= sqrt ( <expression> )
+
+<log> ::= log ( <natural> ) ( <expression> )
+
+<ln> ::= ln ( <expression> )
+
+<sin> ::= sin ( <expression> )
+
+<cos> ::= cos ( <expression> )
+
+<tan> ::= tan ( <expression> )
+
+<asin> ::= asin ( <expression> )
+
+<acos> ::= acos ( <expression> )
+
+<atan> ::= atan ( <expression> )
+
+<sinh> ::= sinh ( <expression> )
+
+<cosh> ::= cosh ( <expression> )
+
+<tanh> ::= tanh ( <expression> )
+
+/******************************** general **************************************/
+
+<compound_number> ::= <rational> <variable>
+                    | <rational> <e> 
+                    | <rational> <pi>
 
 <real_number> ::= <scientific>
                 | <rational>

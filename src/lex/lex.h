@@ -38,7 +38,21 @@ enum l_Types {
     lt_pi,
     lt_x,    
     /* commands */
+    lt_zeros,
+    /* fuinctions */
     lt_root,
+    lt_sqrt,
+    lt_log,
+    lt_ln,
+    lt_sin,
+    lt_cos,
+    lt_tan,
+    lt_asin,
+    lt_acos,
+    lt_atan,
+    lt_sinh,
+    lt_cosh,
+    lt_tanh,
     /* terminator */
     lt_terminator
 };

@@ -1,20 +1,36 @@
 command
-└── root
-    ├── root
-    └── polynomial
-        ├── polynomial term
-        │   ├── rational
-        │   │   └── number {3.000000}
-        │   ├── x
-        │   ├── caret
-        │   └── natural
-        │       └── number {2.000000}
-        ├── plus
-        ├── polynomial term
-        │   ├── rational
-        │   │   └── number {2.000000}
-        │   └── x
-        ├── plus
-        └── polynomial term
-            └── rational
-                └── number {1.000000}
+└── non variable
+    └── additive expression
+        └── multiplicative expression
+            └── exponential expression
+                └── parenthetical expression
+                    └── natural logarithm
+                        ├── natural logarithm
+                        ├── head parenthesis
+                        ├── additive expression
+                        │   └── multiplicative expression
+                        │       └── exponential expression
+                        │           ├── parenthetical expression
+                        │           │   └── sin
+                        │           │       ├── sin
+                        │           │       ├── head parenthesis
+                        │           │       ├── additive expression
+                        │           │       │   └── multiplicative expression
+                        │           │       │       └── exponential expression
+                        │           │       │           └── parenthetical expression
+                        │           │       │               └── rational
+                        │           │       │                   └── number {1.000000}
+                        │           │       └── tail parenthesis
+                        │           ├── caret
+                        │           └── parenthetical expression
+                        │               └── hyperbolic cos
+                        │                   ├── hyperbolic cos
+                        │                   ├── head parenthesis
+                        │                   ├── additive expression
+                        │                   │   └── multiplicative expression
+                        │                   │       └── exponential expression
+                        │                   │           └── parenthetical expression
+                        │                   │               └── special symbols
+                        │                   │                   └── pi
+                        │                   └── tail parenthesis
+                        └── tail parenthesis

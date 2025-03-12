@@ -1,131 +1,129 @@
 command
-├── non variable
-│   ├── nonvariable expression
+├── nonvariable
+│   ├── expression
 │   │   ├── additive expression
 │   │   │   ├── multiplicative expression
 │   │   │   │   ├── exponential expression
 │   │   │   │   │   ├── parenthetical expression
-│   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── special symbols
-│   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   ├── sign
-├── root
-│   ├── polynomial
-│   │   ├── polynomial term
-│   │   │   ├── real number
-│   │   │   │   ├── scientific
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   │   │   ├── rational
-│   │   │   │   │   ├── sign
-│   │   │   │   │   ├── sign
-│   │   │   ├── natural
-│   │   ├── polynomial suffix
-│   │   │   ├── polynomial term
-│   │   │   │   ├── real number
-│   │   │   │   │   ├── scientific
-│   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   │   │   ├── real number
-│   │   │   │   │   ├── scientific
-│   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   ├── polynomial suffix
-│   │   │   ├── polynomial term
-│   │   │   │   ├── real number
-│   │   │   │   │   ├── scientific
-│   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   │   │   ├── real number
-│   │   │   │   │   ├── scientific
-│   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   │   │   ├── real number
-│   │   │   │   │   ├── scientific
-│   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   ├── polynomial suffix
-│   ├── polynomial
-│   │   ├── polynomial term
-│   │   │   ├── real number
-│   │   │   │   ├── scientific
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   │   │   ├── rational
-│   │   │   │   │   ├── sign
-│   │   │   │   │   ├── sign
-│   │   │   ├── natural
-│   │   ├── polynomial suffix
-│   │   │   ├── polynomial term
-│   │   │   │   ├── real number
-│   │   │   │   │   ├── scientific
-│   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   │   │   ├── real number
-│   │   │   │   │   ├── scientific
-│   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   ├── polynomial suffix
-│   │   │   ├── polynomial term
-│   │   │   │   ├── real number
-│   │   │   │   │   ├── scientific
-│   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   │   │   ├── real number
-│   │   │   │   │   ├── scientific
-│   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   │   │   ├── real number
-│   │   │   │   │   ├── scientific
-│   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   ├── rational
-│   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   ├── sign
-│   │   ├── polynomial suffix
+│   │   │   │   │   │   ├── functions
+│   │   │   │   │   │   │   ├── root
+│   │   │   │   │   │   │   ├── square root
+│   │   │   │   │   │   │   ├── log
+│   │   │   │   │   │   │   ├── natural log
+│   │   │   │   │   │   │   │   ├── expression
+│   │   │   │   │   │   │   │   │   ├── additive expression
+│   │   │   │   │   │   │   │   │   │   ├── multiplicative expression
+│   │   │   │   │   │   │   │   │   │   │   ├── exponential expression
+│   │   │   │   │   │   │   │   │   │   │   │   ├── parenthetical expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   ├── functions
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── square root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── natural log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── additive expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── multiplicative expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── parenthetical expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── functions
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── square root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── natural log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── asin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── acos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── atan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cosh
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tanh
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── compound number
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── variable
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── x
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── additive expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   │   ├── parenthetical expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── functions
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── square root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── natural log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── asin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── acos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── atan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cosh
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── additive expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── multiplicative expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── parenthetical expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── functions
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── square root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── natural log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── asin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── acos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── atan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cosh
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tanh
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── compound number
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── special symbols
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── additive expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix
+│   │   │   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix
+│   │   │   │   │   │   │   │   │   │   ├── additive expression suffix
+│   │   │   │   │   ├── exponential expression suffix
+│   │   │   │   ├── multiplicative expression suffix
+│   │   │   ├── additive expression suffix

@@ -14,6 +14,6 @@ int nonvariable_addition(Node* head, long double* value);
 int nonvariable_multiplication(Node* head, long double* value);
 int nonvariable_exponentiation(Node* head, long double* value);
 int nonvariable_parenthesis(Node* head, long double* value);
-int nonvariable_conversion(Node* head, long double* value);
+// int nonvariable_conversion(Node* head, long double* value);
 
 #endif

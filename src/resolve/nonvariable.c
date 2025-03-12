@@ -66,45 +66,46 @@ E:  return -1;
 }
 int nonvariable_parenthesis(Node* head, long double* value) {
     if(head->length == 1) {
-        if(nonvariable_conversion(head->next[0], value) == -1) goto E;
+        if(head->next[0]->type == nt_scientific) NONVARIABLE_SCIENTIFIC = 1;
+        if(get_numeric(head->next[0], value) == -1) goto E;
     } else {
         if(nonvariable_addition(head->next[1], value) == -1) goto E;
     }
     return 0;
 E:  return -1;
 }
-int nonvariable_conversion(Node* head, long double* value) {
-    long double a;
-    int hasSign;
-    errno = 0;
-    /* convert */
-    if(head->type == nt_special_symbols) {
-        hasSign = head->length - 1;
-        if(head->next[hasSign]->type == lt_e) a = GLOBAL_E;
-        if(head->next[hasSign]->type == lt_pi) a = GLOBAL_PI;
-        if(head->next[0]->type == lt_minus) a = -a;
-    }
-    if(head->type == nt_scientific) {
-        NONVARIABLE_SCIENTIFIC = 1;
-        Node* rational = head->next[0], *exponent = head->next[2];
-        /* coefficient part */
-        hasSign = rational->length - 1;
-        a = rational->next[hasSign]->value;
-        if(rational->next[0]->type == lt_minus) a = -a;
-        /* exponent part */
-        int temp;
-        hasSign = exponent->length - 1;
-        temp = exponent->next[hasSign]->value;
-        if(exponent->next[0]->type == lt_minus) temp = -temp;        
-        a *= powl(10, temp);
-    }
-    if(head->type == nt_rational) {
-        hasSign = head->length - 1;
-        a = head->next[hasSign]->value;
-        if(head->next[0]->type == lt_minus) a = -a;       
-    }
-    *value = a;
-    /* range */
-    if(errno == ERANGE || !isfinite(a)) return -1;
-    else return 0;
-}
+// int nonvariable_conversion(Node* head, long double* value) {
+//     long double a;
+//     int hasSign;
+//     errno = 0;
+//     /* convert */
+//     if(head->type == nt_special_symbols) {
+//         hasSign = head->length - 1;
+//         if(head->next[hasSign]->type == lt_e) a = GLOBAL_E;
+//         if(head->next[hasSign]->type == lt_pi) a = GLOBAL_PI;
+//         if(head->next[0]->type == lt_minus) a = -a;
+//     }
+//     if(head->type == nt_scientific) {
+//         NONVARIABLE_SCIENTIFIC = 1;
+//         Node* rational = head->next[0], *exponent = head->next[2];
+//         /* coefficient part */
+//         hasSign = rational->length - 1;
+//         a = rational->next[hasSign]->value;
+//         if(rational->next[0]->type == lt_minus) a = -a;
+//         /* exponent part */
+//         int temp;
+//         hasSign = exponent->length - 1;
+//         temp = exponent->next[hasSign]->value;
+//         if(exponent->next[0]->type == lt_minus) temp = -temp;        
+//         a *= powl(10, temp);
+//     }
+//     if(head->type == nt_rational) {
+//         hasSign = head->length - 1;
+//         a = head->next[hasSign]->value;
+//         if(head->next[0]->type == lt_minus) a = -a;       
+//     }
+//     *value = a;
+//     /* range */
+//     if(errno == ERANGE || !isfinite(a)) return -1;
+//     else return 0;
+// }

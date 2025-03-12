@@ -56,7 +56,21 @@ const l_Map l_map[] = {
     {"pi", lt_pi},
     {"x", lt_x},
     /* commands */
+    {"zeros", lt_zeros},
+    /* functions */
     {"root", lt_root},
+    {"sqrt", lt_sqrt},
+    {"log", lt_log},
+    {"ln", lt_ln},
+    {"sinh", lt_sinh},
+    {"cosh", lt_cosh},
+    {"tanh", lt_tanh},    
+    {"asin", lt_asin},
+    {"acos", lt_acos},
+    {"atan", lt_atan},    
+    {"sin", lt_sin},
+    {"cos", lt_cos},
+    {"tan", lt_tan},
     /* end */
     {NULL, 0}
 };

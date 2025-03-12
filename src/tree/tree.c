@@ -86,13 +86,15 @@ void n_helper(Node* this, int depth, int edge, int state[]) {
 
 void n_compress_chain(Node* this) {
     if(this->length==0) return;
-    while(1) {
-        Node* next = this->next[0]; // i
-        if(n_chain_exception(next->type)) break;
-        if(next->length!=1) break;
-        this->next[0] = next->next[0]; // i
-        free(next->next);
-        free(next);
+    for(int i = 0; i < this->length; i++) {
+        Node* next = this->next[i];
+        while(1) {
+            if(n_chain_exception(next->type)) break;
+            if(next->length!=1) break;
+            this->next[i] = next->next[0]; // i
+            free(next->next);
+            free(next);                 
+        }
     }
 }
 
@@ -153,15 +155,28 @@ const char* const n_typtostr_map[nt_terminator] = {
     [lt_e] = "e",
     [lt_pi] = "pi",
     [lt_x] = "x",
-    [lt_root] = "root",
+    [lt_zeros] = "zeros",
+    [lt_root] = "root",   
+    [lt_sqrt] = "square root",  
+    [lt_log] = "logarithm",   
+    [lt_ln] = "natural logarithm",  
+    [lt_sin] = "sin",  
+    [lt_cos] = "cos",   
+    [lt_tan] = "tan",  
+    [lt_asin] = "arcsin",  
+    [lt_acos] = "arccos",   
+    [lt_atan] = "arctan",  
+    [lt_sinh] = "hyperbolic sin",  
+    [lt_cosh] = "hyperbolic cos",   
+    [lt_tanh] = "hyperbolic tan",  
     /* syn */
     [nt_command] = "command",
     [nt_nonvariable] = "non variable",
-    [nt_root] = "root",
-    [nt_nonvariable_expression] = "nonvariable expression",
+    [nt_zeros] = "zeros",
     [nt_polynomial] = "polynomial",
     [nt_polynomial_suffix] = "polynomial suffix",
     [nt_polynomial_term] = "polynomial term",
+    [nt_expression] = "expression",    
     [nt_additive_expression] = "additive expression",
     [nt_additive_expression_suffix] = "additive expression suffix",
     [nt_multiplicative_expression] = "multiplicative expression",
@@ -169,13 +184,30 @@ const char* const n_typtostr_map[nt_terminator] = {
     [nt_exponential_expression] = "exponential expression",
     [nt_exponential_expression_suffix] = "exponential expression suffix",
     [nt_parenthetical_expression] = "parenthetical expression",
+    [nt_functions] = "functions",   
+    [nt_root] = "root",   
+    [nt_sqrt] = "square root",  
+    [nt_log] = "logarithm",   
+    [nt_ln] = "natural logarithm",  
+    [nt_sin] = "sine",  
+    [nt_cos] = "cosine",   
+    [nt_tan] = "tangent",  
+    [nt_asin] = "arcsin",  
+    [nt_acos] = "arccos",   
+    [nt_atan] = "arctan",  
+    [nt_sinh] = "hyperbolic sin",  
+    [nt_cosh] = "hyperbolic cos",   
+    [nt_tanh] = "hyperbolic tan",  
+    [nt_compound_number] = "compound number",   
     [nt_special_symbols] = "special symbols",
     [nt_real_number] = "real number",
     [nt_scientific] = "scientific",
     [nt_natural] = "natural",
     [nt_integer] = "integer",
     [nt_rational] = "rational",
-    [nt_sign] = "sign"
+    [nt_sign] = "sign",
+    [nt_variable] = "variable",
+    [nt_x] = "x",
 };
 
 const char n_chain_exception_map[] = {
@@ -183,10 +215,11 @@ const char n_chain_exception_map[] = {
     [nt_multiplicative_expression] = 1,
     [nt_exponential_expression] = 1,
     [nt_parenthetical_expression] = 1,
+    [nt_polynomial_term] = 1,
+    [nt_nonvariable] = 1,    
+    [nt_zeros] = 1,    
     [nt_rational] = 1,
-    [nt_nonvariable] = 1,
-    [nt_root] = 1,
-    [nt_special_symbols] = 1
+    [nt_special_symbols] = 1,
 };
 
 const char n_suffix_exception_map[] = {
