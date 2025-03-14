@@ -8,6 +8,7 @@
 #include "./global.h"
 
 int NONVARIABLE_SCIENTIFIC;
+extern const long double THRESHOLD;
 
 int nonvariable_resolve(Node* head);
 int nonvariable_addition(Node* head, long double* value);

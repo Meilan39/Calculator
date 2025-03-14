@@ -31,8 +31,6 @@
 
 <parenthetical_expression> ::= <functions>
                              | <compound_number>
-                             | <real_number>
-                             | <variable>
                              | ( <expression> )
                              | { <expression> }
 
@@ -69,18 +67,19 @@
 
 /******************************** general **************************************/
 
-<compound_number> ::= <rational> <variable>
-                    | <rational> <e> 
-                    | <rational> <pi>
+<compound_number> ::= <real_number> <variable>
+                    | <real_number>
+                    | <variable>
 
-<real_number> ::= <scientific>
+<real_number> ::= <irrational>
+                | <scientific>
                 | <rational>
-                | <special_symbols>
+
+<irrational> ::= {<scientific>}? <special_symbols>
+               | {<rational>}? <special_symbols>
+               | {<sign>}? <special_symbols>
 
 <scientific> ::= <rational> E <integer>
-
-<special_symbols> ::= {<sign>}? e 
-                    | {<sign>}? pi
 
 <natural> ::= <number>
 <integer> ::= {<sign>}? <number>
@@ -89,7 +88,8 @@
              | {<sign>}? <number>
              | <zero>
 
+<special_symbols> ::= e | pi
+
 <sign> ::= + | -
 
-<variable> ::= a | b | c | d | e | f | g | h | i | j | k | l | m 
-             | n | o | p | q | r | s | t | u | v | w | x | y | z
+<variable> ::= x

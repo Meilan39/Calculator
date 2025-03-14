@@ -441,16 +441,14 @@ Node* s_compound_number(Token** token, int depth) {
     PRINTMAP(depth, "compound number", token)
     Node* node = n_construct(nt_compound_number, NULL);
     Token* ptoken = *token;
-    if(!n_push(node, s_rational(token, depth+1))) goto c2;
+    if(!n_push(node, s_real_number(token, depth+1))) goto c2;
     if(!n_push(node, s_variable(token, depth+1))) goto c2;
     goto t;
 c2: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_rational(token, depth+1))) goto c3;
-    if(!n_push(node, s_compare(token, lt_e))) goto c3;
+    if(!n_push(node, s_real_number(token, depth+1))) goto c3;
     goto t;
 c3: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_rational(token, depth+1))) goto f;
-    if(!n_push(node, s_compare(token, lt_pi))) goto f;
+    if(!n_push(node, s_variable(token, depth+1))) goto f;
     goto t;
 f : *token = ptoken;
     return n_free(node);
@@ -460,12 +458,31 @@ Node* s_real_number(Token** token, int depth) {
     PRINTMAP(depth, "real number", token)
     Node* node = n_construct(nt_real_number, NULL);
     Token* ptoken = *token;
-    if(!n_push(node, s_scientific(token, depth+1))) goto c2;
+    if(!n_push(node, s_irrational(token, depth+1))) goto c2;
     goto t;
 c2: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_rational(token, depth+1))) goto c3;
+    if(!n_push(node, s_scientific(token, depth+1))) goto c3;
     goto t;
 c3: *token = ptoken; n_reset(node);
+    if(!n_push(node, s_rational(token, depth+1))) goto f;
+    goto t;
+f : *token = ptoken;
+    return n_free(node);
+t : return node;
+}
+Node* s_irrational(Token** token, int depth) {
+    PRINTMAP(depth, "irrational", token)
+    Node* node = n_construct(nt_irrational, NULL);
+    Token* ptoken = *token;
+    n_push(node, s_scientific(token, depth+1));
+    if(!n_push(node, s_special_symbols(token, depth+1))) goto c2;
+    goto t;
+c2: *token = ptoken; n_reset(node);
+    n_push(node, s_rational(token, depth+1));
+    if(!n_push(node, s_special_symbols(token, depth+1))) goto c3;
+    goto t;
+c3: *token = ptoken; n_reset(node);
+    n_push(node, s_sign(token, depth+1));
     if(!n_push(node, s_special_symbols(token, depth+1))) goto f;
     goto t;
 f : *token = ptoken;
@@ -479,21 +496,6 @@ Node* s_scientific(Token** token, int depth) {
     if(!n_push(node, s_rational(token, depth+1))) goto f;
     if(!n_push(node, s_compare(token, lt_scientific))) goto f;
     if(!n_push(node, s_integer(token, depth+1))) goto f;
-    goto t;
-f : *token = ptoken;
-    return n_free(node);
-t : return node;
-}
-Node* s_special_symbols(Token** token, int depth) {
-    PRINTMAP(depth, "special symbols", token)
-    Node* node = n_construct(nt_special_symbols, NULL);
-    Token* ptoken = *token;
-    n_push(node, s_sign(token, depth+1));
-    if(!n_push(node, s_compare(token, lt_e))) goto c2;
-    goto t;
-c2: *token = ptoken; n_reset(node);
-    n_push(node, s_sign(token, depth+1));
-    if(!n_push(node, s_compare(token, lt_pi))) goto f;
     goto t;
 f : *token = ptoken;
     return n_free(node);
@@ -536,6 +538,19 @@ c2: *token = ptoken; n_reset(node);
     goto t;
 c3: *token = ptoken; n_reset(node);
     if(!n_push(node, s_compare(token, ct_zero))) goto f;
+    goto t;
+f : *token = ptoken;
+    return n_free(node);
+t : return node;
+}
+Node* s_special_symbols(Token** token, int depth) {
+    PRINTMAP(depth, "special symbols", token)
+    Node* node = n_construct(nt_special_symbols, NULL);
+    Token* ptoken = *token;
+    if(!n_push(node, s_compare(token, lt_e))) goto c2;
+    goto t;
+c2: *token = ptoken; n_reset(node);
+    if(!n_push(node, s_compare(token, lt_pi))) goto f;
     goto t;
 f : *token = ptoken;
     return n_free(node);

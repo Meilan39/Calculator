@@ -87,8 +87,8 @@ void n_helper(Node* this, int depth, int edge, int state[]) {
 void n_compress_chain(Node* this) {
     if(this->length==0) return;
     for(int i = 0; i < this->length; i++) {
-        Node* next = this->next[i];
         while(1) {
+            Node* next = this->next[i];
             if(n_chain_exception(next->type)) break;
             if(next->length!=1) break;
             this->next[i] = next->next[0]; // i
@@ -199,12 +199,13 @@ const char* const n_typtostr_map[nt_terminator] = {
     [nt_cosh] = "hyperbolic cos",   
     [nt_tanh] = "hyperbolic tan",  
     [nt_compound_number] = "compound number",   
-    [nt_special_symbols] = "special symbols",
     [nt_real_number] = "real number",
+    [nt_irrational] = "irrational number",
     [nt_scientific] = "scientific",
     [nt_natural] = "natural",
     [nt_integer] = "integer",
     [nt_rational] = "rational",
+    [nt_special_symbols] = "special symbols",
     [nt_sign] = "sign",
     [nt_variable] = "variable",
     [nt_x] = "x",
@@ -215,10 +216,12 @@ const char n_chain_exception_map[] = {
     [nt_multiplicative_expression] = 1,
     [nt_exponential_expression] = 1,
     [nt_parenthetical_expression] = 1,
+    [nt_compound_number] = 1,
     [nt_polynomial_term] = 1,
     [nt_nonvariable] = 1,    
     [nt_zeros] = 1,    
     [nt_rational] = 1,
+    [nt_irrational] = 1,
     [nt_special_symbols] = 1,
 };
 

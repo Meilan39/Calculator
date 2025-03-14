@@ -6,11 +6,15 @@
 
 const long double GLOBAL_E;
 const long double GLOBAL_PI;
+const long double GLOBAL_THRESHOLD;
 
 int get_numeric(Node* head, long double* value);
-long double set_numeric(Node* head);
 
-int numerical_exception(Node* head);
-extern const char numerical_exception_map[nt_terminator];
+int get_compound(Node* head, long double* value);
+int get_scientific(Node* head, long double* value);
+int get_specific_symbol(Node* head, long double* value);
+int get_rational(Node* head, long double* value);
 
-#endif 
+int nonvariable_isinteger(Node* head);
+
+#endif
