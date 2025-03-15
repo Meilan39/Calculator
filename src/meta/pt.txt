@@ -2,15 +2,34 @@ command
 └── non variable
     └── expression
         └── additive expression
-            └── multiplicative expression
-                ├── sign
-                │   └── minus
-                └── exponential expression
-                    └── primary expression
-                        └── real number
-                            └── rational number
-                                └── scientific number
-                                    ├── number {2.000000}
-                                    ├── sign
-                                    │   └── minus
-                                    └── number {31.000000}
+            ├── multiplicative expression
+            │   └── exponential expression
+            │       └── primary expression
+            │           └── real number
+            │               └── rational number
+            │                   └── decimal {1.231000}
+            └── additive expression suffix
+                ├── plus
+                └── multiplicative expression
+                    ├── exponential expression
+                    │   └── primary expression
+                    │       └── real number
+                    │           └── rational number
+                    │               └── scientific number
+                    │                   ├── number {2.000000}
+                    │                   ├── scientific
+                    │                   ├── sign
+                    │                   │   └── minus
+                    │                   └── number {1.000000}
+                    ├── multiplicative expression suffix
+                    │   └── exponential expression
+                    │       └── primary expression
+                    │           └── real number
+                    │               └── irrational number
+                    │                   └── e
+                    └── multiplicative expression suffix
+                        └── exponential expression
+                            └── primary expression
+                                └── variable
+                                    └── x
+                                        └── x

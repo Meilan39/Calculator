@@ -1,12 +1,26 @@
 command
 └── non variable
     └── additive expression
+        ├── multiplicative expression
+        │   └── exponential expression
+        │       └── primary expression
+        │           └── rational number
+        │               └── decimal {1.231000}
+        ├── plus
         └── multiplicative expression
-            ├── minus
+            ├── exponential expression
+            │   └── primary expression
+            │       └── rational number
+            │           └── scientific number
+            │               ├── number {2.000000}
+            │               ├── scientific
+            │               ├── minus
+            │               └── number {1.000000}
+            ├── exponential expression
+            │   └── primary expression
+            │       └── irrational number
+            │           └── e
             └── exponential expression
                 └── primary expression
-                    └── rational number
-                        └── scientific number
-                            ├── number {2.000000}
-                            ├── minus
-                            └── number {31.000000}
+                    └── variable
+                        └── x

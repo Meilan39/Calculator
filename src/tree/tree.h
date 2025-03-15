@@ -17,7 +17,7 @@ typedef struct NODE{
 
 Node* n_free(Node* head);
 Node* n_reset(Node* head);
-Node* n_construct(int type, const Token* token);
+Node* n_construct(int type, double value);
 int n_push(Node* this, Node* node);
 void n_print(Node* this, const char* path);
 void n_helper(Node* this, int depth, int endge, int state[]);

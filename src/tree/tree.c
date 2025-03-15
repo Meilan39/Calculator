@@ -40,13 +40,13 @@ Node* n_reset(Node* head) {
     return head; 
 }
 
-Node* n_construct(int type, const Token* token) {
+Node* n_construct(int type, double value) {
     Node* this = malloc(sizeof(Node));
     if(!this) return NULL;
     this->next = NULL;
     this->length = 0;
     this->type = type;
-    if(token) this->value = token->value;
+    this->value = value;
     return this;
 }
 
@@ -155,6 +155,7 @@ const char* const n_typtostr_map[nt_terminator] = {
     [lt_slash] = "slash",
     [lt_caret] = "caret",
     [lt_equal] = "equal",
+    [lt_comma] = "comma",
     [lt_scientific] = "scientific",
     [lt_h_parenthesis] = "head parenthesis",
     [lt_t_parenthesis] = "tail parenthesis",
@@ -222,9 +223,10 @@ const char n_chain_exception_map[] = {
     [nt_primary_expression] = 1,
     [nt_polynomial_term] = 1,
     [nt_nonvariable] = 1,    
-    [nt_zeros] = 1,    
-    [nt_rational] = 1,
+    [nt_zeros] = 1,
     [nt_irrational] = 1,
+    [nt_rational] = 1,
+    [nt_variable] = 1,
 };
 
 const char n_suffix_exception_map[] = {
