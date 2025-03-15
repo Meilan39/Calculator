@@ -11,7 +11,7 @@ typedef struct NODE{
    struct NODE** next;
    int length;
    int type;
-   long double value;
+   double value;
 } Node;
 
 
@@ -46,7 +46,7 @@ enum n_Types {
    nt_multiplicative_expression_suffix,
    nt_exponential_expression,
    nt_exponential_expression_suffix,
-   nt_parenthetical_expression,
+   nt_primary_expression,
    nt_functions,
    nt_root,
    nt_sqrt,
@@ -61,14 +61,10 @@ enum n_Types {
    nt_sinh,
    nt_cosh,
    nt_tanh,
-   nt_compound_number,
    nt_real_number,
+   nt_rational,   
    nt_irrational,
    nt_scientific,
-   nt_natural,
-   nt_integer,
-   nt_rational,
-   nt_special_symbols,
    nt_sign,
    nt_variable,
    nt_x,

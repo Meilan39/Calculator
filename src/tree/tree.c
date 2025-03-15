@@ -58,6 +58,14 @@ int n_push(Node* this, Node* node) {
     return 1;
 }
 
+int n_replace(Node** target, Node** source) {
+    Node* temp = *source;
+    *source = NULL;
+    n_free(*target);
+    *target = temp;
+    return 0;
+}
+
 void n_print(Node* this, const char* path) {
     s_abstract_syntax_tree = fopen(path, "w");
     if(!s_abstract_syntax_tree) {printf("unable to open %s\n", path); return;}
@@ -73,7 +81,7 @@ void n_helper(Node* this, int depth, int edge, int state[]) {
         fprintf(s_abstract_syntax_tree, "%s", (edge ? "└── " : "├── "));
     }
     if(c_types(this->type)) {
-        fprintf(s_abstract_syntax_tree, "%s {%Lf}\n", n_typtostr(this->type), this->value);
+        fprintf(s_abstract_syntax_tree, "%s {%lf}\n", n_typtostr(this->type), this->value);
     } else fprintf(s_abstract_syntax_tree, "%s\n", n_typtostr(this->type));
     if(this->length > 0) {
         state[depth] = !edge;
@@ -91,7 +99,7 @@ void n_compress_chain(Node* this) {
             Node* next = this->next[i];
             if(n_chain_exception(next->type)) break;
             if(next->length!=1) break;
-            this->next[i] = next->next[0]; // i
+            this->next[i] = next->next[0];
             free(next->next);
             free(next);                 
         }
@@ -183,7 +191,7 @@ const char* const n_typtostr_map[nt_terminator] = {
     [nt_multiplicative_expression_suffix] = "multiplicative expression suffix",
     [nt_exponential_expression] = "exponential expression",
     [nt_exponential_expression_suffix] = "exponential expression suffix",
-    [nt_parenthetical_expression] = "parenthetical expression",
+    [nt_primary_expression] = "primary expression",
     [nt_functions] = "functions",   
     [nt_root] = "root",   
     [nt_sqrt] = "square root",  
@@ -198,14 +206,10 @@ const char* const n_typtostr_map[nt_terminator] = {
     [nt_sinh] = "hyperbolic sin",  
     [nt_cosh] = "hyperbolic cos",   
     [nt_tanh] = "hyperbolic tan",  
-    [nt_compound_number] = "compound number",   
     [nt_real_number] = "real number",
     [nt_irrational] = "irrational number",
-    [nt_scientific] = "scientific",
-    [nt_natural] = "natural",
-    [nt_integer] = "integer",
-    [nt_rational] = "rational",
-    [nt_special_symbols] = "special symbols",
+    [nt_rational] = "rational number",
+    [nt_scientific] = "scientific number",    
     [nt_sign] = "sign",
     [nt_variable] = "variable",
     [nt_x] = "x",
@@ -215,14 +219,12 @@ const char n_chain_exception_map[] = {
     [nt_additive_expression] = 1,
     [nt_multiplicative_expression] = 1,
     [nt_exponential_expression] = 1,
-    [nt_parenthetical_expression] = 1,
-    [nt_compound_number] = 1,
+    [nt_primary_expression] = 1,
     [nt_polynomial_term] = 1,
     [nt_nonvariable] = 1,    
     [nt_zeros] = 1,    
     [nt_rational] = 1,
     [nt_irrational] = 1,
-    [nt_special_symbols] = 1,
 };
 
 const char n_suffix_exception_map[] = {

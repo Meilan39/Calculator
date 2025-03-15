@@ -16,7 +16,7 @@ Token* t_destruct(Token* head) {
     } return NULL;
 }
 
-int t_push(Token* head, int type, long double value) {
+int t_push(Token* head, int type, double value) {
     if(! (head)) goto E;
     for(; head->next; head = head->next);
     if(! (head->next = t_construct())) goto E;

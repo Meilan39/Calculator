@@ -2,7 +2,7 @@
 
 int l_lex(Token* this, char* s) {
     int type;
-    long double value;
+    double value;
     while(*s!='\0') {
         /* pass spaces */
         while(*s==' ') {s++;}
@@ -46,6 +46,7 @@ const l_Map l_map[] = {
     {"/", lt_slash},
     {"^", lt_caret},
     {"=", lt_equal},
+    {",", lt_comma},
     {"E", lt_scientific},
     {"(", lt_h_parenthesis},
     {")", lt_t_parenthesis},

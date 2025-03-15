@@ -8,7 +8,7 @@
 typedef enum c_Types c_Types;
 char c_buffer[256];
 
-int c_constant(char** s, long double* value);
+int c_constant(char** s, double* value);
 int c_types(int type);
 
 int c_compare(char** s, char hash[][3], int keyCount);

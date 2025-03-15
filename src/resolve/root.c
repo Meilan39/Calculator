@@ -36,7 +36,7 @@ int root_get_degree(Node* head, int* degree) {
     if(head->length == 1) { *degree = 0; }
     if(head->length == 2) { *degree = 1; }
     if(head->length == 4) {
-        long double value;
+        double value;
         if(get_numeric(head->next[3], &value) == -1) goto E;
         *degree = value;
     }
@@ -44,11 +44,11 @@ int root_get_degree(Node* head, int* degree) {
 E:  return -1;
 }
 
-int root_coefficient(Node* head, long double* coefficients, int degree) {
+int root_coefficient(Node* head, double* coefficients, int degree) {
     for(int i = degree; i >= 0; i++) {
         for(int j = 0; j < head->length; j++) {
             Node* next = head->next[j];
-            long double value;
+            double value;
             int temp;
             if(root_get_degree(next, &temp) == -1) goto E;
             if(temp != i) continue;
@@ -63,8 +63,8 @@ E:  return -1;
 int root_second_degree(Node* head) {
     int degree = 2;
     Node* X1, X2;
-    long double x1, x2;
-    long double* coefficients = calloc(degree, sizeof(long double));
+    double x1, x2;
+    double* coefficients = calloc(degree, sizeof(double));
     if(root_coefficient(head, coefficients, degree) == -1) goto E;
     printf(" │ real roots: %Lf, %Lf\n", x1, x2);
     free(coefficients);

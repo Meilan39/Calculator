@@ -8,13 +8,14 @@
 #include "./global.h"
 
 int NONVARIABLE_SCIENTIFIC;
-extern const long double THRESHOLD;
+extern const double THRESHOLD;
 
 int nonvariable_resolve(Node* head);
-int nonvariable_addition(Node* head, long double* value);
-int nonvariable_multiplication(Node* head, long double* value);
-int nonvariable_exponentiation(Node* head, long double* value);
-int nonvariable_parenthesis(Node* head, long double* value);
-// int nonvariable_conversion(Node* head, long double* value);
+int nonvariable_addition(Node* head, double* value);
+int nonvariable_multiplication(Node* head, double* value);
+int nonvariable_exponentiation(Node* head, double* value);
+int nonvariable_parenthesis(Node* head, double* value);
+int nonvariable_function(Node* head, double* value);
+
 
 #endif

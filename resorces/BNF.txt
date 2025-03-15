@@ -10,9 +10,9 @@
 <polynomial> ::= <polynomial_term> {<polynomial_suffix}*
 <polynomial_suffix> ::= + <polynomial_term>
                       | - <polynomial_term>
-<polynomial_term> ::= {<real_number>}? x ^ <natural>
-                    | {<real_number>}? x
-                    | <real_number>
+<polynomial_term> ::= {<sign>}? {<real_number>}? x ^ <number>
+                    | {<sign>}? {<real_number>}? x
+                    | {<sign>}? <real_number>
 
 /**************************** expression *******************************/
 
@@ -22,73 +22,61 @@
 <additive_expression_suffix> ::=  + <multiplicative_expression>
                                |  - <multiplicative_expression>
 
-<multiplicative_expression> ::= <exponential_expression> {<multiplicative_expression_suffix>}*
+<multiplicative_expression> ::= {<sign>}? <exponential_expression> {<multiplicative_expression_suffix>}*
 <multiplicative_expression_suffix> ::=  * <exponential_expression>
                                      |  / <exponential_expression>
+                                     | <exponential_expression>
 
-<exponential_expression> ::= <parenthetical_expression> {<exponential_expression_suffix>}*
-<exponential_expression_suffix> ::= ^ <parenthetical_expression>
+<exponential_expression> ::= <primary_expression> {<exponential_expression_suffix>}*
+<exponential_expression_suffix> ::= ^ <primary_expression>
 
-<parenthetical_expression> ::= <functions>
-                             | <compound_number>
-                             | ( <expression> )
-                             | { <expression> }
+<primary_expression> ::= <real_number>
+                       | <functions>
+                       | <variable>
+                       | ( <expression> )
+                       | { <expression> }
 
 /******************************** functions **************************************/
 
 <functions> ::= <root> | <sqrt> | <log> | <sqrt> | <log> | <ln> | <sin> | <cos> | <tan> 
               | <asin> | <acos> | <atan> | <sinh> | <cosh> | <tanh>
 
-<root> ::= root ( <natural> ) ( <expression> )
+<root> ::= root ( <number> , <expression> )
 
-<sqrt> ::= sqrt ( <expression> )
+<sqrt> ::= sqrt <primary_expression>
 
-<log> ::= log ( <natural> ) ( <expression> )
+<log> ::= log ( <number> , <expression> )
 
-<ln> ::= ln ( <expression> )
+<ln> ::= ln <primary_expression>
 
-<sin> ::= sin ( <expression> )
+<sin> ::= sin <primary_expression>
 
-<cos> ::= cos ( <expression> )
+<cos> ::= cos <primary_expression>
 
-<tan> ::= tan ( <expression> )
+<tan> ::= tan <primary_expression>
 
-<asin> ::= asin ( <expression> )
+<asin> ::= asin <primary_expression>
 
-<acos> ::= acos ( <expression> )
+<acos> ::= acos <primary_expression>
 
-<atan> ::= atan ( <expression> )
+<atan> ::= atan <primary_expression>
 
-<sinh> ::= sinh ( <expression> )
+<sinh> ::= sinh <primary_expression>
 
-<cosh> ::= cosh ( <expression> )
+<cosh> ::= cosh <primary_expression>
 
-<tanh> ::= tanh ( <expression> )
+<tanh> ::= tanh <primary_expression>
 
 /******************************** general **************************************/
 
-<compound_number> ::= <real_number> <variable>
-                    | <real_number>
-                    | <variable>
+<real_number> ::= <rational> | <irrational>
 
-<real_number> ::= <irrational>
-                | <scientific>
-                | <rational>
+<rational> ::= <scientific> | <decimal> | <number> | <zero>
 
-<irrational> ::= {<scientific>}? <special_symbols>
-               | {<rational>}? <special_symbols>
-               | {<sign>}? <special_symbols>
+<irrational> ::= e | pi
 
-<scientific> ::= <rational> E <integer>
-
-<natural> ::= <number>
-<integer> ::= {<sign>}? <number>
-            | <zero>
-<rational> ::= {<sign>}? <decimal>
-             | {<sign>}? <number>
-             | <zero>
-
-<special_symbols> ::= e | pi
+<scientific> ::= <decimal> E {<sign>}? <number>
+               | <number> E {<sign>}? <number>
 
 <sign> ::= + | -
 

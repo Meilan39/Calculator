@@ -2,35 +2,15 @@ command
 └── non variable
     └── expression
         └── additive expression
-            ├── multiplicative expression
-            │   └── exponential expression
-            │       └── parenthetical expression
-            │           └── compound number
-            │               └── real number
-            │                   └── scientific
-            │                       ├── rational
-            │                       │   ├── sign
-            │                       │   │   └── minus
-            │                       │   └── number {2.000000}
-            │                       ├── scientific
-            │                       └── integer
-            │                           ├── sign
-            │                           │   └── minus
-            │                           └── number {1.000000}
-            └── additive expression suffix
-                ├── minus
-                └── multiplicative expression
-                    └── exponential expression
-                        └── parenthetical expression
-                            └── compound number
-                                ├── real number
-                                │   └── irrational number
-                                │       ├── rational
-                                │       │   ├── sign
-                                │       │   │   └── minus
-                                │       │   └── number {2.000000}
-                                │       └── special symbols
-                                │           └── e
-                                └── variable
-                                    └── x
-                                        └── x
+            └── multiplicative expression
+                ├── sign
+                │   └── minus
+                └── exponential expression
+                    └── primary expression
+                        └── real number
+                            └── rational number
+                                └── scientific number
+                                    ├── number {2.000000}
+                                    ├── sign
+                                    │   └── minus
+                                    └── number {31.000000}

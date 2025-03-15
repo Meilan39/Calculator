@@ -36,7 +36,7 @@ int main(void) {
         // syntaz tree
         n_simplify(head);
         // resolve
-        resolve(head);
+        // resolve(head);
     E:  // close file
         t_destruct(tokens);
         n_free(head);

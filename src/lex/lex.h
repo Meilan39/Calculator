@@ -28,6 +28,7 @@ enum l_Types {
     lt_slash,
     lt_caret,
     lt_equal,
+    lt_comma,
     lt_scientific,
     lt_h_parenthesis,
     lt_t_parenthesis,

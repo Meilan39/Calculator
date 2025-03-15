@@ -3,73 +3,21 @@ command
 │   ├── expression
 │   │   ├── additive expression
 │   │   │   ├── multiplicative expression
+│   │   │   │   ├── sign
 │   │   │   │   ├── exponential expression
-│   │   │   │   │   ├── parenthetical expression
-│   │   │   │   │   │   ├── functions
-│   │   │   │   │   │   │   ├── root
-│   │   │   │   │   │   │   ├── square root
-│   │   │   │   │   │   │   ├── log
-│   │   │   │   │   │   │   ├── natural log
-│   │   │   │   │   │   │   ├── sin
-│   │   │   │   │   │   │   ├── cos
-│   │   │   │   │   │   │   ├── tan
-│   │   │   │   │   │   │   ├── asin
-│   │   │   │   │   │   │   ├── acos
-│   │   │   │   │   │   │   ├── atan
-│   │   │   │   │   │   │   ├── sin
-│   │   │   │   │   │   │   ├── cosh
-│   │   │   │   │   │   │   ├── tanh
-│   │   │   │   │   │   ├── compound number
-│   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   ├── irrational
-│   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   ├── integer
-│   │   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   ├── special symbols
-│   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   ├── special symbols
-│   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   ├── special symbols
+│   │   │   │   │   ├── primary expression
+│   │   │   │   │   │   ├── real number
+│   │   │   │   │   │   │   ├── rational
 │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   ├── integer
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   ├── variable
-│   │   │   │   │   │   │   │   ├── x
-│   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   ├── irrational
-│   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   ├── integer
-│   │   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   ├── special symbols
-│   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   ├── special symbols
 │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   ├── special symbols
-│   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   ├── integer
-│   │   │   │   │   │   │   │   │   │   ├── sign
 │   │   │   │   │   ├── exponential expression suffix
 │   │   │   │   ├── multiplicative expression suffix
-│   │   │   ├── additive expression suffix
-│   │   │   │   ├── multiplicative expression
 │   │   │   │   │   ├── exponential expression
-│   │   │   │   │   │   ├── parenthetical expression
+│   │   │   │   │   │   ├── primary expression
+│   │   │   │   │   │   │   ├── real number
+│   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   ├── scientific
+│   │   │   │   │   │   │   │   ├── irrational
 │   │   │   │   │   │   │   ├── functions
 │   │   │   │   │   │   │   │   ├── root
 │   │   │   │   │   │   │   │   ├── square root
@@ -84,20 +32,6 @@ command
 │   │   │   │   │   │   │   │   ├── sin
 │   │   │   │   │   │   │   │   ├── cosh
 │   │   │   │   │   │   │   │   ├── tanh
-│   │   │   │   │   │   │   ├── compound number
-│   │   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   │   ├── irrational
-│   │   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   ├── special symbols
-│   │   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   ├── special symbols
-│   │   │   │   │   │   │   │   ├── variable
-│   │   │   │   │   │   │   │   │   ├── x
-│   │   │   │   │   │   ├── exponential expression suffix
-│   │   │   │   │   ├── multiplicative expression suffix
+│   │   │   │   │   │   │   ├── variable
+│   │   │   │   │   │   │   │   ├── x
 │   │   │   ├── additive expression suffix

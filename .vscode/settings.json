@@ -15,6 +15,7 @@
         "limits": "c",
         "locale": "c",
         "ratio": "c",
-        "tuple": "c"
+        "tuple": "c",
+        "nonvariable.h": "c"
     }
 }

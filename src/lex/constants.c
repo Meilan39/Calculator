@@ -1,6 +1,6 @@
 #include "./constants.h"
 
-int c_constant(char** s, long double* value) {
+int c_constant(char** s, double* value) {
     errno = 0;
     int type = 0;
     char *ps = *s, *end;
