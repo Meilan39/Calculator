@@ -50,11 +50,36 @@ Node* n_construct(int type, double value) {
     return this;
 }
 
+Node* n_get(Node* this, int type) {
+    while(this->type != type){
+        if(this->length != 1) return NULL;
+        this = this->next[0];
+    } return this;
+}
+
 int n_push(Node* this, Node* node) {
     if(!node) return 0;
     if((this->length)++) this->next = realloc(this->next, this->length * sizeof(Node*));
     else this->next = malloc(this->length * sizeof(Node*));
     this->next[this->length - 1] = node;   
+    return 1;
+}
+
+int n_delete(Node* this, int n, ...) {
+    if(!(n > 0)) return 0;
+    va_list args;
+    va_start(args, n);
+    int idx = 0, next = va_arg(args, int);
+    for(int i = 0; i < this->length; i++) {
+        if(next == i) {
+            n_free(this->next[i]);
+            next = (--n) ? va_arg(args, int) : next;
+            continue;
+        }
+        this->next[idx++] = this->next[i];
+    }
+    this->length = idx + 1;
+    va_end(args);
     return 1;
 }
 

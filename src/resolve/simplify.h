@@ -9,9 +9,12 @@
 
 int simplify_resolve(Node* head);
 
-int simplify_consolidate_multiplicative(Node* head);
-int simplify_consolidate_additive(Node* head);
+int simplify_addition(Node* head);
+int simplify_multiplication(Node* head);
+int simplify_exponentiation(Node* head);
+int simplify_parenthesis(Node* head);
 
-int simplify_factor(Node* head);
+int simplify_is_equal(Node* a, Node* b);
+
 
 #endif

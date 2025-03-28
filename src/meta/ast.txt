@@ -5,22 +5,10 @@ command
         │   └── exponential expression
         │       └── primary expression
         │           └── rational number
-        │               └── decimal {1.231000}
+        │               └── number {1.000000}
         ├── plus
         └── multiplicative expression
-            ├── exponential expression
-            │   └── primary expression
-            │       └── rational number
-            │           └── scientific number
-            │               ├── number {2.000000}
-            │               ├── scientific
-            │               ├── minus
-            │               └── number {1.000000}
-            ├── exponential expression
-            │   └── primary expression
-            │       └── irrational number
-            │           └── e
             └── exponential expression
                 └── primary expression
-                    └── variable
-                        └── x
+                    └── rational number
+                        └── number {2.000000}

@@ -1,0 +1,125 @@
+
+addition expression:
+    NEW addition
+    FOR node IN next
+        term = multiplication(node)
+        IF term == zero 
+            continue
+        IF term == parenthesis
+            simplify_remove_parenthesis()
+        FOR addi IN addition
+            IF simplify_compare(addi, node, rational, rational)
+                addi->value += node->value
+            IF simplify_compare(addi, node, irrational, irrational)
+                IF simplify_compare(addi->next, node->next, pi, pi)
+                            || simplify_compare(addi->next, node->next, e, e)
+                    Node* temp = n_construct(nt_rational_number, 0)
+                    n_push(temp, n_construct(ct_number, 2)
+                    n_push(temp, n_construct(nt_rational_number))
+            IF simplify_compare(addi, node, variable, variable)
+
+Node* addition_expression(Node* head)
+    Node* addition
+          next;
+    for(int i = 0; i < head->length; i++)
+        next = head->next[i];
+        if(next->type == lt_plus)
+        if(next->type == lt_minus)
+        /* simplify */
+
+
+
+factor
+    - 
+addition
+    - combine like terms
+        - delete zero terms
+multiplication
+    - IF parenthesis
+        - IF multiplication THEN remove parenthesis
+        - IF addition THEN distribute
+    - consolidate to fraction of unresolveables
+        - IF zero temr THEN delete
+        - IF divide by zero THEN error
+exponentiation
+    - IF 
+primary
+    - 
+        
+
+
+
+multiplication expression:
+    - NEW multiplication
+    - FOR node IN next
+        - exponential()
+        - multiplication_merge()
+    - FREE next
+    - SET next, multiplication
+
+exponential expressin:
+    - NEW expponential
+    - FOR node IN next
+        - primary()
+        - exponential_merge()
+    - FREE next
+    - next = exponential
+
+primary expression: 
+    - IF head parenthesis
+        - addition()
+        - parenthesis_merge()
+    - IF function
+        - functions()
+
+functions:
+    - IF sin
+        - IF 0 RETURN 0 
+        - IF n*pi THEN 0
+        - IF n*pi/2 THEN (-1)^(n+1)
+        - IF n*pi/3 THEN (sqrt(3)/2)*(-1)^(floor(n/3))
+        - IF n*pi/4 THEN (sqrt(2)/2)*(-1)^(floor(n/4))
+        - IF n*pi/6 THEN (1/2)*(-1)^(floor(n/6))
+    - IF cos
+        - IF 0 THEN 1
+        - IF n*pi THEN (-1)^n
+        - IF n*pi/2 THEN 0
+        - IF n*pi/3 THEN (1/2)*(-1)^(floor((n+1)/3))
+        - IF n*pi/4 THEN (sqrt(2)/2)*(-1)^(floor((n+2)/4))
+        - IF n*pi/6 THEN (sqrt(3)/2)*(-1)^(floor((n+3)/6))
+    - IF tan
+        - IF 0 THEN 0
+        - IF n*pi THEN 0
+        - IF n*pi/2 THEN inf
+        - IF n*pi/3 THEN (sqrt(3)/2)*(-1)^(floor(n/3))
+        - IF n*pi/4 THEN (sqrt(2)/2)*(-1)^(floor(n/4))
+        - IF n*pi/6 THEN (1/2)*(-1)^(floor(n/6))
+
+
+
+<additive_expression> ::= <multiplicative_expression> {<additive_expression_suffix>}*
+<additive_expression_suffix> ::=  + <multiplicative_expression>
+                               |  - <multiplicative_expression>
+
+<multiplicative_expression> ::= {<sign>}? <exponential_expression> {<multiplicative_expression_suffix>}*
+<multiplicative_expression_suffix> ::=  * <exponential_expression>
+                                     |  / <exponential_expression>
+                                     | <exponential_expression>
+
+<exponential_expression> ::= <primary_expression> {<exponential_expression_suffix>}*
+<exponential_expression_suffix> ::= ^ <primary_expression>
+
+<primary_expression> ::= <real_number>
+                       | <functions>
+                       | <variable>
+                       | ( <expression> )
+                       | { <expression> }
+
+<real_number> ::= <rational> | <irrational>
+
+<rational> ::= <scientific> | <decimal> | <number> | <zero>
+
+<irrational> ::= e | pi
+
+<scientific> ::= <decimal> E {<sign>}? <number>
+               | <number> E {<sign>}? <number>

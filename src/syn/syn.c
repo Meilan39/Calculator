@@ -166,6 +166,7 @@ c2: *token = ptoken; n_reset(node);
     if(!n_push(node, s_exponential_expression(token, depth+1))) goto c3;
     goto t;
 c3: *token = ptoken; n_reset(node);
+    n_push(node, n_construct(lt_dot, 0)); // push dot for implicit multiplication
     if(!n_push(node, s_exponential_expression(token, depth+1))) goto f;
     goto t;
 f : *token = ptoken;

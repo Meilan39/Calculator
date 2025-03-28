@@ -2,6 +2,7 @@
 #define TREE
 
 #include <stdio.h>
+#include <stdarg.h>
 #include "../token/token.h"
 #include "../lex/lex.h"
 
@@ -18,7 +19,9 @@ typedef struct NODE{
 Node* n_free(Node* head);
 Node* n_reset(Node* head);
 Node* n_construct(int type, double value);
+Node* n_get(Node* this, int type);
 int n_push(Node* this, Node* node);
+int n_delete(Node* this, int n, ...);
 void n_print(Node* this, const char* path);
 void n_helper(Node* this, int depth, int endge, int state[]);
 /* simplify */
