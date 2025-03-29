@@ -83,12 +83,20 @@ int n_delete(Node* this, int n, ...) {
     return 1;
 }
 
-int n_replace(Node** target, Node** source) {
-    Node* temp = *source;
-    *source = NULL;
-    n_free(*target);
-    *target = temp;
+int n_emplace(Node* this, int length) {
+    if(this->next) {
+        if(this->length > length) goto E;
+        this->next = realloc(this->next, length * sizeof(Node*));
+        for(int i = this->length; i < length; i++)
+            this->next[i] = NULL;
+        this->length = length;
+    } else {
+        this->length = length;
+        this->next = calloc(sizeof(Node*), this->length);
+    }
     return 0;
+E:  printf("...emplace failed\n");
+    return -1;
 }
 
 void n_print(Node* this, const char* path) {

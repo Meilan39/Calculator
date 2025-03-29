@@ -11,7 +11,8 @@ E:  printf("...double overflow\n");
 
 int simplify_addition(Node* head) {
     for(int i = 0; i < head->length; i++) {
-        Node *temp, *ref;
+        Node *temp, *ref, *rRational, *tRational;
+        double rn = 1, rd = 1, tn = 1, td = 1;
         int minus = 0;
         /* pass-over and mark signs */
         if(head->next[i]->type == lt_plus) {minus = 0; continue; }
@@ -31,49 +32,53 @@ int simplify_addition(Node* head) {
         /* compress */
         temp = n_get(head->next[i], nt_multiplicative_expression);
         for(int j = 0; j < i; j+=2) {
-            int matched, allMatched = 1;
-            int rDivide = 0, tDivide = 0;
+            int matched, rDivide = 0, tDivide = 0;
             /* match against reference terms */
             ref = n_get(head->next[j], nt_multiplicative_expression);
             for(int k = 0; k < ref->length; k+=2) {
                 matched = 0;
                 if(ref->next[k]->type == lt_dot) {rDivide = 0; continue;}
                 if(ref->next[k]->type == lt_slash) {rDivide = 1; continue;} 
-                if(n_get(ref->next[k], nt_rational)) continue;
+                if(n_get(ref->next[k], nt_rational)) {
+                    continue;
+                }
                 for(int l = 0; l < temp->length; l+=2) {
                     if(temp->next[l]->type == lt_dot) {tDivide = 0; continue;}
                     if(temp->next[l]->type == lt_slash) {tDivide = 1; continue;} 
-                    if(n_get(temp->next[l], nt_rational)) continue;
+                    if(n_get(temp->next[l], nt_rational)) {
+                        continue;                        
+                    }
                     if(rDivide == tDivide && simplify_is_equal(ref->next[k], temp->next[l])) {
                         matched = 1;
                         break;
                     }
                 }
                 if(!matched) {
-                    allMatched = 0;
+                    ref = NULL;
                     break;
                 }
             }
-            /* merge temp into reference */
-            if(allMatched) {
-                double coefficient = (rRational ? rRational->next[0]->value : 1) +
-                                     (tRational ? tRational->next[0]->value : 1) *
-                                     (minus ? -1 : 1);
-                if(!isfinite(coefficient)) {
-                    printf("...double overflow in additive simplify\n");
-                    goto E;
-                } else if(coefficient == 0) {
-                    n_delete(head, 4, abs(j-1), j, abs(i-1), i);
+        }
+        /* merge temp into reference */
+        if(ref) {
+            // need to make temp its own thing that can handle fractions.
+            double coefficient = (rRational ? rRational->next[0]->value : 1) +
+                                 (tRational ? tRational->next[0]->value : 1) *
+                                 (minus ? -1 : 1);
+            if(!isfinite(coefficient)) {
+                printf("...double overflow in additive simplify\n");
+                goto E;
+            } else if(coefficient == 0) {
+                n_delete(head, 4, abs(j-1), j, abs(i-1), i);
+            } else {
+                n_delete(head, 2, abs(i-1), i);
+                if(rRational) {
+                    rRational->next[0]->value = coefficient;
                 } else {
-                    n_delete(head, 2, abs(i-1), i);
-                    if(rRational) {
-                        rRational->next[0]->value = coefficient;
-                    } else {
-                        Node *i_number = n_construct(ct_number, coefficient),
-                            *i_rational = n_construct(nt_rational, 0);
-                        n_push(i_rational, i_number);
-                        n_push(ref, i_rational);
-                    }
+                    Node *i_number = n_construct(ct_number, coefficient),
+                        *i_rational = n_construct(nt_rational, 0);
+                    n_push(i_rational, i_number);
+                    n_push(ref, i_rational);
                 }
             }
         }

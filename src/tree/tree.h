@@ -22,6 +22,7 @@ Node* n_construct(int type, double value);
 Node* n_get(Node* this, int type);
 int n_push(Node* this, Node* node);
 int n_delete(Node* this, int n, ...);
+int n_emplace(Node* this, int length);
 void n_print(Node* this, const char* path);
 void n_helper(Node* this, int depth, int endge, int state[]);
 /* simplify */

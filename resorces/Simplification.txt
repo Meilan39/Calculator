@@ -1,76 +1,33 @@
 
-addition expression:
-    NEW addition
-    FOR node IN next
-        term = multiplication(node)
-        IF term == zero 
-            continue
-        IF term == parenthesis
-            simplify_remove_parenthesis()
-        FOR addi IN addition
-            IF simplify_compare(addi, node, rational, rational)
-                addi->value += node->value
-            IF simplify_compare(addi, node, irrational, irrational)
-                IF simplify_compare(addi->next, node->next, pi, pi)
-                            || simplify_compare(addi->next, node->next, e, e)
-                    Node* temp = n_construct(nt_rational_number, 0)
-                    n_push(temp, n_construct(ct_number, 2)
-                    n_push(temp, n_construct(nt_rational_number))
-            IF simplify_compare(addi, node, variable, variable)
-
-Node* addition_expression(Node* head)
-    Node* addition
-          next;
-    for(int i = 0; i < head->length; i++)
-        next = head->next[i];
-        if(next->type == lt_plus)
-        if(next->type == lt_minus)
-        /* simplify */
-
-
+addition_compressible()
+    
 
 factor
     - 
 addition
+    - IF parenthesis
+        - delete parenthesis
+    - IF sign
+        - update sign
+        - delete sign
     - combine like terms
         - delete zero terms
 multiplication
     - IF parenthesis
-        - IF multiplication THEN remove parenthesis
+        - IF multiplication THEN delete parenthesis
         - IF addition THEN distribute
+    - sort
     - consolidate to fraction of unresolveables
-        - IF zero temr THEN delete
+        - IF zero term THEN delete
         - IF divide by zero THEN error
 exponentiation
-    - IF 
+    - IF parenthesis
+        - IF exponentiation THEN remove parenthesis
+        - IF multiplication THEN group rational
+        - IF addition THEN distribute
+    - 
 primary
     - 
-        
-
-
-
-multiplication expression:
-    - NEW multiplication
-    - FOR node IN next
-        - exponential()
-        - multiplication_merge()
-    - FREE next
-    - SET next, multiplication
-
-exponential expressin:
-    - NEW expponential
-    - FOR node IN next
-        - primary()
-        - exponential_merge()
-    - FREE next
-    - next = exponential
-
-primary expression: 
-    - IF head parenthesis
-        - addition()
-        - parenthesis_merge()
-    - IF function
-        - functions()
 
 functions:
     - IF sin
