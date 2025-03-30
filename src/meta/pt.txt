@@ -2,17 +2,24 @@ command
 └── non variable
     └── expression
         └── additive expression
-            ├── multiplicative expression
-            │   └── exponential expression
-            │       └── primary expression
-            │           └── real number
-            │               └── rational number
-            │                   └── number {1.000000}
-            └── additive expression suffix
+            └── multiplicative expression
                 ├── plus
-                └── multiplicative expression
+                ├── exponential expression
+                │   ├── dot
+                │   └── primary expression
+                │       └── real number
+                │           └── rational number
+                │               └── number {1.000000}
+                └── multiplicative expression suffix
+                    ├── slash
                     └── exponential expression
-                        └── primary expression
-                            └── real number
-                                └── rational number
-                                    └── number {2.000000}
+                        ├── dot
+                        ├── primary expression
+                        │   └── real number
+                        │       └── rational number
+                        │           └── number {2.000000}
+                        └── exponential expression suffix
+                            └── primary expression
+                                └── real number
+                                    └── rational number
+                                        └── number {1.000000}

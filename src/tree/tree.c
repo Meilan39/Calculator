@@ -1,20 +1,58 @@
 #include "tree.h"
 
 void n_simplify(Node* this) {
-    /* print parse tree */
-    n_print(this, "./src/meta/pt.txt");
-    /* compress */
+    n_print(this, "./src/meta/pt.txt"); // print parse tree
     n_compress(this);
-    /* print abstract syntax tree */
-    n_print(this, "./src/meta/ast.txt");    
+    n_print(this, "./src/meta/ast.txt"); // print abstract syntax tree
 }
 
 void n_compress(Node* this) {
-    //n_compress_symbol(this);
     n_compress_suffix(this);
     n_compress_chain(this);
     for(int i = 0; i < this->length; i++)
         n_compress(this->next[i]);  
+    n_refactor(this); // refactoring is depth first
+}
+
+void n_refactor(Node* this) {
+    /* refactor multiplication */
+    if(this->type == nt_multiplicative_expression) {
+        Node* next;
+        int divide = 0, idx = 1;
+        /* start from 1 to avoid multiplicative sign */
+        for(int i = 1; i < this->length; i++) {
+            next = this->next[i];
+            if(next->type == lt_dot || next->type == lt_slash) {
+                divide = (next->type == lt_slash); 
+                n_free(next);
+                continue;
+            }
+            next->next[0]->type = divide ? lt_slash : lt_dot;
+            this->next[idx++] = this->next[i];
+            if((idx-1) != i) this->next[i] = NULL;
+        }
+        this->length = idx;
+        this->next = realloc(this->next, sizeof(Node*) * this->length);
+    }    
+    /* refactor addition */
+    if(this->type == nt_additive_expression) {
+        Node* next;
+        int minus = 0, idx = 0;
+        for(int i = 0; i < this->length; i++) {
+            next = this->next[i];
+            if(next->type == lt_plus || next->type == lt_minus) {
+                minus = (next->type == lt_minus); 
+                n_free(next);
+                continue;
+            }
+            if(next->next[0]->type == lt_minus) minus = !minus;
+            next->next[0]->type = minus ? lt_minus : lt_plus;
+            this->next[idx++] = this->next[i];
+            if((idx-1) != i) this->next[i] = NULL;
+        }
+        this->length = idx;
+        this->next = realloc(this->next, sizeof(Node*) * this->length);
+    }
 }
 
 Node* n_free(Node* head) {

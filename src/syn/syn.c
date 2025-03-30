@@ -146,7 +146,8 @@ Node* s_multiplicative_expression(Token** token, int depth) {
     PRINTMAP(depth, "multiplicative expression", token)
     Node* node = n_construct(nt_multiplicative_expression, 0);
     Token* ptoken = *token;
-    n_push(node, s_sign(token, depth+1));
+    /* if minus is not pushed to multiplication, push plus */
+    if(!n_push(node, s_sign(token, depth+1))) n_push(node, n_construct(lt_plus, 0));
     if(!n_push(node, s_exponential_expression(token, depth+1))) goto f;
     while(n_push(node, s_multiplicative_expression_suffix(token, depth+1)));
     goto t;
@@ -177,6 +178,8 @@ Node* s_exponential_expression(Token** token, int depth) {
     PRINTMAP(depth, "exponential expression", token)
     Node* node = n_construct(nt_exponential_expression, 0);
     Token* ptoken = *token;
+    /* push a spaceholder dot */
+    n_push(node, n_construct(lt_dot, 0));
     if(!n_push(node, s_primary_expression(token, depth+1))) goto f;
     while(n_push(node, s_exponential_expression_suffix(token, depth+1)));
     goto t;
@@ -188,7 +191,8 @@ Node* s_exponential_expression_suffix(Token** token, int depth) {
     PRINTMAP(depth, "exponential expression suffix", token)
     Node* node = n_construct(nt_exponential_expression_suffix, 0);
     Token* ptoken = *token;
-    if(!n_push(node, s_compare(token, lt_caret))) goto f;
+    /* don't push carets */
+    if(!s_compare(token, lt_caret)) goto f;
     if(!n_push(node, s_primary_expression(token, depth+1))) goto f;
     goto t;
 f : *token = ptoken;
