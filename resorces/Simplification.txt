@@ -2,6 +2,10 @@
 addition_compressible()
     
 
+- replace famous equalities
+- replace famous function values
+- 
+
 factor
     - 
 addition
