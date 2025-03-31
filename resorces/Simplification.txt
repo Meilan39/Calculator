@@ -1,19 +1,15 @@
-
-addition_compressible()
-    
-
 - replace famous equalities
 - replace famous function values
-- 
+
+addition canonical
+    - term number
+    - term multipliction orderpp
 
 factor
     - 
 addition
     - IF parenthesis
         - delete parenthesis
-    - IF sign
-        - update sign
-        - delete sign
     - combine like terms
         - delete zero terms
 multiplication

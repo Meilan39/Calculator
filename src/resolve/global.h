@@ -8,6 +8,8 @@ const double GLOBAL_E;
 const double GLOBAL_PI;
 const double GLOBAL_THRESHOLD;
 
+void swap(Node* a, Node* b);
+
 int get_numeric(Node* head, double* value);
 
 int get_irrational(Node* head, double* value);

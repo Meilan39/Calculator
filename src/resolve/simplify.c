@@ -2,93 +2,121 @@
 
 
 int simplify_resolve(Node* head) {
-    // if(simplify_addition(head->next[0]->next[0]) == -1) goto E;
+    if(simplify_addition(head->next[0]->next[0]) == -1) goto E;
     n_print(head, "./src/meta/simplified.txt");
     return 1;
 E:  printf("...double overflow\n");
     return -1;
 }
 
-// int simplify_addition(Node* head) {
-//     for(int i = 0; i < head->length; i++) {
-//         Node *this, *ref, *rTemp, *tTemp;
-//         Node *rn = NULL, *rd = NULL, *tn = NULL, *td = NULL;
-//         int minus = 0;
-//         /* pass-over and mark signs */
-//         if(head->next[i]->type == lt_plus) {minus = 0; continue; }
-//         if(head->next[i]->type == lt_minus) {minus = 1; continue; } 
-//         /* remove parenthesis */
-//         this = n_get(head->next[i], nt_primary_expression);
-//         if(this->length == 3) {
-//             n_delete(this, 2, 0, 2);
-//         }
-//         /* get multiplication sign */
-//         this = n_get(head->next[i], nt_multiplicative_expression);
-//         if(this->next[0]->type == lt_minus || this->next[0]->type == lt_plus) {
-//             if(this->next[0]->type == lt_minus)
-//                 minus = !minus;
-//             n_delete(this, 1, 0);
-//         }
-//         /* find match */
-//         this = n_get(head->next[i], nt_multiplicative_expression);
-//         for(int j = 0; j < i; j+=2) {
-//             ref = n_get(head->next[j], nt_multiplicative_expression);
-//             int ridx = 0, tidx = 0;
-//             while(1) {
-//                 if((rTemp = n_get(ref->next[ridx],  nt_rational)) ||
-//                    (tTemp = n_get(this->next[tidx], nt_rational))) {
-//                     if(rTemp) {
-//                         if(!rn) rn = rTemp->next[0]; // ref numeraotr coefficient
-//                         else    rd = rTemp->next[0]; // ref denominator coefficient
-//                         ridx++;
-//                     }
-//                     if(tTemp) {
-//                         if(!tn) tn = tTemp->next[0]; // temp numeraotr coefficient
-//                         else    td = tTemp->next[0]; // temp denominator coefficient
-//                         tidx++;
-//                     }
-//                     continue;
-//                 }
-//                 if(!simplify_is_equal(ref->next[ridx++], this->next[tidx++]) ||
-//                    !(ridx < ref->length && tidx < this->length)) {
-//                     ref = NULL; 
-//                     break;
-//                 }
-//             }
-//             if(ref) break;
-//         }
-//         /* merge this into reference */
-//         if(ref) {
-//             double rnf, rdf, tnf, tdf;
-//             rnf = rn ? rn->value : 1;
-//             rdf = rd ? rd->value : 1;
-//             tnf = tn ? tn->value : 1;
-//             tdf = td ? td->value : 1;
-//             // need to make this its own thing that can handle fractions.
-//             double coefficient = (rRational ? rRational->next[0]->value : 1) +
-//                                  (tRational ? tRational->next[0]->value : 1) *
-//                                  (minus ? -1 : 1);
-//             if(!isfinite(coefficient)) {
-//                 printf("...double overflow in additive simplify\n");
-//                 goto E;
-//             } else if(coefficient == 0) {
-//                 n_delete(head, 4, abs(j-1), j, abs(i-1), i);
-//             } else {
-//                 n_delete(head, 2, abs(i-1), i);
-//                 if(rRational) {
-//                     rRational->next[0]->value = coefficient;
-//                 } else {
-//                     Node *i_number = n_construct(ct_number, coefficient),
-//                         *i_rational = n_construct(nt_rational, 0);
-//                     n_push(i_rational, i_number);
-//                     n_push(ref, i_rational);
-//                 }
-//             }
-//         }
-//     }
-//     return 0;
-// E:  return -1;
-// }
+int simplify_addition(Node* head) {
+    int idx = 0;
+    for(int i = 0; i < head->length; i++) {
+        Node *this;
+        /* remove parenthesis */
+        this = n_get(head->next[i], nt_primary_expression);
+        if(this->length == 3) {
+            Node* temp = head->next[i];
+            Node* additive = this->next[1];     // addutive expression inside parenthesis
+            head->next[i] = additive->next[0];  // replace parenthesis with first term
+            for(int j = 1; j < additive->length; j++) 
+                head->next[head->length + j - 1] = additive->next[j];
+            head->length += (additive->length - 1);
+            n_free(temp);
+        }
+        /* combine like terms and canonicalize */
+        for(int j = 0; j <= idx; j++) {
+            if(simplify_additive_compare(this->next[j], this->next[i]) == 0) {
+                Node *a = this->next[j], *b = this->next[i];
+                double an=1, ad=1, bn=1, bd=1, temp;
+                int minus = (a->next[0] == lt_minus) ^ (b->next[0] == lt_minus);
+                /*  */
+                if(a->length >= 2 && n_get(a->next[1], nt_rational)) 
+                    an = a->next[1]->next[0]->value; 
+                if(a->length >= 3 && n_get(a->next[2], nt_rational)) 
+                    an = a->next[2]->next[0]->value; 
+                if(b->length >= 2 && n_get(b->next[1], nt_rational)) 
+                    an = b->next[1]->next[0]->value;
+                if(b->length >= 3 && n_get(b->next[2], nt_rational)) 
+                    an = b->next[2]->next[0]->value; 
+                /* free b */
+                n_free(this->next[i]);
+                this->next[i] = NULL;
+                break;
+            } else if(simplify_additive_compare(this->next[j], this->next[i]) > 0) {
+                for(int k = i - 1; idx <= k; k--) 
+                    swap(&this->next[k], &this->next[k+1]);
+                idx++;
+                break;
+            } else if(j == idx) {
+                idx++;
+                if(idx != i) {
+                    this->next[idx] = this->next[i];
+                    this->next[i] = NULL;                    
+                }
+                break;
+            }
+        }
+        // /* find match */
+        // this = n_get(head->next[i], nt_multiplicative_expression);
+        // for(int j = 0; j < i; j+=2) {
+        //     ref = n_get(head->next[j], nt_multiplicative_expression);
+        //     int ridx = 0, tidx = 0;
+        //     while(1) {
+        //         if((rTemp = n_get(ref->next[ridx],  nt_rational)) ||
+        //            (tTemp = n_get(this->next[tidx], nt_rational))) {
+        //             if(rTemp) {
+        //                 if(!rn) rn = rTemp->next[0]; // ref numeraotr coefficient
+        //                 else    rd = rTemp->next[0]; // ref denominator coefficient
+        //                 ridx++;
+        //             }
+        //             if(tTemp) {
+        //                 if(!tn) tn = tTemp->next[0]; // temp numeraotr coefficient
+        //                 else    td = tTemp->next[0]; // temp denominator coefficient
+        //                 tidx++;
+        //             }
+        //             continue;
+        //         }
+        //         if(!simplify_is_equal(ref->next[ridx++], this->next[tidx++]) ||
+        //            !(ridx < ref->length && tidx < this->length)) {
+        //             ref = NULL; 
+        //             break;
+        //         }
+        //     }
+        //     if(ref) break;
+        // }
+        // /* merge this into reference */
+        // if(ref) {
+        //     double rnf, rdf, tnf, tdf;
+        //     rnf = rn ? rn->value : 1;
+        //     rdf = rd ? rd->value : 1;
+        //     tnf = tn ? tn->value : 1;
+        //     tdf = td ? td->value : 1;
+        //     // need to make this its own thing that can handle fractions.
+        //     double coefficient = (rRational ? rRational->next[0]->value : 1) +
+        //                          (tRational ? tRational->next[0]->value : 1) *
+        //                          (minus ? -1 : 1);
+        //     if(!isfinite(coefficient)) {
+        //         printf("...double overflow in additive simplify\n");
+        //         goto E;
+        //     } else if(coefficient == 0) {
+        //         n_delete(head, 4, abs(j-1), j, abs(i-1), i);
+        //     } else {
+        //         n_delete(head, 2, abs(i-1), i);
+        //         if(rRational) {
+        //             rRational->next[0]->value = coefficient;
+        //         } else {
+        //             Node *i_number = n_construct(ct_number, coefficient),
+        //                 *i_rational = n_construct(nt_rational, 0);
+        //             n_push(i_rational, i_number);
+        //             n_push(ref, i_rational);
+        //         }
+        //     }
+        // }
+    }
+    return 0;
+E:  return -1;
+}
 // int simplify_multiplication(Node** head) {
 //     Node* multiplication = n_construct(nt_multiplicative_expression, 0);
 //     int divide = 0;

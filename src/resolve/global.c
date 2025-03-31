@@ -4,6 +4,12 @@ const double GLOBAL_E  = 2.718281828459045;
 const double GLOBAL_PI = 3.141592653589793;
 const double GLOBAL_THRESHOLD = 0.00000001;
 
+void swap(Node** a, Node** b) {
+    Node* temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
 int get_numeric(Node* head, double* value) {
     errno = 0;
     /* convert */
