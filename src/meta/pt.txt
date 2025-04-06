@@ -2,24 +2,62 @@ command
 └── non variable
     └── expression
         └── additive expression
-            └── multiplicative expression
+            ├── multiplicative expression
+            │   ├── plus
+            │   └── exponential expression
+            │       ├── dot
+            │       ├── primary expression
+            │       │   └── real number
+            │       │       └── rational number
+            │       │           └── number {2.000000}
+            │       └── exponential expression suffix
+            │           └── primary expression
+            │               ├── head parenthesis
+            │               ├── expression
+            │               │   └── additive expression
+            │               │       └── multiplicative expression
+            │               │           ├── plus
+            │               │           ├── exponential expression
+            │               │           │   ├── dot
+            │               │           │   └── primary expression
+            │               │           │       └── real number
+            │               │           │           └── rational number
+            │               │           │               └── number {2.000000}
+            │               │           └── multiplicative expression suffix
+            │               │               ├── dot
+            │               │               └── exponential expression
+            │               │                   ├── dot
+            │               │                   └── primary expression
+            │               │                       └── real number
+            │               │                           └── irrational number
+            │               │                               └── e
+            │               └── tail parenthesis
+            └── additive expression suffix
                 ├── plus
-                ├── exponential expression
-                │   ├── dot
-                │   └── primary expression
-                │       └── real number
-                │           └── rational number
-                │               └── number {1.000000}
-                └── multiplicative expression suffix
-                    ├── slash
+                └── multiplicative expression
+                    ├── plus
                     └── exponential expression
                         ├── dot
                         ├── primary expression
-                        │   └── real number
-                        │       └── rational number
-                        │           └── number {2.000000}
+                        │   ├── head parenthesis
+                        │   ├── expression
+                        │   │   └── additive expression
+                        │   │       └── multiplicative expression
+                        │   │           ├── plus
+                        │   │           └── exponential expression
+                        │   │               ├── dot
+                        │   │               ├── primary expression
+                        │   │               │   └── real number
+                        │   │               │       └── rational number
+                        │   │               │           └── number {2.000000}
+                        │   │               └── exponential expression suffix
+                        │   │                   └── primary expression
+                        │   │                       └── real number
+                        │   │                           └── rational number
+                        │   │                               └── number {2.000000}
+                        │   └── tail parenthesis
                         └── exponential expression suffix
                             └── primary expression
                                 └── real number
-                                    └── rational number
-                                        └── number {1.000000}
+                                    └── irrational number
+                                        └── e

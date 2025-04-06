@@ -88,11 +88,32 @@ Node* n_construct(int type, double value) {
     return this;
 }
 
-Node* n_get(Node* this, int type) {
+Node* n_pop(Node* this, int index);
+
+Node* n_pick(Node* this, int index);
+
+Node** n_findd(Node* this, int type) {
+    Node** ref = NULL;
     while(this->type != type){
-        if(this->length != 1) return NULL;
-        this = this->next[0];
-    } return this;
+        if(this->length > 2) return NULL;
+        if(this->length == 2) {
+            if(ct_terminator >= this->next[0]->type || this->next[0]->type >= lt_terminator)
+                return NULL;
+            this = this->next[1];
+            ref = &(this->next[1]);           
+        } else {
+            this = this->next[0];
+            ref = &(this->next[0]);            
+        }
+    } return this->length == 1 ? NULL : ref;
+}
+
+Node** n_findb(Node* this, int type) {
+    /* todo */
+    // while(this->type != type){
+    //     if(this->length != 1) return NULL;
+    //     this = this->next[0];
+    // } return this;
 }
 
 int n_push(Node* this, Node* node) {
@@ -100,6 +121,19 @@ int n_push(Node* this, Node* node) {
     if((this->length)++) this->next = realloc(this->next, this->length * sizeof(Node*));
     else this->next = malloc(this->length * sizeof(Node*));
     this->next[this->length - 1] = node;   
+    return 1;
+}
+
+int n_pushfront(Node* this, Node* node) {
+    if(!node) return 0;
+    if((this->length)++) {
+        Node* temp[] = malloc(this->length * sizeof(Node*));
+        for(int i = 0; i < this->length - 1; i++)
+            temp[i+1] = this->next[i];
+        free(this->next);
+        this->next = temp;
+    } else this->next = malloc(this->length * sizeof(Node*));
+    this->next[0] = node;
     return 1;
 }
 

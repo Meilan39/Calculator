@@ -1,33 +1,28 @@
-- replace famous equalities
-- replace famous function values
-
-addition canonical
-    - term number
-    - term multipliction orderpp
-
-factor
-    - 
-addition
+2addition
     - IF parenthesis
         - delete parenthesis
-    - combine like terms
+    - sort while combining like terms
         - delete zero terms
 multiplication
     - IF parenthesis
         - IF multiplication THEN delete parenthesis
+        - IF head->length == 1 THEN break
         - IF addition THEN distribute
-    - sort
-    - consolidate to fraction of unresolveables
+    - sort while consolidate to fraction of unresolveables
         - IF zero term THEN delete
         - IF divide by zero THEN error
 exponentiation
     - IF parenthesis
         - IF exponentiation THEN remove parenthesis
+        - IF head->length == 1 THEN break
         - IF multiplication THEN group rational
         - IF addition THEN distribute
-    - 
+    - collaps
+        - IF rational and rational THEN collaps
+        - IF parenthesis and natural THEN duplicate
 primary
-    - 
+    - IF parenthesis
+        - IF parenthesis THEN remove parenthesis
 
 functions:
     - IF sin

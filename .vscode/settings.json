@@ -16,6 +16,7 @@
         "locale": "c",
         "ratio": "c",
         "tuple": "c",
-        "nonvariable.h": "c"
+        "nonvariable.h": "c",
+        "simplify.h": "c"
     }
 }

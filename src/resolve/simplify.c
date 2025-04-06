@@ -1,5 +1,8 @@
 #include "simplify.h"
 
+Node* SIMPLIFY_ADDITIVE = NULL;
+Node* SIMPLIFY_MULTIPLICATIVE = NULL;
+Node* SIMPLIFY_EXPONENTIAL = NULL;
 
 int simplify_resolve(Node* head) {
     if(simplify_addition(head->next[0]->next[0]) == -1) goto E;
@@ -10,246 +13,271 @@ E:  printf("...double overflow\n");
 }
 
 int simplify_addition(Node* head) {
+    SIMPLIFY_ADDITIVE = head;
     int idx = 0;
+    Node **ptr, *ref;
     for(int i = 0; i < head->length; i++) {
-        Node *this;
-        /* remove parenthesis */
-        this = n_get(head->next[i], nt_primary_expression);
-        if(this->length == 3) {
-            Node* temp = head->next[i];
-            Node* additive = this->next[1];     // addutive expression inside parenthesis
-            head->next[i] = additive->next[0];  // replace parenthesis with first term
-            for(int j = 1; j < additive->length; j++) 
-                head->next[head->length + j - 1] = additive->next[j];
-            head->length += (additive->length - 1);
-            n_free(temp);
+        switch(simplify_multiplication(head->next[i])) {
+            case  1: i--; break; // expansion: i - 1 + 1 to offset
+            case -1: goto E; break;
         }
+    }
+    for(int i = 0; i < head->length; i++) {
+        if((ptr = n_findd(head->next[i], nt_primary_expression))) {
+            ref = *ptr;
+            Node* temp = make("{}", nt_primary_expression,
+                                    n_pick(ref, 1));
+            n_replace(ptr, temp);
+        }
+    }
+    for(int i = 0; i < head->length; i++) {
         /* combine like terms and canonicalize */
         for(int j = 0; j <= idx; j++) {
-            if(simplify_additive_compare(this->next[j], this->next[i]) == 0) {
-                Node *a = this->next[j], *b = this->next[i];
-                double an=1, ad=1, bn=1, bd=1, temp;
-                int minus = (a->next[0] == lt_minus) ^ (b->next[0] == lt_minus);
-                /*  */
-                if(a->length >= 2 && n_get(a->next[1], nt_rational)) 
-                    an = a->next[1]->next[0]->value; 
-                if(a->length >= 3 && n_get(a->next[2], nt_rational)) 
-                    an = a->next[2]->next[0]->value; 
-                if(b->length >= 2 && n_get(b->next[1], nt_rational)) 
-                    an = b->next[1]->next[0]->value;
-                if(b->length >= 3 && n_get(b->next[2], nt_rational)) 
-                    an = b->next[2]->next[0]->value; 
-                /* free b */
-                n_free(this->next[i]);
-                this->next[i] = NULL;
+            int cmp = simplify_additive_compare(head->next[j], head->next[i]);
+            if(cmp == 0) {
+                /* merge */
+                n_delete(head, i);
                 break;
-            } else if(simplify_additive_compare(this->next[j], this->next[i]) > 0) {
+            } else if(cmp > 0) {
                 for(int k = i - 1; idx <= k; k--) 
-                    swap(&this->next[k], &this->next[k+1]);
+                    swap(&head->next[k], &head->next[k+1]);
                 idx++;
                 break;
             } else if(j == idx) {
                 idx++;
                 if(idx != i) {
-                    this->next[idx] = this->next[i];
-                    this->next[i] = NULL;                    
+                    head->next[idx] = head->next[i];
+                    head->next[i] = NULL;                    
                 }
                 break;
             }
         }
-        // /* find match */
-        // this = n_get(head->next[i], nt_multiplicative_expression);
-        // for(int j = 0; j < i; j+=2) {
-        //     ref = n_get(head->next[j], nt_multiplicative_expression);
-        //     int ridx = 0, tidx = 0;
-        //     while(1) {
-        //         if((rTemp = n_get(ref->next[ridx],  nt_rational)) ||
-        //            (tTemp = n_get(this->next[tidx], nt_rational))) {
-        //             if(rTemp) {
-        //                 if(!rn) rn = rTemp->next[0]; // ref numeraotr coefficient
-        //                 else    rd = rTemp->next[0]; // ref denominator coefficient
-        //                 ridx++;
-        //             }
-        //             if(tTemp) {
-        //                 if(!tn) tn = tTemp->next[0]; // temp numeraotr coefficient
-        //                 else    td = tTemp->next[0]; // temp denominator coefficient
-        //                 tidx++;
-        //             }
-        //             continue;
-        //         }
-        //         if(!simplify_is_equal(ref->next[ridx++], this->next[tidx++]) ||
-        //            !(ridx < ref->length && tidx < this->length)) {
-        //             ref = NULL; 
-        //             break;
-        //         }
-        //     }
-        //     if(ref) break;
-        // }
-        // /* merge this into reference */
-        // if(ref) {
-        //     double rnf, rdf, tnf, tdf;
-        //     rnf = rn ? rn->value : 1;
-        //     rdf = rd ? rd->value : 1;
-        //     tnf = tn ? tn->value : 1;
-        //     tdf = td ? td->value : 1;
-        //     // need to make this its own thing that can handle fractions.
-        //     double coefficient = (rRational ? rRational->next[0]->value : 1) +
-        //                          (tRational ? tRational->next[0]->value : 1) *
-        //                          (minus ? -1 : 1);
-        //     if(!isfinite(coefficient)) {
-        //         printf("...double overflow in additive simplify\n");
-        //         goto E;
-        //     } else if(coefficient == 0) {
-        //         n_delete(head, 4, abs(j-1), j, abs(i-1), i);
-        //     } else {
-        //         n_delete(head, 2, abs(i-1), i);
-        //         if(rRational) {
-        //             rRational->next[0]->value = coefficient;
-        //         } else {
-        //             Node *i_number = n_construct(ct_number, coefficient),
-        //                 *i_rational = n_construct(nt_rational, 0);
-        //             n_push(i_rational, i_number);
-        //             n_push(ref, i_rational);
-        //         }
-        //     }
-        // }
     }
     return 0;
 E:  return -1;
 }
-// int simplify_multiplication(Node** head) {
-//     Node* multiplication = n_construct(nt_multiplicative_expression, 0);
-//     int divide = 0;
-//     for(int i = 0; i < (*head)->length; i++) {
-//         Node* next = (*head)->next[i];
-//         if(next->type == lt_dot) {divide = 0; continue;}
-//         if(next->type == lt_slash) {divide = 1; continue;} 
-//         if(simplify_exponentiation(&((*head)->next[i])) == -1) goto E;
-//         simplify_merge_multiplication(multiplication, &((*head)->next[i]));
-//     }
-//     n_free(*head);
-//     *head = multiplication;
-//     return 0;
-// E:  return -1;
-// }
-// int simplify_exponentiation(Node** head) {
-//     Node* exponentiation = n_construct(nt_exponential_expression, 0);
-//     /* from right to left */
-//     for(int i = (*head)->length - 1; i >= 0; i--) {
-//         Node* next = (*head)->next[i];
-//         if(next->type == lt_caret) {continue;}
-//         if(simplify_parenthesis(&((*head)->next[i])) == -1) goto E;
-//         simplify_merge_exponentiation(exponentiation, &((*head)->next[i]));
-//     }
-//     n_free(*head);
-//     *head = exponentiation;
-//     return 0;
-// E:  return -1;
-// }
-// int simplify_parenthesis(Node** head) {
-//     if((*head)->next[0]->type == lt_h_parenthesis) {
-//         if(simplify_addition(&((*head)->next[1])) == -1) goto E;
-//         simplify_merge_parenthesis(head);
-//     } 
-//     if((*head)->next[0]->type == nt_functions) {
-//         if(simplify_function((*head)->next[0]) == -1) goto E;
-//     }
-//     return 0;
-// E:  return -1;
-// }
-// int simplify_function(Node** head) {
-//     double base, expression, a;
-//     switch(head->type) {
-//         case nt_root:
-//             if(get_numeric(head->next[2], &base) == -1) goto E;
-//             if(simplify_addition(head->next[5]) == -1) goto E;
-//             a = pow(expression, 1 / base);
-//             if(!isfinite(a)) {
-//                 printf("...unsupported root base\n");
-//                 return -1;
-//             }
-//             break;
-//         case nt_sqrt:
-//             if(simplify_addition(head->next[2]) == -1) goto E;
-//             a = sqrt(expression);
-//             if(!isfinite(a)) goto E;
-//             break;
-//         case nt_log:
-//             if(get_numeric(head->next[2], &base) == -1) goto E;
-//             if(simplify_addition(head->next[5]) == -1) goto E;
-//             if(base != 2 && base != 10 && base != GLOBAL_E) {
-//                 printf("...unsupported log base\n");
-//                 return -1;
-//             }
-//             if(base == 2)        a = log2(expression);
-//             if(base == 10)       a = log10(expression);
-//             if(base == GLOBAL_E) a = log(expression);
-//             if(!isfinite(a)) goto E;
-//             break;
-//         case nt_ln:
-//             if(get_numeric(head->next[2], &expression) == -1) goto E;
-//             a = log(expression);
-//             if(!isfinite(a)) goto E;
-//             break;
-//         case nt_sin:
-//             if(get_numeric(head->next[2], &expression) == -1) goto E;
-//             a = sin(expression);
-//             if(!isfinite(a)) goto E;
-//             break;
-//         case nt_cos:
-//             if(get_numeric(head->next[2], &expression) == -1) goto E;
-//             a = cos(expression);
-//             if(!isfinite(a)) goto E;
-//             break;
-//         case nt_tan:
-//             if(get_numeric(head->next[2], &expression) == -1) goto E;
-//             a = tan(expression);
-//             if(!isfinite(a)) goto E;
-//             break;
-//         case nt_asin:
-//             if(get_numeric(head->next[2], &expression) == -1) goto E;
-//             a = asin(expression);
-//             if(!isfinite(a)) {
-//                 printf("...unsupported arcsin range (-1 ~ 1)");
-//                 return -1;
-//             }
-//             break;
-//         case nt_acos:
-//             if(get_numeric(head->next[2], &expression) == -1) goto E;
-//             a = acos(expression);
-//             if(!isfinite(a)) {
-//                 printf("...unsupported arccosine range (-1 ~ 1)");
-//                 return -1;
-//             }
-//             break;
-//         case nt_atan:
-//             if(get_numeric(head->next[2], &expression) == -1) goto E;
-//             a = atan(expression);
-//             if(!isfinite(a)) goto E;
-//             break;
-//         case nt_sinh:
-//             if(get_numeric(head->next[2], &expression) == -1) goto E;
-//             a = atan(expression);
-//             if(!isfinite(a)) goto E;
-//             break;
-//         case nt_cosh:
-//             if(get_numeric(head->next[2], &expression) == -1) goto E;
-//             a = atan(expression);
-//             if(!isfinite(a)) goto E;
-//             break;
-//         case nt_tanh:
-//             if(get_numeric(head->next[2], &expression) == -1) goto E;
-//             a = atan(expression);
-//             if(!isfinite(a)) goto E;
-//             break;
-//         default:
-//             printf("...invalid input for simplify resolve\n");
-//             goto E;
-//     }
-//     return 0;
-// E:  printf("...double overflow\n");
-//     return -1;
-// }
+int simplify_multiplication(Node* head) {
+    SIMPLIFY_MULTIPLICATIVE = head;
+    int idx = 0;
+    Node **ptr, *ref;
+    for(int i = 0; i < head->length; i++) {
+        switch(simplify_exponentiation(head->next[i])) {
+            case  1: i--; break; // expansion: i - 1 + 1 to offset
+            case -1: goto E; break;
+        }
+    }
+    for(int i = 0; i < head->length; i++) {
+        if((ptr = n_findd(head->next[i], nt_primary_expression))) {
+            ref = *ptr;
+            if(ref->next[1]->type == nt_multiplicative_expression) {
+                Node* temp = make("{}", nt_primary_expression,
+                                        n_pick(ref, 1));
+                n_replace(ptr, temp);
+            }
+            if(head->length == 2) goto N;
+            if(ref->next[1]->type == nt_additive_expression) {
+                // if(ref->next[1]->length == 1) goto N;
+                Node *parenthesis = n_pop(head, i),
+                     *primary = parenthesis->next[1];
+                for(int j = 0; j < primary->length; j++) {
+                    Node* temp = make("{}{}", nt_multiplicative_expression,
+                                              n_copy(head),
+                                              n_pick(primary, i));
+                    n_push(SIMPLIFY_ADDITIVE, temp);
+                    n_free(parenthesis);
+                }
+                n_delete(SIMPLIFY_ADDITIVE, i);
+                goto T;
+            }
+        }       
+    }
+    for(int i = 0; i < head->length; i++) {
+        /* combine like terms and canonicalize */
+        for(int j = 0; j <= idx; j++) {
+            int cmp = simplify_multiplicative_compare(head->next[j], head->next[i]);
+            if(cmp == 0) {
+                /* merge */            
+                n_delete(head, i);
+                break;
+            } else if(cmp > 0) {
+                for(int k = i - 1; idx <= k; k--) 
+                    swap(&head->next[k], &head->next[k+1]);
+                idx++;
+                break;
+            } else if(j == idx) {
+                idx++;
+                if(idx != i) {
+                    head->next[idx] = head->next[i];
+                    head->next[i] = NULL;                    
+                }
+                break;
+            }
+        }
+    }
+N:  return 0;
+T:  return 1;
+E:  return -1;
+}
+int simplify_exponentiation(Node* head) {
+    SIMPLIFY_EXPONENTIAL = head;
+    int idx = 0;
+    for(int i = head->length - 1; i >= 0; i--) {
+        switch(simplify_parenthesis(head->next[i])) {
+            case  1: i--; break; // expansion: i - 1 + 1 to offset
+            case -1: goto E; break;
+        }
+    }
+    for(int i = head->length - 1; i >= 0; i--) {
+        Node **parenthesis, **temp;
+        if((parenthesis = n_findd(head->next[i], nt_primary_expression))) {
+            if((temp = n_findd((*parenthesis)->next[1], nt_exponential_expression))) {
+                Node* temp = make("{}", nt_primary_expression,
+                                        n_pick((*parenthesis), 1));
+                n_replace(parenthesis, temp);
+            }
+            if(head->length == 2) goto N;
+            if((temp = n_findd((*parenthesis)->next[1], nt_multiplicative_expression))) {
+                
+
+            }
+            if((temp = n_findd((*parenthesis)->next[1], nt_multiplicative_expression))) {
+                Node *parenthesis = n_pop(head, i),
+                     *primary = parenthesis->next[1];
+                for(int j = 0; j < primary->length; j++) {
+                    Node* temp = make("{}{}", nt_multiplicative_expression,
+                                              n_copy(head),
+                                              n_pick(primary, i));
+                    n_push(SIMPLIFY_ADDITIVE, temp);
+                    n_free(parenthesis);
+                }
+                n_delete(SIMPLIFY_ADDITIVE, i);
+                goto T;
+            }
+        }       
+    }
+    for(int i = head->length - 1; i >= 0; i--) {
+        /* combine like terms and canonicalize */
+        for(int j = 0; j <= idx; j++) {
+            int cmp = simplify_multiplicative_compare(head->next[j], head->next[i]);
+            if(cmp == 0) {
+                /* merge */            
+                n_delete(head, i);
+                break;
+            } else if(cmp > 0) {
+                for(int k = i - 1; idx <= k; k--) 
+                    swap(&head->next[k], &head->next[k+1]);
+                idx++;
+                break;
+            } else if(j == idx) {
+                idx++;
+                if(idx != i) {
+                    head->next[idx] = head->next[i];
+                    head->next[i] = NULL;                    
+                }
+                break;
+            }
+        }
+    }
+N:  return 0;
+T:  return 1;
+E:  return -1;
+}
+int simplify_parenthesis(Node* head) {
+
+}
+int simplify_function(Node* head) {
+    double base, expression, a;
+    switch(head->type) {
+        case nt_root:
+            if(get_numeric(head->next[2], &base) == -1) goto E;
+            if(simplify_addition(head->next[5]) == -1) goto E;
+            a = pow(expression, 1 / base);
+            if(!isfinite(a)) {
+                printf("...unsupported root base\n");
+                return -1;
+            }
+            break;
+        case nt_sqrt:
+            if(simplify_addition(head->next[2]) == -1) goto E;
+            a = sqrt(expression);
+            if(!isfinite(a)) goto E;
+            break;
+        case nt_log:
+            if(get_numeric(head->next[2], &base) == -1) goto E;
+            if(simplify_addition(head->next[5]) == -1) goto E;
+            if(base != 2 && base != 10 && base != GLOBAL_E) {
+                printf("...unsupported log base\n");
+                return -1;
+            }
+            if(base == 2)        a = log2(expression);
+            if(base == 10)       a = log10(expression);
+            if(base == GLOBAL_E) a = log(expression);
+            if(!isfinite(a)) goto E;
+            break;
+        case nt_ln:
+            if(get_numeric(head->next[2], &expression) == -1) goto E;
+            a = log(expression);
+            if(!isfinite(a)) goto E;
+            break;
+        case nt_sin:
+            if(get_numeric(head->next[2], &expression) == -1) goto E;
+            a = sin(expression);
+            if(!isfinite(a)) goto E;
+            break;
+        case nt_cos:
+            if(get_numeric(head->next[2], &expression) == -1) goto E;
+            a = cos(expression);
+            if(!isfinite(a)) goto E;
+            break;
+        case nt_tan:
+            if(get_numeric(head->next[2], &expression) == -1) goto E;
+            a = tan(expression);
+            if(!isfinite(a)) goto E;
+            break;
+        case nt_asin:
+            if(get_numeric(head->next[2], &expression) == -1) goto E;
+            a = asin(expression);
+            if(!isfinite(a)) {
+                printf("...unsupported arcsin range (-1 ~ 1)");
+                return -1;
+            }
+            break;
+        case nt_acos:
+            if(get_numeric(head->next[2], &expression) == -1) goto E;
+            a = acos(expression);
+            if(!isfinite(a)) {
+                printf("...unsupported arccosine range (-1 ~ 1)");
+                return -1;
+            }
+            break;
+        case nt_atan:
+            if(get_numeric(head->next[2], &expression) == -1) goto E;
+            a = atan(expression);
+            if(!isfinite(a)) goto E;
+            break;
+        case nt_sinh:
+            if(get_numeric(head->next[2], &expression) == -1) goto E;
+            a = atan(expression);
+            if(!isfinite(a)) goto E;
+            break;
+        case nt_cosh:
+            if(get_numeric(head->next[2], &expression) == -1) goto E;
+            a = atan(expression);
+            if(!isfinite(a)) goto E;
+            break;
+        case nt_tanh:
+            if(get_numeric(head->next[2], &expression) == -1) goto E;
+            a = atan(expression);
+            if(!isfinite(a)) goto E;
+            break;
+        default:
+            printf("...invalid input for simplify resolve\n");
+            goto E;
+    }
+    return 0;
+E:  printf("...double overflow\n");
+    return -1;
+}
 
 int simplify_is_equal(Node* a, Node* b) {
     if(!a || !b) return 0;
@@ -259,4 +287,11 @@ int simplify_is_equal(Node* a, Node* b) {
     for(int i = 0; i < a->length; i++)
         return simplify_is_equal(a->next[i], b->next[i]);
     return 1;
+}
+
+int simplify_reduce(Node* a, Node* b) {
+    if(a->type != nt_multiplicative_expression || b->type != nt_multiplicative_expression)
+        goto E;
+    return 0;
+E:  return -1;  
 }

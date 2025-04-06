@@ -1,18 +1,47 @@
 command
 └── non variable
     └── additive expression
+        ├── multiplicative expression
+        │   ├── plus
+        │   └── exponential expression
+        │       ├── dot
+        │       ├── primary expression
+        │       │   └── rational number
+        │       │       └── number {2.000000}
+        │       └── primary expression
+        │           ├── head parenthesis
+        │           ├── additive expression
+        │           │   └── multiplicative expression
+        │           │       ├── plus
+        │           │       ├── exponential expression
+        │           │       │   ├── dot
+        │           │       │   └── primary expression
+        │           │       │       └── rational number
+        │           │       │           └── number {2.000000}
+        │           │       └── exponential expression
+        │           │           ├── dot
+        │           │           └── primary expression
+        │           │               └── irrational number
+        │           │                   └── e
+        │           └── tail parenthesis
         └── multiplicative expression
             ├── plus
-            ├── exponential expression
-            │   ├── dot
-            │   └── primary expression
-            │       └── rational number
-            │           └── number {1.000000}
             └── exponential expression
-                ├── slash
+                ├── dot
                 ├── primary expression
-                │   └── rational number
-                │       └── number {2.000000}
+                │   ├── head parenthesis
+                │   ├── additive expression
+                │   │   └── multiplicative expression
+                │   │       ├── plus
+                │   │       └── exponential expression
+                │   │           ├── dot
+                │   │           ├── primary expression
+                │   │           │   └── rational number
+                │   │           │       └── number {2.000000}
+                │   │           └── primary expression
+                │   │               └── rational number
+                │   │                   └── number {2.000000}
+                │   └── tail parenthesis
                 └── primary expression
-                    └── rational number
-                        └── number {1.000000}
+                    └── irrational number
+                        └── e

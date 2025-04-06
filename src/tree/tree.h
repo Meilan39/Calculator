@@ -19,8 +19,12 @@ typedef struct NODE{
 Node* n_free(Node* head);
 Node* n_reset(Node* head);
 Node* n_construct(int type, double value);
-Node* n_get(Node* this, int type);
+Node* n_pop(Node* this, int index);
+Node* n_pick(Node* this, int index);
+Node** n_findd(Node* this, int type);
+Node** n_findb(Node* this, int type);
 int n_push(Node* this, Node* node);
+int n_pushfront(Node* this, Node* node);
 int n_delete(Node* this, int n, ...);
 int n_emplace(Node* this, int length);
 void n_print(Node* this, const char* path);

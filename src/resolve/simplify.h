@@ -7,6 +7,10 @@
 #include "../tree/tree.h"
 #include "./global.h"
 
+Node* SIMPLIFY_ADDITIVE;
+Node* SIMPLIFY_MULTIPLICATIVE;
+Node* SIMPLIFY_EXPONENTIAL;
+
 int simplify_resolve(Node* head);
 
 int simplify_addition(Node* head);
