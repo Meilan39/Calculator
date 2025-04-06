@@ -33,8 +33,10 @@
 <primary_expression> ::= <real_number>
                        | <functions>
                        | <variable>
-                       | ( <expression> )
-                       | { <expression> }
+                       | <parenthesis>
+
+<parenthesis> ::= ( <expression> )
+                | { <expression> }
 
 /******************************** functions **************************************/
 

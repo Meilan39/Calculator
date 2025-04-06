@@ -8,7 +8,9 @@ const double GLOBAL_E;
 const double GLOBAL_PI;
 const double GLOBAL_THRESHOLD;
 
-void swap(Node* a, Node* b);
+void swap(Node** a, Node** b);
+
+Node* make(const char*, int type, ...);
 
 int get_numeric(Node* head, double* value);
 

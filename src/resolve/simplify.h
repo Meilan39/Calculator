@@ -18,7 +18,8 @@ int simplify_multiplication(Node* head);
 int simplify_exponentiation(Node* head);
 int simplify_parenthesis(Node* head);
 
-int simplify_is_equal(Node* a, Node* b);
+int simplify_additive_compare(Node* a, Node* b);
+int simplify_multiplicative_compare(Node* a, Node* b);
 
 
 #endif

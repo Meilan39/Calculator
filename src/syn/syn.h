@@ -8,6 +8,9 @@
 
 FILE* s_syntax_depth_map;
 
+int s_minus_flag;
+int s_divide_flag;
+
 #define DEPTHMAP 1
 #ifdef DEPTHMAP
     #define PRINTMAP(depth, name, token)                                        \
@@ -41,6 +44,7 @@ Node* s_multiplicative_expression_suffix(Token** token, int depth);
 Node* s_exponential_expression(Token** token, int depth);
 Node* s_exponential_expression_suffix(Token** token, int depth);
 Node* s_primary_expression(Token** token, int depth);
+Node* s_parenthesis(Token** token, int depth);
 Node* s_functions(Token** token, int depth);
 Node* s_root(Token** token, int depth);
 Node* s_sqrt(Token** token, int depth);

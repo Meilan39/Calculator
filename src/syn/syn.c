@@ -120,6 +120,7 @@ Node* s_additive_expression(Token** token, int depth) {
     PRINTMAP(depth, "additive expression", token)
     Node* node = n_construct(nt_additive_expression, 0);
     Token* ptoken = *token;
+    s_minus_flag = 0;
     if(!n_push(node, s_multiplicative_expression(token, depth+1))) goto f;
     while(n_push(node, s_additive_expression_suffix(token, depth+1)));
     goto t;
@@ -131,11 +132,11 @@ Node* s_additive_expression_suffix(Token** token, int depth) {
     PRINTMAP(depth, "additive expression suffix", token)
     Node* node = n_construct(nt_additive_expression_suffix, 0);
     Token* ptoken = *token;
-    if(!n_push(node, s_compare(token, lt_plus))) goto c2;
+    if(!s_compare(token, lt_plus)) goto c2; s_minus_flag = 0;
     if(!n_push(node, s_multiplicative_expression(token, depth+1))) goto c2;
     goto t;
 c2: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_minus))) goto f;
+    if(!s_compare(token, lt_minus)) goto f; s_minus_flag = 1;
     if(!n_push(node, s_multiplicative_expression(token, depth+1))) goto f;
     goto t;
 f : *token = ptoken;
@@ -146,10 +147,11 @@ Node* s_multiplicative_expression(Token** token, int depth) {
     PRINTMAP(depth, "multiplicative expression", token)
     Node* node = n_construct(nt_multiplicative_expression, 0);
     Token* ptoken = *token;
-    /* if minus is not pushed to multiplication, push plus */
-    if(!n_push(node, s_sign(token, depth+1))) n_push(node, n_construct(lt_plus, 0));
+    s_divide_flag = 0;
+    s_sign(token, depth+1); 
     if(!n_push(node, s_exponential_expression(token, depth+1))) goto f;
     while(n_push(node, s_multiplicative_expression_suffix(token, depth+1)));
+    node->subtype = s_minus_flag ? 2 : 1;
     goto t;
 f : *token = ptoken;
     return n_free(node);
@@ -159,15 +161,15 @@ Node* s_multiplicative_expression_suffix(Token** token, int depth) {
     PRINTMAP(depth, "multiplicative expression suffix", token)
     Node* node = n_construct(nt_multiplicative_expression_suffix, 0);
     Token* ptoken = *token;
-    if(!n_push(node, s_compare(token, lt_dot))) goto c2;
+    if(!s_compare(token, lt_dot)) goto c2; s_divide_flag = 0;
     if(!n_push(node, s_exponential_expression(token, depth+1))) goto c2;
     goto t;
 c2: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_slash))) goto c3;
+    if(!s_compare(token, lt_slash)) goto c3; s_divide_flag = 1;
     if(!n_push(node, s_exponential_expression(token, depth+1))) goto c3;
     goto t;
 c3: *token = ptoken; n_reset(node);
-    n_push(node, n_construct(lt_dot, 0)); // push dot for implicit multiplication
+    s_divide_flag = 0;
     if(!n_push(node, s_exponential_expression(token, depth+1))) goto f;
     goto t;
 f : *token = ptoken;
@@ -178,10 +180,9 @@ Node* s_exponential_expression(Token** token, int depth) {
     PRINTMAP(depth, "exponential expression", token)
     Node* node = n_construct(nt_exponential_expression, 0);
     Token* ptoken = *token;
-    /* push a spaceholder dot */
-    n_push(node, n_construct(lt_dot, 0));
     if(!n_push(node, s_primary_expression(token, depth+1))) goto f;
     while(n_push(node, s_exponential_expression_suffix(token, depth+1)));
+    node->subtype = s_divide_flag ? 2 : 1;
     goto t;
 f : *token = ptoken;
     return n_free(node);
@@ -191,7 +192,6 @@ Node* s_exponential_expression_suffix(Token** token, int depth) {
     PRINTMAP(depth, "exponential expression suffix", token)
     Node* node = n_construct(nt_exponential_expression_suffix, 0);
     Token* ptoken = *token;
-    /* don't push carets */
     if(!s_compare(token, lt_caret)) goto f;
     if(!n_push(node, s_primary_expression(token, depth+1))) goto f;
     goto t;
@@ -212,14 +212,24 @@ c3: *token = ptoken; n_reset(node);
     if(!n_push(node, s_variable(token, depth+1))) goto c4;
     goto t;
 c4: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_h_parenthesis))) goto c5;
-    if(!n_push(node, s_expression(token, depth+1))) goto c5;
-    if(!n_push(node, s_compare(token, lt_t_parenthesis))) goto c5;
+    if(!n_push(node, s_parenthesis(token, depth+1))) goto f;
     goto t;
-c5: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_h_bracket))) goto f;
+f : *token = ptoken;
+    return n_free(node);
+t : return node;
+}
+Node* s_parenthesis(Token** token, int depth) {
+    PRINTMAP(depth, "parenthesis", token)
+    Node* node = n_construct(nt_parenthesis, 0);
+    Token* ptoken = *token;
+    if(!s_compare(token, lt_h_parenthesis)) goto c2;
+    if(!n_push(node, s_expression(token, depth+1))) goto c2;
+    if(!s_compare(token, lt_t_parenthesis)) goto c2;
+    goto t;
+c2: *token = ptoken; n_reset(node);
+    if(!s_compare(token, lt_h_bracket)) goto f;
     if(!n_push(node, s_expression(token, depth+1))) goto f;
-    if(!n_push(node, s_compare(token, lt_t_bracket))) goto f;
+    if(!s_compare(token, lt_t_bracket)) goto f;
     goto t;
 f : *token = ptoken;
     return n_free(node);
@@ -490,10 +500,11 @@ Node* s_sign(Token** token, int depth) {
     PRINTMAP(depth, "sign", token)
     Node* node = n_construct(nt_sign, 0);
     Token* ptoken = *token;
-    if(!n_push(node, s_compare(token, lt_plus))) goto c2;    
+    if(!n_push(node, s_compare(token, lt_plus))) goto c2; 
     goto t;
 c2: *token = ptoken; n_reset(node);
-    if(!n_push(node, s_compare(token, lt_minus))) goto f;    
+    if(!n_push(node, s_compare(token, lt_minus))) goto f; 
+    s_minus_flag = !s_minus_flag;
     goto t;
 f : *token = ptoken;
     return n_free(node);

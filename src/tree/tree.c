@@ -11,49 +11,49 @@ void n_compress(Node* this) {
     n_compress_chain(this);
     for(int i = 0; i < this->length; i++)
         n_compress(this->next[i]);  
-    n_refactor(this); // refactoring is depth first
+    // n_refactor(this); // refactoring is depth first
 }
 
-void n_refactor(Node* this) {
-    /* refactor multiplication */
-    if(this->type == nt_multiplicative_expression) {
-        Node* next;
-        int divide = 0, idx = 1;
-        /* start from 1 to avoid multiplicative sign */
-        for(int i = 1; i < this->length; i++) {
-            next = this->next[i];
-            if(next->type == lt_dot || next->type == lt_slash) {
-                divide = (next->type == lt_slash); 
-                n_free(next);
-                continue;
-            }
-            next->next[0]->type = divide ? lt_slash : lt_dot;
-            this->next[idx++] = this->next[i];
-            if((idx-1) != i) this->next[i] = NULL;
-        }
-        this->length = idx;
-        this->next = realloc(this->next, sizeof(Node*) * this->length);
-    }    
-    /* refactor addition */
-    if(this->type == nt_additive_expression) {
-        Node* next;
-        int minus = 0, idx = 0;
-        for(int i = 0; i < this->length; i++) {
-            next = this->next[i];
-            if(next->type == lt_plus || next->type == lt_minus) {
-                minus = (next->type == lt_minus); 
-                n_free(next);
-                continue;
-            }
-            if(next->next[0]->type == lt_minus) minus = !minus;
-            next->next[0]->type = minus ? lt_minus : lt_plus;
-            this->next[idx++] = this->next[i];
-            if((idx-1) != i) this->next[i] = NULL;
-        }
-        this->length = idx;
-        this->next = realloc(this->next, sizeof(Node*) * this->length);
-    }
-}
+// void n_refactor(Node* this) {
+//     /* refactor multiplication */
+//     if(this->type == nt_multiplicative_expression) {
+//         Node* next;
+//         int divide = 0, idx = 1;
+//         /* start from 1 to avoid multiplicative sign */
+//         for(int i = 1; i < this->length; i++) {
+//             next = this->next[i];
+//             if(next->type == lt_dot || next->type == lt_slash) {
+//                 divide = (next->type == lt_slash); 
+//                 n_free(next);
+//                 continue;
+//             }
+//             next->subtype = divide ? 2 : 1;
+//             this->next[idx++] = this->next[i];
+//             if((idx-1) != i) this->next[i] = NULL;
+//         }
+//         this->length = idx;
+//         this->next = realloc(this->next, sizeof(Node*) * this->length);
+//     }    
+//     /* refactor addition */
+//     if(this->type == nt_additive_expression) {
+//         Node* next;
+//         int minus = 0, idx = 0;
+//         for(int i = 0; i < this->length; i++) {
+//             next = this->next[i];
+//             if(next->type == lt_plus || next->type == lt_minus) {
+//                 minus = (next->type == lt_minus); 
+//                 n_free(next);
+//                 continue;
+//             }
+//             if(next->next[0]->type == lt_minus) minus = !minus;
+//             next->next[0]->type = minus ? lt_minus : lt_plus;
+//             this->next[idx++] = this->next[i];
+//             if((idx-1) != i) this->next[i] = NULL;
+//         }
+//         this->length = idx;
+//         this->next = realloc(this->next, sizeof(Node*) * this->length);
+//     }
+// }
 
 Node* n_free(Node* head) {
     if(!head) return NULL;
@@ -75,6 +75,8 @@ Node* n_reset(Node* head) {
     }
     head->next = NULL;
     head->length = 0;
+    head->subtype = 0;
+    head->value = 0;
     return head; 
 }
 
@@ -84,13 +86,16 @@ Node* n_construct(int type, double value) {
     this->next = NULL;
     this->length = 0;
     this->type = type;
+    this->subtype = 0;
     this->value = value;
     return this;
 }
 
-Node* n_pop(Node* this, int index);
+Node* n_pop(Node* this, int index) {return NULL;}
 
-Node* n_pick(Node* this, int index);
+Node* n_pick(Node* this, int index) {return NULL;}
+
+Node* n_copy(Node* this) {return NULL;}
 
 Node** n_findd(Node* this, int type) {
     Node** ref = NULL;
@@ -127,7 +132,7 @@ int n_push(Node* this, Node* node) {
 int n_pushfront(Node* this, Node* node) {
     if(!node) return 0;
     if((this->length)++) {
-        Node* temp[] = malloc(this->length * sizeof(Node*));
+        Node** temp = malloc(this->length * sizeof(Node*));
         for(int i = 0; i < this->length - 1; i++)
             temp[i+1] = this->next[i];
         free(this->next);
@@ -171,6 +176,10 @@ E:  printf("...emplace failed\n");
     return -1;
 }
 
+int n_replace(Node** this, Node* new) {
+    return 0;
+}
+
 void n_print(Node* this, const char* path) {
     s_abstract_syntax_tree = fopen(path, "w");
     if(!s_abstract_syntax_tree) {printf("unable to open %s\n", path); return;}
@@ -185,9 +194,21 @@ void n_helper(Node* this, int depth, int edge, int state[]) {
             fprintf(s_abstract_syntax_tree, state[i] ? "│   " : "    ");
         fprintf(s_abstract_syntax_tree, "%s", (edge ? "└── " : "├── "));
     }
-    if(c_types(this->type)) {
-        fprintf(s_abstract_syntax_tree, "%s {%lf}\n", n_typtostr(this->type), this->value);
-    } else fprintf(s_abstract_syntax_tree, "%s\n", n_typtostr(this->type));
+    /* print to file */
+    fprintf(s_abstract_syntax_tree, "%s", n_typtostr(this->type));
+    if(c_types(this->type)){
+        fprintf(s_abstract_syntax_tree, " {%lf}", this->value);
+    }
+    if(this->type == nt_multiplicative_expression) {
+        if(this->subtype == 1) fprintf(s_abstract_syntax_tree, " |%s|", "positive");
+        if(this->subtype == 2) fprintf(s_abstract_syntax_tree, " |%s|", "negative");
+    }
+    if(this->type == nt_exponential_expression) {
+        if(this->subtype == 1) fprintf(s_abstract_syntax_tree, " |%s|", "product");
+        if(this->subtype == 2) fprintf(s_abstract_syntax_tree, " |%s|", "quotient");
+    }
+    fprintf(s_abstract_syntax_tree, "\n");
+    /* edge processing */
     if(this->length > 0) {
         state[depth] = !edge;
         for (int i = 0; i < this->length; i++) {
@@ -298,6 +319,7 @@ const char* const n_typtostr_map[nt_terminator] = {
     [nt_exponential_expression] = "exponential expression",
     [nt_exponential_expression_suffix] = "exponential expression suffix",
     [nt_primary_expression] = "primary expression",
+    [nt_parenthesis] = "parenthesis",
     [nt_functions] = "functions",   
     [nt_root] = "root",   
     [nt_sqrt] = "square root",  
@@ -325,7 +347,7 @@ const char n_chain_exception_map[] = {
     [nt_additive_expression] = 1,
     [nt_multiplicative_expression] = 1,
     [nt_exponential_expression] = 1,
-    [nt_primary_expression] = 1,
+    [nt_parenthesis] = 1,
     [nt_polynomial_term] = 1,
     [nt_nonvariable] = 1,    
     [nt_zeros] = 1,

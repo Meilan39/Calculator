@@ -10,70 +10,6 @@ command
 │   │   │   │   │   │   │   ├── rational
 │   │   │   │   │   │   │   │   ├── scientific
 │   │   │   │   │   ├── exponential expression suffix
-│   │   │   │   │   │   ├── primary expression
-│   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   ├── irrational
-│   │   │   │   │   │   │   ├── functions
-│   │   │   │   │   │   │   │   ├── root
-│   │   │   │   │   │   │   │   ├── square root
-│   │   │   │   │   │   │   │   ├── log
-│   │   │   │   │   │   │   │   ├── natural log
-│   │   │   │   │   │   │   │   ├── sin
-│   │   │   │   │   │   │   │   ├── cos
-│   │   │   │   │   │   │   │   ├── tan
-│   │   │   │   │   │   │   │   ├── asin
-│   │   │   │   │   │   │   │   ├── acos
-│   │   │   │   │   │   │   │   ├── atan
-│   │   │   │   │   │   │   │   ├── sin
-│   │   │   │   │   │   │   │   ├── cosh
-│   │   │   │   │   │   │   │   ├── tanh
-│   │   │   │   │   │   │   ├── variable
-│   │   │   │   │   │   │   │   ├── x
-│   │   │   │   │   │   │   ├── expression
-│   │   │   │   │   │   │   │   ├── additive expression
-│   │   │   │   │   │   │   │   │   ├── multiplicative expression
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   ├── exponential expression
-│   │   │   │   │   │   │   │   │   │   │   ├── primary expression
-│   │   │   │   │   │   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix
-│   │   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix
-│   │   │   │   │   │   │   │   │   │   │   ├── exponential expression
-│   │   │   │   │   │   │   │   │   │   │   │   ├── primary expression
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── irrational
-│   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix
-│   │   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix
-│   │   │   │   │   │   │   │   │   │   │   ├── exponential expression
-│   │   │   │   │   │   │   │   │   │   │   │   ├── primary expression
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── irrational
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── functions
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── root
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── square root
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── log
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── natural log
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cos
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tan
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── asin
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── acos
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── atan
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cosh
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tanh
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── variable
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── x
-│   │   │   │   │   │   │   │   │   ├── additive expression suffix
-│   │   │   │   │   ├── exponential expression suffix
 │   │   │   │   ├── multiplicative expression suffix
 │   │   │   │   │   ├── exponential expression
 │   │   │   │   │   │   ├── primary expression
@@ -97,9 +33,104 @@ command
 │   │   │   │   │   │   │   │   ├── tanh
 │   │   │   │   │   │   │   ├── variable
 │   │   │   │   │   │   │   │   ├── x
-│   │   │   ├── additive expression suffix
-│   │   │   │   ├── multiplicative expression
-│   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   ├── parenthesis
+│   │   │   │   │   │   │   │   ├── expression
+│   │   │   │   │   │   │   │   │   ├── additive expression
+│   │   │   │   │   │   │   │   │   │   ├── multiplicative expression
+│   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   ├── exponential expression
+│   │   │   │   │   │   │   │   │   │   │   │   ├── primary expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
+│   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix
+│   │   │   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   ├── primary expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── irrational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── functions
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── square root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── natural log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── asin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── acos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── atan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cosh
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tanh
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── variable
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── x
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── parenthesis
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── additive expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── multiplicative expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sign
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── primary expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── primary expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── irrational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── functions
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── square root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── natural log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── asin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── acos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── atan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cosh
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tanh
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── variable
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── x
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── parenthesis
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── additive expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix
+│   │   │   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix
+│   │   │   │   │   │   │   │   │   │   │   │   ├── exponential expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   ├── primary expression
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── irrational
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── functions
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── square root
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── natural log
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── asin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── acos
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── atan
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cosh
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tanh
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── variable
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── x
+│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── parenthesis
+│   │   │   │   │   │   │   │   │   │   ├── additive expression suffix
+│   │   │   │   │   │   ├── exponential expression suffix
+│   │   │   │   ├── multiplicative expression suffix
 │   │   │   │   │   ├── exponential expression
 │   │   │   │   │   │   ├── primary expression
 │   │   │   │   │   │   │   ├── real number
@@ -122,73 +153,5 @@ command
 │   │   │   │   │   │   │   │   ├── tanh
 │   │   │   │   │   │   │   ├── variable
 │   │   │   │   │   │   │   │   ├── x
-│   │   │   │   │   │   │   ├── expression
-│   │   │   │   │   │   │   │   ├── additive expression
-│   │   │   │   │   │   │   │   │   ├── multiplicative expression
-│   │   │   │   │   │   │   │   │   │   ├── sign
-│   │   │   │   │   │   │   │   │   │   ├── exponential expression
-│   │   │   │   │   │   │   │   │   │   │   ├── primary expression
-│   │   │   │   │   │   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix
-│   │   │   │   │   │   │   │   │   │   │   │   ├── primary expression
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   │   │   ├── exponential expression suffix
-│   │   │   │   │   │   │   │   │   │   ├── multiplicative expression suffix
-│   │   │   │   │   │   │   │   │   │   │   ├── exponential expression
-│   │   │   │   │   │   │   │   │   │   │   │   ├── primary expression
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── irrational
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── functions
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── root
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── square root
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── log
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── natural log
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cos
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tan
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── asin
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── acos
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── atan
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── sin
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── cosh
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── tanh
-│   │   │   │   │   │   │   │   │   │   │   │   │   ├── variable
-│   │   │   │   │   │   │   │   │   │   │   │   │   │   ├── x
-│   │   │   │   │   │   │   │   │   ├── additive expression suffix
-│   │   │   │   │   │   ├── exponential expression suffix
-│   │   │   │   │   │   │   ├── primary expression
-│   │   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   ├── irrational
-│   │   │   │   │   │   ├── exponential expression suffix
-│   │   │   │   │   ├── multiplicative expression suffix
-│   │   │   │   │   │   ├── exponential expression
-│   │   │   │   │   │   │   ├── primary expression
-│   │   │   │   │   │   │   │   ├── real number
-│   │   │   │   │   │   │   │   │   ├── rational
-│   │   │   │   │   │   │   │   │   │   ├── scientific
-│   │   │   │   │   │   │   │   │   ├── irrational
-│   │   │   │   │   │   │   │   ├── functions
-│   │   │   │   │   │   │   │   │   ├── root
-│   │   │   │   │   │   │   │   │   ├── square root
-│   │   │   │   │   │   │   │   │   ├── log
-│   │   │   │   │   │   │   │   │   ├── natural log
-│   │   │   │   │   │   │   │   │   ├── sin
-│   │   │   │   │   │   │   │   │   ├── cos
-│   │   │   │   │   │   │   │   │   ├── tan
-│   │   │   │   │   │   │   │   │   ├── asin
-│   │   │   │   │   │   │   │   │   ├── acos
-│   │   │   │   │   │   │   │   │   ├── atan
-│   │   │   │   │   │   │   │   │   ├── sin
-│   │   │   │   │   │   │   │   │   ├── cosh
-│   │   │   │   │   │   │   │   │   ├── tanh
-│   │   │   │   │   │   │   │   ├── variable
-│   │   │   │   │   │   │   │   │   ├── x
+│   │   │   │   │   │   │   ├── parenthesis
 │   │   │   ├── additive expression suffix

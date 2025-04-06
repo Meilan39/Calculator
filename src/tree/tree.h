@@ -12,6 +12,7 @@ typedef struct NODE{
    struct NODE** next;
    int length;
    int type;
+   int subtype;
    double value;
 } Node;
 
@@ -21,12 +22,14 @@ Node* n_reset(Node* head);
 Node* n_construct(int type, double value);
 Node* n_pop(Node* this, int index);
 Node* n_pick(Node* this, int index);
+Node* n_copy(Node* this);
 Node** n_findd(Node* this, int type);
 Node** n_findb(Node* this, int type);
 int n_push(Node* this, Node* node);
 int n_pushfront(Node* this, Node* node);
 int n_delete(Node* this, int n, ...);
 int n_emplace(Node* this, int length);
+int n_replace(Node** this, Node* new);
 void n_print(Node* this, const char* path);
 void n_helper(Node* this, int depth, int endge, int state[]);
 /* simplify */
@@ -56,6 +59,7 @@ enum n_Types {
    nt_exponential_expression,
    nt_exponential_expression_suffix,
    nt_primary_expression,
+   nt_parenthesis,
    nt_functions,
    nt_root,
    nt_sqrt,

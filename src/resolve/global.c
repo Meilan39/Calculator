@@ -10,6 +10,10 @@ void swap(Node** a, Node** b) {
     *b = temp;
 }
 
+Node* make(const char*, int type, ...) {
+    return NULL;
+}
+
 int get_numeric(Node* head, double* value) {
     errno = 0;
     /* convert */

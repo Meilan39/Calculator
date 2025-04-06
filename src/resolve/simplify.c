@@ -295,3 +295,6 @@ int simplify_reduce(Node* a, Node* b) {
     return 0;
 E:  return -1;  
 }
+
+int simplify_additive_compare(Node* a, Node* b) {return 0;}
+int simplify_multiplicative_compare(Node* a, Node* b) {return 0;}
