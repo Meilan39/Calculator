@@ -1,5 +1,6 @@
 <number> ::= <nonzero> {<digit>}*
 <decimal> ::= <nonozero> {<digit>}* . {digit>}*
+            | <zero> . {<digit>}+
 
 <digit> ::= <zero> | <nonzero>
 

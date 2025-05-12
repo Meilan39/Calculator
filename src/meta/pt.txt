@@ -2,33 +2,16 @@ command
 └── non variable
     └── expression
         └── additive expression
-            └── multiplicative expression |negative|
-                ├── exponential expression |product|
-                │   └── primary expression
-                │       └── real number
-                │           └── rational number
-                │               └── number {1.000000}
-                └── multiplicative expression suffix
+            ├── multiplicative expression |positive|
+            │   └── exponential expression |product|
+            │       └── primary expression
+            │           └── real number
+            │               └── rational number
+            │                   └── number {1.000000}
+            └── additive expression suffix
+                └── multiplicative expression |negative|
                     └── exponential expression |product|
                         └── primary expression
-                            └── parenthesis
-                                └── expression
-                                    └── additive expression
-                                        └── multiplicative expression |negative|
-                                            ├── exponential expression |product|
-                                            │   └── primary expression
-                                            │       └── real number
-                                            │           └── rational number
-                                            │               └── number {2.000000}
-                                            └── multiplicative expression suffix
-                                                └── exponential expression |product|
-                                                    └── primary expression
-                                                        └── parenthesis
-                                                            └── expression
-                                                                └── additive expression
-                                                                    └── multiplicative expression |negative|
-                                                                        └── exponential expression |product|
-                                                                            └── primary expression
-                                                                                └── real number
-                                                                                    └── rational number
-                                                                                        └── number {1.000000}
+                            └── real number
+                                └── rational number
+                                    └── number {2.000000}

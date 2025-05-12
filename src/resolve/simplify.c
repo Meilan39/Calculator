@@ -15,23 +15,17 @@ E:  printf("...double overflow\n");
 int simplify_addition(Node* head) {
     SIMPLIFY_ADDITIVE = head;
     int idx = 0;
-    Node **ptr, *ref;
     for(int i = 0; i < head->length; i++) {
-        switch(simplify_multiplication(head->next[i])) {
-            case  1: i--; break; // expansion: i - 1 + 1 to offset
-            case -1: goto E; break;
+        /* resolve */
+        if(simplify_multiplication(head->next[i]) == -1) goto E;
+        /* parenthesis */
+        Node **temp;
+        if((temp = n_findd(head->next[i], nt_additive_expression))) {
+            n_merge(head, *temp);
+            n_delete(head, i--);
+            break;
         }
-    }
-    for(int i = 0; i < head->length; i++) {
-        if((ptr = n_findd(head->next[i], nt_primary_expression))) {
-            ref = *ptr;
-            Node* temp = make("{}", nt_primary_expression,
-                                    n_pick(ref, 1));
-            n_replace(ptr, temp);
-        }
-    }
-    for(int i = 0; i < head->length; i++) {
-        /* combine like terms and canonicalize */
+        /* sort and combine like terms */
         for(int j = 0; j <= idx; j++) {
             int cmp = simplify_additive_compare(head->next[j], head->next[i]);
             if(cmp == 0) {
@@ -56,43 +50,33 @@ int simplify_addition(Node* head) {
     return 0;
 E:  return -1;
 }
+
 int simplify_multiplication(Node* head) {
     SIMPLIFY_MULTIPLICATIVE = head;
     int idx = 0;
     Node **ptr, *ref;
     for(int i = 0; i < head->length; i++) {
-        switch(simplify_exponentiation(head->next[i])) {
-            case  1: i--; break; // expansion: i - 1 + 1 to offset
-            case -1: goto E; break;
+        /* resolve */
+        if(simplify_exponentiation(head->next[i]) == -1) goto E;
+        /* oa */
+        Node **temp;
+        if((temp = n_findd(head->next[i], nt_multiplicative_expression))) {
+            n_merge(head, *temp);
+            n_delete(head, i--);
         }
-    }
-    for(int i = 0; i < head->length; i++) {
-        if((ptr = n_findd(head->next[i], nt_primary_expression))) {
-            ref = *ptr;
-            if(ref->next[1]->type == nt_multiplicative_expression) {
-                Node* temp = make("{}", nt_primary_expression,
-                                        n_pick(ref, 1));
-                n_replace(ptr, temp);
+        if(head->length == 1) break;
+        if((temp = n_findd(head->next[i], nt_additive_expression))) {
+            Node *exponential = n_pop(head, i);
+            for(int j = 0; j < (*temp)->length; j++) {
+                Node* product = make("{}{}", nt_multiplicative_expression,
+                                            n_copy(head),
+                                            n_pick(*temp, i));
+                n_push(SIMPLIFY_ADDITIVE, product);
             }
-            if(head->length == 2) goto N;
-            if(ref->next[1]->type == nt_additive_expression) {
-                // if(ref->next[1]->length == 1) goto N;
-                Node *parenthesis = n_pop(head, i),
-                     *primary = parenthesis->next[1];
-                for(int j = 0; j < primary->length; j++) {
-                    Node* temp = make("{}{}", nt_multiplicative_expression,
-                                              n_copy(head),
-                                              n_pick(primary, i));
-                    n_push(SIMPLIFY_ADDITIVE, temp);
-                    n_free(parenthesis);
-                }
-                n_delete(SIMPLIFY_ADDITIVE, i);
-                goto T;
-            }
-        }       
-    }
-    for(int i = 0; i < head->length; i++) {
-        /* combine like terms and canonicalize */
+            n_free(exponential);
+            break;
+        }
+        /*  */
         for(int j = 0; j <= idx; j++) {
             int cmp = simplify_multiplicative_compare(head->next[j], head->next[i]);
             if(cmp == 0) {
@@ -114,77 +98,39 @@ int simplify_multiplication(Node* head) {
             }
         }
     }
-N:  return 0;
-T:  return 1;
+    return 0;
 E:  return -1;
 }
+
 int simplify_exponentiation(Node* head) {
     SIMPLIFY_EXPONENTIAL = head;
     int idx = 0;
     for(int i = head->length - 1; i >= 0; i--) {
-        switch(simplify_parenthesis(head->next[i])) {
-            case  1: i--; break; // expansion: i - 1 + 1 to offset
-            case -1: goto E; break;
+        /* resolve */
+        switch(simplify_parenthesis(head->next[i] == -1)) goto E;
+        /* parenthesis */
+        Node **temp;
+        if((temp = n_findd(head->next[i], nt_exponential_expression))) {
+            n_merge(head, *temp);
+            n_delete(head, i);
+            i += (*temp)->length; // go to top of new chain
         }
-    }
-    for(int i = head->length - 1; i >= 0; i--) {
-        Node **parenthesis, **temp;
-        if((parenthesis = n_findd(head->next[i], nt_primary_expression))) {
-            if((temp = n_findd((*parenthesis)->next[1], nt_exponential_expression))) {
-                Node* temp = make("{}", nt_primary_expression,
-                                        n_pick((*parenthesis), 1));
-                n_replace(parenthesis, temp);
-            }
-            if(head->length == 2) goto N;
-            if((temp = n_findd((*parenthesis)->next[1], nt_multiplicative_expression))) {
-                
+        if(head->length == 1) break;
+        if((temp = n_findd(head->next[i], nt_multiplicative_expression))) {
+            Node* multiplication = n_construct(nt_multiplicative_expression, 0);
+            if(n_findd(multiplication, *temp, nt_rational)) {}
+        }
 
-            }
-            if((temp = n_findd((*parenthesis)->next[1], nt_multiplicative_expression))) {
-                Node *parenthesis = n_pop(head, i),
-                     *primary = parenthesis->next[1];
-                for(int j = 0; j < primary->length; j++) {
-                    Node* temp = make("{}{}", nt_multiplicative_expression,
-                                              n_copy(head),
-                                              n_pick(primary, i));
-                    n_push(SIMPLIFY_ADDITIVE, temp);
-                    n_free(parenthesis);
-                }
-                n_delete(SIMPLIFY_ADDITIVE, i);
-                goto T;
-            }
-        }       
     }
-    for(int i = head->length - 1; i >= 0; i--) {
-        /* combine like terms and canonicalize */
-        for(int j = 0; j <= idx; j++) {
-            int cmp = simplify_multiplicative_compare(head->next[j], head->next[i]);
-            if(cmp == 0) {
-                /* merge */            
-                n_delete(head, i);
-                break;
-            } else if(cmp > 0) {
-                for(int k = i - 1; idx <= k; k--) 
-                    swap(&head->next[k], &head->next[k+1]);
-                idx++;
-                break;
-            } else if(j == idx) {
-                idx++;
-                if(idx != i) {
-                    head->next[idx] = head->next[i];
-                    head->next[i] = NULL;                    
-                }
-                break;
-            }
-        }
-    }
-N:  return 0;
+    return 0;
 T:  return 1;
 E:  return -1;
 }
+
 int simplify_parenthesis(Node* head) {
 
 }
+
 int simplify_function(Node* head) {
     double base, expression, a;
     switch(head->type) {

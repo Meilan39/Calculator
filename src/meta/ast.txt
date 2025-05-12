@@ -1,21 +1,11 @@
 command
 └── non variable
     └── additive expression
+        ├── multiplicative expression |positive|
+        │   └── exponential expression |product|
+        │       └── rational number
+        │           └── number {1.000000}
         └── multiplicative expression |negative|
-            ├── exponential expression |product|
-            │   └── rational number
-            │       └── number {1.000000}
             └── exponential expression |product|
-                └── parenthesis
-                    └── additive expression
-                        └── multiplicative expression |negative|
-                            ├── exponential expression |product|
-                            │   └── rational number
-                            │       └── number {2.000000}
-                            └── exponential expression |product|
-                                └── parenthesis
-                                    └── additive expression
-                                        └── multiplicative expression |negative|
-                                            └── exponential expression |product|
-                                                └── rational number
-                                                    └── number {1.000000}
+                └── rational number
+                    └── number {2.000000}

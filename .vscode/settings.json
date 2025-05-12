@@ -17,6 +17,7 @@
         "ratio": "c",
         "tuple": "c",
         "nonvariable.h": "c",
-        "simplify.h": "c"
+        "simplify.h": "c",
+        "lex.h": "c"
     }
 }
